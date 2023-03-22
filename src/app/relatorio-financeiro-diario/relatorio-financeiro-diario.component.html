@@ -1,0 +1,41 @@
+<!-- Title and date selector -->
+<div style="margin-top: 40px; margin-left: 50px; margin-right: 50px; display: inline-block; width: calc(100% - 100px);">
+    <p class="view-title-text" style="float: left; margin-right: 40px; line-height: 56px;">Relatório Financeiro</p>
+    <p routerLink="/relatorio-financeiro/diario" class="container-title-text dark-grey underline" style="float: left; line-height: 56px; margin-right: 20px; cursor: pointer;">Diário</p>
+    <p routerLink="/relatorio-financeiro/mensal" class="container-title-text dark-grey" style="float: left; line-height: 56px; cursor: pointer;">Mensal</p>
+    <div style="float: right;">
+        <mat-form-field>
+            <mat-label>Escolha uma data</mat-label>
+            <input matInput [matDatepicker]="picker" [formControl]="date">
+            <mat-datepicker-toggle matIconSuffix [for]="picker">
+                <mat-icon matDatepickerToggleIcon>keyboard_arrow_down</mat-icon>
+            </mat-datepicker-toggle>
+            <mat-datepicker #picker></mat-datepicker>
+        </mat-form-field>
+    </div>
+</div>
+
+<!-- Containers -->
+<div style="margin-top: 10px; margin-left: 50px; margin-right: 50px; display: inline-block; width: calc(100% - 100px);">
+
+    <!-- Custo total -->
+    <div class="container" style="width: calc(100%/2 - 50px); float: left;">
+        <p class="container-title-text" style="margin-bottom: 37px;">Custo total no dia</p>
+        <p class="big-text" style="margin-bottom: 37px;">R$ 10,00</p>
+        <p class="coloured-text red" style="margin-bottom: 4px;">+ 5,25%</p>
+        <p class="small-text">Desde ontem</p>
+    </div>
+
+    <!-- Custo médio -->
+    <div class="container" style="width: calc(100%/2 - 50px); float: left; margin-right: 0px;">
+        <p class="container-title-text" style="margin-bottom: 37px;">Custo médio por hora no dia</p>
+        <p class="big-text" style="margin-bottom: 37px;">R$ 0,42 / hora</p>
+        <p class="coloured-text red" style="margin-bottom: 4px;">+ 7,05%</p>
+        <p class="small-text">Desde ontem</p>
+    </div>
+
+    <!-- Série histórica -->
+    <div class="container" style="width: calc(100% - 40px); float: left; margin-right: 0px;">
+        <p class="container-title-text" style="margin-bottom: 37px;">Série histórica de custos totais</p>
+    </div>
+</div>

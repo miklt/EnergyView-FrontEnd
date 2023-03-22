@@ -1,0 +1,100 @@
+<!-- Title and date selector -->
+<div style="margin-top: 40px; margin-left: 50px; margin-right: 50px; display: inline-block; width: calc(100% - 100px);">
+    <p class="view-title-text" style="float: left; margin-right: 40px; line-height: 56px;">Relatório de Consumo</p>
+    <p routerLink="/relatorio-de-consumo/diario" class="container-title-text dark-grey" style="float: left; line-height: 56px; margin-right: 20px; cursor: pointer;">Diário</p>
+    <p routerLink="/relatorio-de-consumo/mensal" class="container-title-text dark-grey underline" style="float: left; line-height: 56px; cursor: pointer;">Mensal</p>
+    <div style="float: right;">
+        <mat-form-field>
+            <mat-label>Escolha uma data</mat-label>
+            <input matInput [matDatepicker]="dp" [formControl]="date">
+            <mat-datepicker-toggle matIconSuffix [for]="dp">
+                <mat-icon matDatepickerToggleIcon>keyboard_arrow_down</mat-icon>
+            </mat-datepicker-toggle>
+            <mat-datepicker #dp
+                            startView="year"
+                            (monthSelected)="setMonthAndYear($event, dp)"
+                            panelClass="example-month-picker">
+            </mat-datepicker>
+        </mat-form-field>
+    </div>
+</div>
+
+<!-- Containers -->
+<div style="margin-top: 10px; margin-left: 50px; margin-right: 50px; display: inline-block; width: calc(100% - 100px);">
+
+    <!-- Consumo total -->
+    <div class="container" style="width: calc((100%/2 - 110px)/2); float: left;">
+        <p class="container-title-text" style="margin-bottom: 37px;">Consumo total no mês</p>
+        <p class="big-text" style="margin-bottom: 37px;">6702,3 kWh</p>
+        <p class="coloured-text red" style="margin-bottom: 4px;">+ 5,25%</p>
+        <p class="small-text">Desde o último mês</p>
+    </div>
+
+    <!-- Horario de pico -->
+    <div class="container" style="width: calc((100%/2 - 110px)/2); float: left;">
+        <p class="container-title-text" style="margin-bottom: 37px;">Dia de pico</p>
+        <p class="big-text" style="margin-bottom: 37px;">09 (segunda-feira)</p>
+        <p class="coloured-text" style="margin-bottom: 4px;">15 (segunda-feira)</p>
+        <p class="small-text">Dia de pico do último mês</p>
+    </div>
+
+    <!-- Demanda media -->
+    <div class="container" style="width: calc(100%/2 - 50px); float: left; margin-right: 0px;">
+        <p class="container-title-text" style="margin-bottom: 16px;">Demanda media no mês</p>
+        <div style="border-bottom: 3px dashed #0388BE; width: 30px; margin-bottom: 18px;"></div>
+        <p class="big-text" style="margin-bottom: 37px;">50 kW</p>
+        <p class="coloured-text green" style="margin-bottom: 4px;">- 3,17%</p>
+        <p class="small-text">Desde o último mês</p>
+    </div>
+
+    <!-- Consumo por fase -->
+    <div class="container" style="width: calc(100%/2 - 50px); float: left; padding-bottom: 30px;">
+        <p class="container-title-text" style="margin-bottom: 31px;">Consumo por fase</p>
+        <!-- Fase A -->
+        <p class="big-text" style="float: left; line-height: 32px; margin-right: 10px;">A</p>
+        <div style="width: calc(100% - 30px); display: inline-block; margin-bottom: 10px;">
+            <p class="coloured-text" style="margin-bottom: 0px; font-size: 16px; line-height: 16px; float: left;">2012,1 kWh</p>
+            <p class="coloured-text green" style="margin-bottom: 0px; float: right; line-height: 16px">- 3,17%</p>
+            <br>
+            <p class="small-text" style="line-height: 12px; float: left;">30% do consumo total</p>
+            <p class="small-text" style="float: right; line-height: 12px;">Desde o último mês</p>
+        </div>
+        <!-- Fase B -->
+        <p class="big-text" style="float: left; line-height: 32px; margin-right: 10px;">B</p>
+        <div style="width: calc(100% - 30px); display: inline-block; margin-bottom: 10px;">
+            <p class="coloured-text" style="margin-bottom: 0px; font-size: 16px; line-height: 16px; float: left;">3357,2 kWh</p>
+            <p class="coloured-text red" style="margin-bottom: 0px; float: right; line-height: 16px">+ 3,17%</p>
+            <br>
+            <p class="small-text" style="line-height: 12px; float: left;">50% do consumo total</p>
+            <p class="small-text" style="float: right; line-height: 12px;">Desde o último mês</p>
+        </div>
+        <!-- Fase C -->
+        <p class="big-text" style="float: left; line-height: 32px; margin-right: 10px;">C</p>
+        <div style="width: calc(100% - 30px); display: inline-block;">
+            <p class="coloured-text" style="margin-bottom: 0px; font-size: 16px; line-height: 16px; float: left;">1345,1 kWh</p>
+            <p class="coloured-text" style="margin-bottom: 0px; float: right; line-height: 16px">+ 0,00%</p>
+            <br>
+            <p class="small-text" style="line-height: 12px; float: left;">20% do consumo total</p>
+            <p class="small-text" style="float: right; line-height: 12px;">Desde o último mês</p>
+        </div>  
+    </div>
+    
+    <!-- Demanda maxima -->
+    <div class="container" style="width: calc(100%/2 - 50px); float: left; margin-right: 0px;">
+        <p class="container-title-text" style="margin-bottom: 16px;">Demanda maxima no mês</p>
+        <div style="border-bottom: 3px solid #0388BE; width: 30px; margin-bottom: 18px;"></div>
+        <p class="big-text" style="margin-bottom: 37px;">100 kW</p>
+        <p class="coloured-text green" style="margin-bottom: 4px;">- 7,82%</p>
+        <p class="small-text">Desde o último mês</p>
+    </div>
+
+    <!-- Consumo acumulado -->
+    <div class="container" style="width: calc(100%/2 - 50px); float: left;">
+        <p class="container-title-text" style="margin-bottom: 37px;">Consumo acumulado no mês</p>
+    </div>
+
+    <!-- Curva de carga -->
+    <div class="container" style="width: calc(100%/2 - 50px); float: left; margin-right: 0px;">
+        <p class="container-title-text" style="margin-bottom: 37px;">Curva de carga no mês</p>
+    </div>
+</div>
