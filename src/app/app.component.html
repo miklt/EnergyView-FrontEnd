@@ -1,3 +1,4 @@
+<ngx-loading-bar [includeSpinner]="false" height="3px"></ngx-loading-bar>
 <mat-sidenav-container>
   <!-- Left-positioned side bar -->
   <mat-sidenav mode="side" opened style="width: 320px; border: 0px; background-color: #0388BE;">
@@ -5,7 +6,6 @@
   </mat-sidenav>
   <!-- Router outlet (content) -->
   <mat-sidenav-content style="height: 100vh; background-color: #f8f8f8; min-width: 852px;">
-    <ngx-loading-bar></ngx-loading-bar>
     <router-outlet></router-outlet>
   </mat-sidenav-content>
 </mat-sidenav-container>
