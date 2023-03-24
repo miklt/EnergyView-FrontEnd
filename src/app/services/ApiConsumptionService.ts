@@ -14,9 +14,9 @@ export class ApiConsumptionService {
     constructor(private http: HttpClient) { 
         
     }
-    getChartsConsumoDiario(dateParam: Date){
+    getChartsConsumoDiario(dateParam: string){
         let data = Array<string>();
-        const params = new HttpParams().set("date", dateParam.toDateString());
+        const params = new HttpParams().set("date", dateParam);
 
         this.http.get(this.backendURLConsumoDiario, { params : params }).subscribe(
             (response : any) => {
