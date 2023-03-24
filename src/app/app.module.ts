@@ -6,6 +6,7 @@ import { AppComponent } from './app.component';
 import { FormsModule } from '@angular/forms';
 import { ReactiveFormsModule } from '@angular/forms';
 import { LOCALE_ID } from '@angular/core';
+import { HttpClientModule } from '@angular/common/http';
 // Angular Material
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatSidenavModule } from '@angular/material/sidenav';
@@ -24,6 +25,7 @@ import { RelatorioDeConsumoDiarioComponent } from './relatorio-de-consumo-diario
 import { RelatorioDeConsumoMensalComponent } from './relatorio-de-consumo-mensal/relatorio-de-consumo-mensal.component';
 import { RelatorioFinanceiroDiarioComponent } from './relatorio-financeiro-diario/relatorio-financeiro-diario.component';
 import { RelatorioFinanceiroMensalComponent } from './relatorio-financeiro-mensal/relatorio-financeiro-mensal.component'; 
+import { ApiConsumptionService } from './services/ApiConsumptionService';
 
 
 const appRoutes : Routes = [
@@ -62,10 +64,12 @@ const appRoutes : Routes = [
     MatSelectModule,
     MatNativeDateModule,
     ReactiveFormsModule,
-    LoadingBarRouterModule
+    LoadingBarRouterModule,
+    HttpClientModule
   ],
   providers: [
     {provide: LOCALE_ID, useValue: 'pt-BR'},
+    ApiConsumptionService
   ],
   bootstrap: [AppComponent]
 })

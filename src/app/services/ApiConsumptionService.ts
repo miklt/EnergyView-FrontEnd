@@ -8,15 +8,15 @@ import {HttpClient, HttpParams} from '@angular/common/http';
 export class ApiConsumptionService {
   //carList: Car[];
 
-    backendURL : string = 'HERE_GOES_THE_URL/curva-de-carga';
-    backendURLConsumoDiario : string = "HERE_GOES_THE_URL/dashboard-consumo-diario";
+  //backendURL : string = 'HERE_GOES_THE_URL/curva-de-carga';
+    backendURLConsumoDiario : string = "http://127.0.0.1:8000/day-consumption-dashboard";
     
     constructor(private http: HttpClient) { 
         
     }
     getChartsConsumoDiario(dateParam: string){
         let data = Array<string>();
-        const params = new HttpParams().set("date", dateParam);
+        const params = new HttpParams().set("date", "2023-03-20");
 
         this.http.get(this.backendURLConsumoDiario, { params : params }).subscribe(
             (response : any) => {
@@ -25,6 +25,7 @@ export class ApiConsumptionService {
                 }
             }
         )
+        console.log(data)
         return data;
     }
 
