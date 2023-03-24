@@ -16,6 +16,7 @@ export class RelatorioDeConsumoDiarioComponent{
     var year = this.date.getRawValue()?.getFullYear();
     var dateString = year + "/" + month + "/" + day;
     console.log(dateString);
+    this.getChartsViaEvent(dateString)
   }
   
   onDateChange(event: any): void {
@@ -39,12 +40,11 @@ export class RelatorioDeConsumoDiarioComponent{
 
   //This event should be linked to the "onclick" or the "onchange" event from the calendar
   //Or a better solution could be link this function into a button, but somebody has to add a button into the front-end
-  getChartsViaEvent(){
+  getChartsViaEvent(date: string){
     //I really don't know how to convert from FormControl to a pure Date Datatype
     //So, this work will be yours 😳
     //this.date.value?.toDateString()
-    const fecha = new Date();
-    this.response = this.apiClient.getChartsConsumoDiario(fecha);
+    this.response = this.apiClient.getChartsConsumoDiario(date);
 
     //This properties: Chart1 and Chart2, should be setted in the innerHTML properties from front-end components
     //Chart1 into the component with the id: chartCurvaCarga
