@@ -6,6 +6,7 @@ import { AppComponent } from './app.component';
 import { FormsModule } from '@angular/forms';
 import { ReactiveFormsModule } from '@angular/forms';
 import { LOCALE_ID } from '@angular/core';
+import {HttpClient, HttpClientModule, HttpParams} from '@angular/common/http';
 // Angular Material
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatSidenavModule } from '@angular/material/sidenav';
@@ -62,7 +63,8 @@ const appRoutes : Routes = [
     MatSelectModule,
     MatNativeDateModule,
     ReactiveFormsModule,
-    LoadingBarRouterModule
+    LoadingBarRouterModule,
+    HttpClientModule
   ],
   providers: [
     {provide: LOCALE_ID, useValue: 'pt-BR'},
