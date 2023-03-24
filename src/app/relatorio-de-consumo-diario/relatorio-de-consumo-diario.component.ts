@@ -11,24 +11,43 @@ export class RelatorioDeConsumoDiarioComponent{
   date = new FormControl(new Date());
   
   ngOnInit(){
-    var day = this.date.getRawValue()?.getDate();
-    var month = this.date.getRawValue()?.getMonth();
-    var year = this.date.getRawValue()?.getFullYear();
-    var dateString = year + "/" + month + "/" + day;
+    var day = this.date.getRawValue()!.getDate();
+    var month = this.date.getRawValue()!.getMonth();
+    month += 1;
+    var year = this.date.getRawValue()!.getFullYear();
+    if(day <= 9 && month <= 9){
+      var dateString = year + "-" + "0" + month + "-" + "0" + day;
+    }
+    else if(day <= 9){
+      var dateString = year + "-" + month + "-" + "0" + day;
+    }
+    else if(month <= 9){
+      var dateString = year + "-" + "0" + month + "-" + day;
+    }
+    else{
+      var dateString = year + "-" + month + "-" + day;
+    }
     console.log(dateString);
-    this.getChartsViaEvent(dateString)
   }
   
   onDateChange(event: any): void {
     var day = event.getDate();
     var month = event.getMonth();
+    month += 1;
     var year = event.getFullYear();
-    var dateString = year + "/" + month + "/" + day;
+    if(day <= 9 && month <= 9){
+      var dateString = year + "-" + "0" + month + "-" + "0" + day;
+    }
+    else if(day <= 9){
+      var dateString = year + "-" + month + "-" + "0" + day;
+    }
+    else if(month <= 9){
+      var dateString = year + "-" + "0" + month + "-" + day;
+    }
+    else{
+      var dateString = year + "-" + month + "-" + day;
+    }
     console.log(dateString);
-  }
-
-  isDate(value: any): value is Date {
-    return value instanceof Date;
   }
     
   chart1 : any;
