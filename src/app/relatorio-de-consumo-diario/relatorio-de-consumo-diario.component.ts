@@ -9,6 +9,15 @@ import { ApiConsumptionService } from '../services/ApiConsumptionService';
 })
 export class RelatorioDeConsumoDiarioComponent{
   date = new FormControl(new Date());
+  service;
+
+  chart1 : any;
+  chart2 : any;
+  response : any;
+
+  constructor(private apiClient : ApiConsumptionService){
+    this.service = apiClient;
+  }
   
   ngOnInit(){
     var day = this.date.getRawValue()!.getDate();
@@ -48,14 +57,9 @@ export class RelatorioDeConsumoDiarioComponent{
       var dateString = year + "-" + month + "-" + day;
     }
     console.log(dateString);
+    this.service.getChartsConsumoDiario(dateString)
   }
     
-  chart1 : any;
-  chart2 : any;
-  response : any;
-  constructor(private apiClient : ApiConsumptionService){
-
-  }
 
   //This event should be linked to the "onclick" or the "onchange" event from the calendar
   //Or a better solution could be link this function into a button, but somebody has to add a button into the front-end
