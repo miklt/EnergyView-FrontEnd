@@ -1,19 +1,16 @@
 import { Injectable } from '@angular/core';
-import {HttpClient, HttpParams} from '@angular/common/http';
-
+import { HttpClient, HttpParams } from '@angular/common/http';
 
 @Injectable({
   providedIn: 'root'
 })
-export class ApiConsumptionService {
-  //carList: Car[];
 
-  //backendURL : string = 'HERE_GOES_THE_URL/curva-de-carga';
+export class ApiConsumptionService {
     backendURLConsumoDiario : string = "http://127.0.0.1:8000/day-consumption-dashboard";
-    
+
     constructor(private http: HttpClient) { 
-        
     }
+
     getChartsConsumoDiario(dateParam: string){
         let data = Array<string>();
         const params = new HttpParams().set("date", "2023-03-20");
@@ -28,5 +25,4 @@ export class ApiConsumptionService {
         console.log(data)
         return data;
     }
-
 }

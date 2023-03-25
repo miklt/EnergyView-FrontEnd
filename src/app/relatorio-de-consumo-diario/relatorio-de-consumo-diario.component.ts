@@ -8,12 +8,12 @@ import { ApiConsumptionService } from '../services/ApiConsumptionService';
   styleUrls: ['./relatorio-de-consumo-diario.component.css']
 })
 export class RelatorioDeConsumoDiarioComponent{
-  date = new FormControl(new Date());
-  service;
-
+  service : any;
   chart1 : any;
   chart2 : any;
   response : any;
+
+  date = new FormControl(new Date());
 
   constructor(private apiClient : ApiConsumptionService){
     this.service = apiClient;
