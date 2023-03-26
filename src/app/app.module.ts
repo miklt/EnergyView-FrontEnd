@@ -19,13 +19,13 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatInputModule } from '@angular/material/input';
 import { MatSelectModule } from '@angular/material/select';
 import { MatNativeDateModule } from '@angular/material/core';
-// Components
+// Components & Services
 import { SideBarComponent } from './side-bar/side-bar.component';
 import { RelatorioDeConsumoDiarioComponent } from './relatorio-de-consumo-diario/relatorio-de-consumo-diario.component';
 import { RelatorioDeConsumoMensalComponent } from './relatorio-de-consumo-mensal/relatorio-de-consumo-mensal.component';
 import { RelatorioFinanceiroDiarioComponent } from './relatorio-financeiro-diario/relatorio-financeiro-diario.component';
 import { RelatorioFinanceiroMensalComponent } from './relatorio-financeiro-mensal/relatorio-financeiro-mensal.component'; 
-import { ApiConsumptionService } from './services/ApiConsumptionService';
+import { ApiService } from './services/ApiService';
 
 const appRoutes : Routes = [
   {path: '', redirectTo: '/relatorio-de-consumo/diario', pathMatch: 'full'},
@@ -68,7 +68,7 @@ const appRoutes : Routes = [
   ],
   providers: [
     {provide: LOCALE_ID, useValue: 'pt-BR'},
-    ApiConsumptionService
+    ApiService
   ],
   bootstrap: [AppComponent]
 })
