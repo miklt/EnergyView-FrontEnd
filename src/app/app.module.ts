@@ -7,7 +7,7 @@ import { AppComponent } from './app.component';
 import { FormsModule } from '@angular/forms';
 import { ReactiveFormsModule } from '@angular/forms';
 import { LOCALE_ID } from '@angular/core';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClient, HttpClientModule, HttpParams } from '@angular/common/http';
 import { LoadingBarRouterModule } from '@ngx-loading-bar/router';
 // Angular Material
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
