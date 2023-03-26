@@ -76,6 +76,7 @@ export class RelatorioDeConsumoDiarioComponent{
     //For the time being (while we dont implement the getChartsConsumoDiario properly) we're mocking the response
     //this.response = this.apiClient.getResponse(dateString, "consumo");
 
+    //I don't think we should be handling data in the front-end, this should probably be created in the back-end and returned in the response array
     this.consumo_relativo_a = (this.response['consumo-total-a'] / this.response['consumo-total'] * 100).toFixed(2)
     this.consumo_relativo_b = (this.response['consumo-total-b'] / this.response['consumo-total'] * 100).toFixed(2)
     this.consumo_relativo_c = (this.response['consumo-total-c'] / this.response['consumo-total'] * 100).toFixed(2)
