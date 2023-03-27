@@ -15,60 +15,62 @@ export class ApiService {
 
     getResponse(dateString: string, dashboardType: string){
         let response = Array<string>();
-        const params = new HttpParams().set("date", dateString);
-
-        if(dateString.length == 10){ //Diario
+        const params = new HttpParams().set("day", dateString);
+      
+        return new Promise((resolve, reject) => {
+          if(dateString.length == 10){ //Diario
             if(dashboardType == "consumo"){ //Consumo diario
-                this.http.get(this.backendURLConsumoDiario, { params : params }).subscribe(
-                    (response : any) => {
-                        for(let i = 0; i < response.length; i++){
-                            response.push(response[i]);
-                        }
-                    }
-                )
-                return response;
+              this.http.get(this.backendURLConsumoDiario, { params : params }).subscribe(
+                (response : any) => {
+                  for(let i = 0; i < response.length; i++){
+                    response.push(response[i]);
+                  }
+                  resolve(response);
+                }
+              );
             }
             else if(dashboardType == "financeiro"){ //Financeiro diario
-                this.http.get(this.backendURLFinanceiroDiario, { params : params }).subscribe(
-                    (response : any) => {
-                        for(let i = 0; i < response.length; i++){
-                            response.push(response[i]);
-                        }
-                    }
-                )
-                return response;
+              this.http.get(this.backendURLFinanceiroDiario, { params : params }).subscribe(
+                (response : any) => {
+                  for(let i = 0; i < response.length; i++){
+                    response.push(response[i]);
+                  }
+                  resolve(response);
+                }
+              );
             }
             else{
-                throw new Error("Dashboard type not found.");
+              reject("Dashboard type not found.");
             }
-        }
-        else if(dateString.length == 7){ //Mensal
+          }
+          else if(dateString.length == 7){ //Mensal
             if(dashboardType == "consumo"){ //Consumo mensal
-                this.http.get(this.backendURLConsumoMensal, { params : params }).subscribe(
-                    (response : any) => {
-                        for(let i = 0; i < response.length; i++){
-                            response.push(response[i]);
-                        }
-                    }
-                )
-                return response;
+              this.http.get(this.backendURLConsumoMensal, { params : params }).subscribe(
+                (response : any) => {
+                  for(let i = 0; i < response.length; i++){
+                    response.push(response[i]);
+                  }
+                  resolve(response);
+                }
+              );
             }
             else if(dashboardType == "financeiro"){ //Financeiro mensal
-                this.http.get(this.backendURLFinanceiroMensal, { params : params }).subscribe(
-                    (response : any) => {
-                        for(let i = 0; i < response.length; i++){
-                            response.push(response[i]);
-                        }
-                    }
-                )
-                return response;
+              this.http.get(this.backendURLFinanceiroMensal, { params : params }).subscribe(
+                (response : any) => {
+                  for(let i = 0; i < response.length; i++){
+                    response.push(response[i]);
+                  }
+                  resolve(response);
+                }
+              );
             }
             else{
-                throw new Error("Dashboard type not found.");
+              reject("Dashboard type not found.");
             }
-        }
-        else{
-            throw new Error("Date type not found.");
-        }
+          }
+          else{
+            reject("Date type not found.");
+          }
+        });
     }
 }
