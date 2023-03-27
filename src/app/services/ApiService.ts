@@ -27,9 +27,9 @@ export class ApiService {
           for(let i = 0; i < response.length; i++){
             response.push(response[i]);
           }
-          this.minDate = response['min-date'];
         }
       );
+      this.minDate = new Date(this.today.getFullYear() - 20, 0, 1);
     }
 
     getResponse(dateString: string, dashboardType: string){

@@ -45,12 +45,12 @@ export class RelatorioDeConsumoDiarioComponent{
     let consumo_acumulado = document.getElementById("chartConsumoAcumulado");
     let curva_carga = document.getElementById("chartCurvaDeCarga");
     //I don't think we should be handling data in the front-end, this should probably be created in the back-end and returned in the response array
-    this.consumo_relativo_a = (this.response['consumo-total-a'] / this.response['consumo-total'] * 100).toFixed(2)
-    this.consumo_relativo_b = (this.response['consumo-total-b'] / this.response['consumo-total'] * 100).toFixed(2)
-    this.consumo_relativo_c = (this.response['consumo-total-c'] / this.response['consumo-total'] * 100).toFixed(2)
+    this.consumo_relativo_a = (this.response['consumo-total-a'] / this.response['consumo-total'] * 100).toFixed(0);
+    this.consumo_relativo_b = (this.response['consumo-total-b'] / this.response['consumo-total'] * 100).toFixed(0);
+    this.consumo_relativo_c = (this.response['consumo-total-c'] / this.response['consumo-total'] * 100).toFixed(0);
     if(curva_carga && consumo_acumulado){
-      curva_carga.innerHTML = this.response["curva-de-carga"]
-      consumo_acumulado.innerHTML = this.response["consumo-acumulado"]
+      curva_carga.innerHTML = this.response["curva-de-carga"];
+      consumo_acumulado.innerHTML = this.response["consumo-acumulado"];
       let scriptTags = curva_carga.getElementsByTagName('script');
       for (let i = 0; i < scriptTags.length; i++) {
         eval(scriptTags[i].innerHTML);
