@@ -14,9 +14,7 @@ export class RelatorioDeConsumoDiarioComponent{
   consumo_relativo_c : any;
   date = new FormControl(new Date());
 
-  constructor(private apiClient : ApiService){}
-  
-  ngOnInit(){
+  constructor(private apiClient : ApiService){
     var day = this.date.getRawValue()!.getDate();
     var month = this.date.getRawValue()!.getMonth();
     month += 1;
@@ -58,10 +56,8 @@ export class RelatorioDeConsumoDiarioComponent{
     
   async getData(dateString: string){
     this.response = await this.apiClient.getResponse(dateString, "consumo");
-    
-    let curva_carga = document.getElementById("chartCurvaCarga");
-    let consumo_acumulado = document.getElementById("chartConsumoAcumuladoDiario");
-    
+    let consumo_acumulado = document.getElementById("chartConsumoAcumulado");
+    let curva_carga = document.getElementById("chartCurvaDeCarga");
     //I don't think we should be handling data in the front-end, this should probably be created in the back-end and returned in the response array
     this.consumo_relativo_a = (this.response['consumo-total-a'] / this.response['consumo-total'] * 100).toFixed(2)
     this.consumo_relativo_b = (this.response['consumo-total-b'] / this.response['consumo-total'] * 100).toFixed(2)

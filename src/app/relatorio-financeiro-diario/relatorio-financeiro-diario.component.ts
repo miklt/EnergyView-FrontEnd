@@ -9,7 +9,7 @@ import { FormControl } from '@angular/forms';
 export class RelatorioFinanceiroDiarioComponent {
   date = new FormControl(new Date());
 
-  ngOnInit(){
+  constructor(){
     var day = this.date.getRawValue()!.getDate();
     var month = this.date.getRawValue()!.getMonth();
     month += 1;

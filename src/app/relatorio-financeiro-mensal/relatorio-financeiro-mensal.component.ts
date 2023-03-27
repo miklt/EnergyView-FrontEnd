@@ -47,7 +47,7 @@ export class RelatorioFinanceiroMensalComponent {
     datepicker.close();
   }
 
-  ngOnInit(){
+  constructor(){
     var month = this.date.getRawValue()!.toDate().getMonth();
     month += 1;
     var year = this.date.getRawValue()!.toDate().getFullYear();
