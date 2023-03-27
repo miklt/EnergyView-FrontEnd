@@ -15,8 +15,7 @@ export class RelatorioFinanceiroDiarioComponent {
   constructor(private apiClient : ApiService){
     this.minDate = this.apiClient.minDate;
     var day = this.date.getRawValue()!.getDate();
-    var month = this.date.getRawValue()!.getMonth();
-    month += 1;
+    var month = this.date.getRawValue()!.getMonth() + 1;
     var year = this.date.getRawValue()!.getFullYear();
     if(day <= 9 && month <= 9) dateString = year + "-" + "0" + month + "-" + "0" + day;
     else if(day <= 9) var dateString = year + "-" + month + "-" + "0" + day;
@@ -26,8 +25,7 @@ export class RelatorioFinanceiroDiarioComponent {
   
   onDateChange(event: any){
     var day = event.getDate();
-    var month = event.getMonth();
-    month += 1;
+    var month = event.getMonth() + 1;
     var year = event.getFullYear();
     if(day <= 9 && month <= 9) dateString = year + "-" + "0" + month + "-" + "0" + day;
     else if(day <= 9) var dateString = year + "-" + month + "-" + "0" + day;

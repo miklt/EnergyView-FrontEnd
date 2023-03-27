@@ -52,8 +52,7 @@ export class RelatorioFinanceiroMensalComponent {
 
   constructor(private apiClient : ApiService){
     this.minDate = moment(this.apiClient.minDate);
-    var month = this.date.getRawValue()!.toDate().getMonth();
-    month += 1;
+    var month = this.date.getRawValue()!.toDate().getMonth() + 1;
     var year = this.date.getRawValue()!.toDate().getFullYear();
     if(month <= 9) var dateString = year + "-" + "0" + month;
     else var dateString = year + "-" + month;
@@ -61,8 +60,7 @@ export class RelatorioFinanceiroMensalComponent {
   }
 
   onDateChange(event: any){
-    var month = event.toDate().getMonth();
-    month += 1;
+    var month = event.toDate().getMonth() + 1;
     var year = event.toDate().getFullYear();
     if(month <= 9) var dateString = year + "-" + "0" + month;
     else var dateString = year + "-" + month;
