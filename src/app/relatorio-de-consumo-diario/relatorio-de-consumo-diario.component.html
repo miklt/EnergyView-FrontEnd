@@ -68,7 +68,7 @@
         <p class="big-text" style="float: left; line-height: 32px; margin-right: 10px;">C</p>
         <div style="width: calc(100% - 30px); display: inline-block;">
             <p class="coloured-text" style="margin-bottom: 0px; font-size: 16px; line-height: 16px; float: left;">{{this.response['consumo-total-c']}} kWh</p>
-            <p class="coloured-text" style="margin-bottom: 0px; float: right; line-height: 16px">+ {{this.response['variacao-consumo-total-c']}}%</p>
+            <p class="coloured-text" style="margin-bottom: 0px; float: right; line-height: 16px">{{this.response['variacao-consumo-total-c']}}%</p>
             <br>
             <p class="small-text" style="line-height: 12px; float: left;">{{consumo_relativo_c}}% do consumo total</p>
             <p class="small-text" style="float: right; line-height: 12px;">Desde ontem</p>
@@ -87,16 +87,12 @@
     <!-- Consumo acumulado -->
     <div class="container" style="width: calc(100%/2 - 50px); float: left;">
         <p class="container-title-text" style="margin-bottom: 37px;">Consumo acumulado</p>
-        <div id="chartConsumoAcumulado">
-
-        </div>
+        <div id="chartConsumoAcumulado"></div>
     </div>
 
     <!-- Curva de carga -->
     <div class="container" style="width: calc(100%/2 - 50px); float: left; margin-right: 0px;">
         <p class="container-title-text" style="margin-bottom: 37px;">Curva de carga</p>
-        <div id="chartCurvaDeCarga">
-
-        </div>
-    </div>
+        <div id="chartCurvaDeCarga"></div>
+    </div>
 </div>
