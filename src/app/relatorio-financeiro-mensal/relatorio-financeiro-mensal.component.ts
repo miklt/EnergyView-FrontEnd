@@ -51,25 +51,17 @@ export class RelatorioFinanceiroMensalComponent {
     var month = this.date.getRawValue()!.toDate().getMonth();
     month += 1;
     var year = this.date.getRawValue()!.toDate().getFullYear();
-    if(month <= 9){
-      var dateString = year + "-" + "0" + month;
-    }
-    else{
-      var dateString = year + "-" + month;
-    }
+    if(month <= 9) var dateString = year + "-" + "0" + month;
+    else var dateString = year + "-" + month;
     console.log(dateString);
   }
 
-  onDateChange(event: any): void {
+  onDateChange(event: any){
     var month = event.toDate().getMonth();
     month += 1;
     var year = event.toDate().getFullYear();
-    if(month <= 9){
-      var dateString = year + "-" + "0" + month;
-    }
-    else{
-      var dateString = year + "-" + month;
-    }
+    if(month <= 9) var dateString = year + "-" + "0" + month;
+    else var dateString = year + "-" + month;
     console.log(dateString);
   }
 }
