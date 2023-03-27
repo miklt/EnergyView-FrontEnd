@@ -8,7 +8,7 @@ import { ApiService } from '../services/ApiService';
   styleUrls: ['./relatorio-de-consumo-diario.component.css']
 })
 export class RelatorioDeConsumoDiarioComponent{
-  response : any;
+  response : any = {} as any;
   consumo_relativo_a : any;
   consumo_relativo_b : any;
   consumo_relativo_c : any;

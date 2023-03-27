@@ -16,7 +16,6 @@ export class ApiService {
     getResponse(dateString: string, dashboardType: string){
         let response = Array<string>();
         const params = new HttpParams().set("day", dateString);
-      
         return new Promise((resolve, reject) => {
           if(dateString.length == 10){ //Diario
             if(dashboardType == "consumo"){ //Consumo diario
