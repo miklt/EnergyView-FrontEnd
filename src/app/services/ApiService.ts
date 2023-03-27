@@ -15,8 +15,7 @@ export class ApiService {
 
     constructor(private http: HttpClient){
       var day = this.today.getDate();
-      var month = this.today.getMonth();
-      month += 1;
+      var month = this.today.getMonth() + 1;
       var year = this.today.getFullYear();
       if(day <= 9 && month <= 9) todayString = year + "-" + "0" + month + "-" + "0" + day;
       else if(day <= 9) var todayString = year + "-" + month + "-" + "0" + day;

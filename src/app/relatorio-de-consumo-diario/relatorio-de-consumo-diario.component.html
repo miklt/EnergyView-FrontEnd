@@ -22,7 +22,7 @@
     <div class="container" style="width: calc((100%/2 - 110px)/2); height: 153px; float: left;">
         <p class="container-title-text" style="margin-bottom: 37px;">Consumo total</p>
         <p class="big-text" style="margin-bottom: 37px;">{{this.response['consumo-total']}} kWh</p>
-        <p class="coloured-text red" style="margin-bottom: 4px;">+ 5,25%</p>
+        <p class="coloured-text red" style="margin-bottom: 4px;">+{{this.response['variacao-consumo-total']}}%</p>
         <p class="small-text">Desde ontem</p>
     </div>
 
@@ -30,7 +30,7 @@
     <div class="container" style="width: calc((100%/2 - 110px)/2); height: 153px; float: left;">
         <p class="container-title-text" style="margin-bottom: 37px;">Horário de pico</p>
         <p class="big-text" style="margin-bottom: 37px;">{{this.response['horario-de-pico']}}</p>
-        <p class="coloured-text" style="margin-bottom: 4px;">16h30 - 17h30</p>
+        <p class="coloured-text" style="margin-bottom: 4px;">{{this.response['horario-de-pico-ontem']}}</p>
         <p class="small-text">Horário de pico de ontem</p>
     </div>
 
@@ -39,7 +39,7 @@
         <p class="container-title-text" style="margin-bottom: 16px;">Demanda média</p>
         <div style="border-bottom: 3px dashed #0388BE; width: 30px; margin-bottom: 18px;"></div>
         <p class="big-text" style="margin-bottom: 37px;">{{this.response['demanda-media']}} kW</p>
-        <p class="coloured-text green" style="margin-bottom: 4px;">- 3,17%</p>
+        <p class="coloured-text green" style="margin-bottom: 4px;">{{this.response['variacao-demanda-media']}}%</p>
         <p class="small-text">Desde ontem</p>
     </div>
 
@@ -50,7 +50,7 @@
         <p class="big-text" style="float: left; line-height: 32px; margin-right: 10px;">A</p>
         <div style="width: calc(100% - 30px); display: inline-block; margin-bottom: 10px;">
             <p class="coloured-text" style="margin-bottom: 0px; font-size: 16px; line-height: 16px; float: left;">{{this.response['consumo-total-a']}} kWh</p>
-            <p class="coloured-text green" style="margin-bottom: 0px; float: right; line-height: 16px">- 3,17%</p>
+            <p class="coloured-text green" style="margin-bottom: 0px; float: right; line-height: 16px">{{this.response['variacao-consumo-total-a']}}%</p>
             <br>
             <p class="small-text" style="line-height: 12px; float: left;">{{consumo_relativo_a}}% do consumo total</p>
             <p class="small-text" style="float: right; line-height: 12px;">Desde ontem</p>
@@ -59,7 +59,7 @@
         <p class="big-text" style="float: left; line-height: 32px; margin-right: 10px;">B</p>
         <div style="width: calc(100% - 30px); display: inline-block; margin-bottom: 10px;">
             <p class="coloured-text" style="margin-bottom: 0px; font-size: 16px; line-height: 16px; float: left;">{{this.response['consumo-total-b']}} kWh</p>
-            <p class="coloured-text red" style="margin-bottom: 0px; float: right; line-height: 16px">+ 3,17%</p>
+            <p class="coloured-text red" style="margin-bottom: 0px; float: right; line-height: 16px">{{this.response['variacao-consumo-total-b']}}%</p>
             <br>
             <p class="small-text" style="line-height: 12px; float: left;">{{consumo_relativo_b}}% do consumo total</p>
             <p class="small-text" style="float: right; line-height: 12px;">Desde ontem</p>
@@ -68,7 +68,7 @@
         <p class="big-text" style="float: left; line-height: 32px; margin-right: 10px;">C</p>
         <div style="width: calc(100% - 30px); display: inline-block;">
             <p class="coloured-text" style="margin-bottom: 0px; font-size: 16px; line-height: 16px; float: left;">{{this.response['consumo-total-c']}} kWh</p>
-            <p class="coloured-text" style="margin-bottom: 0px; float: right; line-height: 16px">+ 0,00%</p>
+            <p class="coloured-text" style="margin-bottom: 0px; float: right; line-height: 16px">+ {{this.response['variacao-consumo-total-c']}}%</p>
             <br>
             <p class="small-text" style="line-height: 12px; float: left;">{{consumo_relativo_c}}% do consumo total</p>
             <p class="small-text" style="float: right; line-height: 12px;">Desde ontem</p>
@@ -80,7 +80,7 @@
         <p class="container-title-text" style="margin-bottom: 16px;">Demanda máxima</p>
         <div style="border-bottom: 3px solid #0388BE; width: 30px; margin-bottom: 18px;"></div>
         <p class="big-text" style="margin-bottom: 37px;">{{this.response['demanda-maxima']}} kW</p>
-        <p class="coloured-text green" style="margin-bottom: 4px;">- 7,82%</p>
+        <p class="coloured-text green" style="margin-bottom: 4px;">{{this.response['variacao-demanda-maxima']}}%</p>
         <p class="small-text">Desde ontem</p>
     </div>
 
@@ -98,5 +98,5 @@
         <div id="chartCurvaDeCarga">
 
         </div>
-    </div>
+    </div>
 </div>
