@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { FormControl } from '@angular/forms';
+import { ApiService } from '../services/ApiService';
 
 @Component({
   selector: 'app-relatorio-financeiro-diario',
@@ -8,8 +9,11 @@ import { FormControl } from '@angular/forms';
 })
 export class RelatorioFinanceiroDiarioComponent {
   date = new FormControl(new Date());
+  maxDate = new Date();
+  minDate = new Date();
 
-  constructor(){
+  constructor(private apiClient : ApiService){
+    this.minDate = this.apiClient.minDate;
     var day = this.date.getRawValue()!.getDate();
     var month = this.date.getRawValue()!.getMonth();
     month += 1;

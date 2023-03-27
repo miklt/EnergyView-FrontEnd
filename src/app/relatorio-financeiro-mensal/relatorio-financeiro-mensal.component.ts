@@ -5,6 +5,7 @@ import {DateAdapter, MAT_DATE_FORMATS, MAT_DATE_LOCALE} from '@angular/material/
 import {MatDatepicker} from '@angular/material/datepicker';
 import * as _moment from 'moment';
 import {default as _rollupMoment, Moment} from 'moment';
+import { ApiService } from '../services/ApiService';
 
 const moment = _rollupMoment || _moment;
 
@@ -38,6 +39,8 @@ export const MY_FORMATS = {
 
 export class RelatorioFinanceiroMensalComponent {
   date = new FormControl(moment());
+  maxDate = moment();
+  minDate = moment();
 
   setMonthAndYear(normalizedMonthAndYear: Moment, datepicker: MatDatepicker<Moment>) {
     const ctrlValue = this.date.value!;
@@ -47,7 +50,8 @@ export class RelatorioFinanceiroMensalComponent {
     datepicker.close();
   }
 
-  constructor(){
+  constructor(private apiClient : ApiService){
+    this.minDate = moment(this.apiClient.minDate);
     var month = this.date.getRawValue()!.toDate().getMonth();
     month += 1;
     var year = this.date.getRawValue()!.toDate().getFullYear();
