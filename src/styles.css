@@ -78,6 +78,10 @@ body { margin: 0; font-family: Lato, sans-serif; }
     color: #0388BE;
 }
 
+.light-grey{
+    color: #666666;
+}
+
 .selected{
     background-color: #116486;
     margin-right: 20px;
@@ -105,12 +109,21 @@ body { margin: 0; font-family: Lato, sans-serif; }
 }
 
 .no-space{
-    padding: 0px !important;
-    border: 0px !important;
-    margin: 0px !important;
+    padding: 0px;
+    border: 0px;
+    margin: 0px;
 }
 
 .invisible{
     color: rgba(0, 0, 0, 0);
     background-color: rgba(0, 0, 0, 0);
+}
+
+.center {
+    margin: 0;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    -ms-transform: translate(-50%, -50%);
+    transform: translate(-50%, -50%);
 }
