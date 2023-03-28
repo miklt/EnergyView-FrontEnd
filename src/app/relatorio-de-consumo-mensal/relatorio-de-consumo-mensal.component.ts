@@ -79,5 +79,21 @@ export class RelatorioDeConsumoMensalComponent {
   async getData(dateString: string){
     //Gets the response using the ApiService
     this.response = await this.apiClient.getResponse(dateString, "consumo");
+
+    //Sets the chart's divs innerHTML
+    let consumo_acumulado = document.getElementById("chartConsumoAcumulado");
+    let curva_carga = document.getElementById("chartCurvaDeCarga");
+    curva_carga!.innerHTML = this.response["curva-de-carga"];
+    consumo_acumulado!.innerHTML = this.response["consumo-acumulado"];
+
+    let scriptTags = curva_carga!.getElementsByTagName('script');
+    for (let i = 0; i < scriptTags.length; i++) {
+      eval(scriptTags[i].innerHTML);
+    }
+
+    scriptTags = consumo_acumulado!.getElementsByTagName('script');
+    for (let i = 0; i < scriptTags.length; i++) {
+      eval(scriptTags[i].innerHTML);
+    }
   }
 }

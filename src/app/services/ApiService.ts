@@ -25,6 +25,10 @@ export class ApiService {
                     response.push(response[i]);
                   }
                   resolve(response);
+                },
+                (error : any) => {
+                  console.error("There's no data for the informed date", error);
+                  resolve([]);
                 }
               );
             }
@@ -35,6 +39,10 @@ export class ApiService {
                     response.push(response[i]);
                   }
                   resolve(response);
+                },
+                (error : any) => {
+                  console.error("There's no data for the informed date", error);
+                  resolve([]);
                 }
               );
             }
@@ -50,6 +58,10 @@ export class ApiService {
                     response.push(response[i]);
                   }
                   resolve(response);
+                },
+                (error : any) => {
+                  console.error("There's no data for the informed date", error);
+                  resolve([]);
                 }
               );
             }
@@ -60,6 +72,10 @@ export class ApiService {
                     response.push(response[i]);
                   }
                   resolve(response);
+                },
+                (error : any) => {
+                  console.error("There's no data for the informed date", error);
+                  resolve([]);
                 }
               );
             }

@@ -47,5 +47,14 @@ export class RelatorioFinanceiroDiarioComponent {
   async getData(dateString: string){
     //Gets the response using the ApiService
     this.response = await this.apiClient.getResponse(dateString, "financeiro");
+
+    //Sets the chart's divs innerHTML
+    let serie_historica = document.getElementById("chartSerieHistorica");
+    serie_historica!.innerHTML = this.response["serie-historica"];
+
+    let scriptTags = serie_historica!.getElementsByTagName('script');
+    for (let i = 0; i < scriptTags.length; i++) {
+      eval(scriptTags[i].innerHTML);
+    }
   }
 }
