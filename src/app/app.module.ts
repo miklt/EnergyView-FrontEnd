@@ -19,6 +19,7 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatInputModule } from '@angular/material/input';
 import { MatSelectModule } from '@angular/material/select';
 import { MatNativeDateModule } from '@angular/material/core';
+import { MatProgressBarModule } from '@angular/material/progress-bar';
 // Components & Services
 import { SideBarComponent } from './side-bar/side-bar.component';
 import { RelatorioDeConsumoDiarioComponent } from './relatorio-de-consumo-diario/relatorio-de-consumo-diario.component';
@@ -64,7 +65,8 @@ const appRoutes : Routes = [
     MatNativeDateModule,
     ReactiveFormsModule,
     LoadingBarRouterModule,
-    HttpClientModule
+    HttpClientModule,
+    MatProgressBarModule
   ],
   providers: [
     {provide: LOCALE_ID, useValue: 'pt-BR'},
