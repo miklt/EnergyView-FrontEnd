@@ -8,12 +8,11 @@ import { ApiService } from '../services/ApiService';
   styleUrls: ['./relatorio-financeiro-diario.component.css']
 })
 export class RelatorioFinanceiroDiarioComponent {
+  response : any = {} as any;
   date = new FormControl(new Date());
   maxDate = new Date();
-  minDate = new Date();
 
   constructor(private apiClient : ApiService){
-    this.minDate = this.apiClient.minDate;
     var day = this.date.getRawValue()!.getDate();
     var month = this.date.getRawValue()!.getMonth() + 1;
     var year = this.date.getRawValue()!.getFullYear();
@@ -21,6 +20,7 @@ export class RelatorioFinanceiroDiarioComponent {
     else if(day <= 9) var dateString = year + "-" + month + "-" + "0" + day;
     else if(month <= 9) var dateString = year + "-" + "0" + month + "-" + day;
     else var dateString = year + "-" + month + "-" + day;
+    this.getData(dateString);
   }
   
   onDateChange(event: any){
@@ -31,5 +31,10 @@ export class RelatorioFinanceiroDiarioComponent {
     else if(day <= 9) var dateString = year + "-" + month + "-" + "0" + day;
     else if(month <= 9) var dateString = year + "-" + "0" + month + "-" + day;
     else var dateString = year + "-" + month + "-" + day;
+    this.getData(dateString);
+  }
+  
+  async getData(dateString: string){
+    this.response = await this.apiClient.getResponse(dateString, "financeiro");
   }
 }

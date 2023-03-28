@@ -38,9 +38,9 @@ export const MY_FORMATS = {
 })
 
 export class RelatorioFinanceiroMensalComponent {
+  response : any = {} as any;
   date = new FormControl(moment());
   maxDate = moment();
-  minDate = moment();
 
   setMonthAndYear(normalizedMonthAndYear: Moment, datepicker: MatDatepicker<Moment>) {
     const ctrlValue = this.date.value!;
@@ -51,12 +51,11 @@ export class RelatorioFinanceiroMensalComponent {
   }
 
   constructor(private apiClient : ApiService){
-    this.minDate = moment(this.apiClient.minDate);
     var month = this.date.getRawValue()!.toDate().getMonth() + 1;
     var year = this.date.getRawValue()!.toDate().getFullYear();
     if(month <= 9) var dateString = year + "-" + "0" + month;
     else var dateString = year + "-" + month;
-    console.log(dateString);
+    this.getData(dateString);
   }
 
   onDateChange(event: any){
@@ -64,6 +63,10 @@ export class RelatorioFinanceiroMensalComponent {
     var year = event.toDate().getFullYear();
     if(month <= 9) var dateString = year + "-" + "0" + month;
     else var dateString = year + "-" + month;
-    console.log(dateString);
+    this.getData(dateString);
+  }
+
+  async getData(dateString: string){
+    this.response = await this.apiClient.getResponse(dateString, "consumo");
   }
 }

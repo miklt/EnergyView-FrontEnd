@@ -11,13 +11,11 @@ export class RelatorioDeConsumoDiarioComponent{
   response : any = {} as any;
   date = new FormControl(new Date());
   maxDate = new Date();
-  minDate = new Date();
   consumo_relativo_a : any;
   consumo_relativo_b : any;
   consumo_relativo_c : any;
 
   constructor(private apiClient : ApiService){
-    this.minDate = this.apiClient.minDate;
     var day = this.date.getRawValue()!.getDate();
     var month = this.date.getRawValue()!.getMonth();
     month += 1;
@@ -27,7 +25,6 @@ export class RelatorioDeConsumoDiarioComponent{
     else if(month <= 9) var dateString = year + "-" + "0" + month + "-" + day;
     else var dateString = year + "-" + month + "-" + day;
     this.getData(dateString);
-    console.log(this.response);
   }
   
   onDateChange(event: any){
@@ -39,7 +36,6 @@ export class RelatorioDeConsumoDiarioComponent{
     else if(month <= 9) var dateString = year + "-" + "0" + month + "-" + day;
     else var dateString = year + "-" + month + "-" + day;
     this.getData(dateString);
-    console.log(this.response);
   }
     
   async getData(dateString: string){
