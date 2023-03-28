@@ -51,22 +51,33 @@ export class RelatorioFinanceiroMensalComponent {
   }
 
   constructor(private apiClient : ApiService){
-    var month = this.date.getRawValue()!.toDate().getMonth() + 1;
+    //Separates the date in day, month and year to make a formatted string
+    var month = this.date.getRawValue()!.toDate().getMonth() + 1; //For some reason month goes from 0 to 11
     var year = this.date.getRawValue()!.toDate().getFullYear();
+
+    //Handles the date so that dateString is always YYYY-MM
     if(month <= 9) var dateString = year + "-" + "0" + month;
     else var dateString = year + "-" + month;
+
+    //Uses the aforementioned dateString to get the data for the view
     this.getData(dateString);
   }
 
   onDateChange(event: any){
-    var month = event.toDate().getMonth() + 1;
+    //Separates the date in day, month and year to make a formatted string
+    var month = event.toDate().getMonth() + 1; //For some reason month goes from 0 to 11
     var year = event.toDate().getFullYear();
+
+    //Handles the date so that dateString is always YYYY-MM
     if(month <= 9) var dateString = year + "-" + "0" + month;
     else var dateString = year + "-" + month;
+
+    //Uses the aforementioned dateString to get the data for the view
     this.getData(dateString);
   }
 
   async getData(dateString: string){
-    this.response = await this.apiClient.getResponse(dateString, "consumo");
+    //Gets the response using the ApiService
+    this.response = await this.apiClient.getResponse(dateString, "financeiro");
   }
 }
