@@ -27,6 +27,7 @@ export class RelatorioDeConsumoDiarioComponent{
     else if(month <= 9) var dateString = year + "-" + "0" + month + "-" + day;
     else var dateString = year + "-" + month + "-" + day;
     this.getData(dateString);
+    console.log(this.response);
   }
   
   onDateChange(event: any){
@@ -38,6 +39,7 @@ export class RelatorioDeConsumoDiarioComponent{
     else if(month <= 9) var dateString = year + "-" + "0" + month + "-" + day;
     else var dateString = year + "-" + month + "-" + day;
     this.getData(dateString);
+    console.log(this.response);
   }
     
   async getData(dateString: string){
