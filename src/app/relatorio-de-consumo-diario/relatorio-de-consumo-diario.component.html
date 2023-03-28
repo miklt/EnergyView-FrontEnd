@@ -23,7 +23,7 @@
         <p class="container-title-text" style="margin-bottom: 37px;">Consumo total</p>
         <p class="big-text" style="margin-bottom: 37px;">{{this.response['consumo-total']}} kWh</p>
         <p class="coloured-text" [ngClass]="{'red': this.response['variacao-consumo-total'].charAt(0) === '+' && this.response['variacao-consumo-total'].charAt(1) !== '0', 'green': this.response['variacao-consumo-total'].charAt(0) === '-'}" style="margin-bottom: 4px;">{{this.response['variacao-consumo-total']}}%</p>
-        <p class="small-text">Desde ontem</p>
+        <p class="small-text">Desde o dia anterior</p>
     </div>
 
     <!-- Horario de pico -->
@@ -31,7 +31,7 @@
         <p class="container-title-text" style="margin-bottom: 37px;">Horário de pico</p>
         <p class="big-text" style="margin-bottom: 37px;">{{this.response['horario-de-pico']}}</p>
         <p class="coloured-text" style="margin-bottom: 4px;">{{this.response['horario-de-pico-ontem']}}</p>
-        <p class="small-text">Horário de pico de ontem</p>
+        <p class="small-text">No dia anterior</p>
     </div>
 
     <!-- Demanda media -->
@@ -40,7 +40,7 @@
         <div style="border-bottom: 3px dashed #0388BE; width: 30px; margin-bottom: 18px;"></div>
         <p class="big-text" style="margin-bottom: 37px;">{{this.response['demanda-media']}} kW</p>
         <p class="coloured-text" [ngClass]="{'red': this.response['variacao-demanda-media'].charAt(0) === '+' && this.response['variacao-demanda-media'].charAt(1) !== '0', 'green': this.response['variacao-demanda-media'].charAt(0) === '-'}" style="margin-bottom: 4px;">{{this.response['variacao-demanda-media']}}%</p>
-        <p class="small-text">Desde ontem</p>
+        <p class="small-text">Desde o dia anterior</p>
     </div>
 
     <!-- Consumo por fase -->
@@ -53,7 +53,7 @@
             <p class="coloured-text" [ngClass]="{'red': this.response['variacao-consumo-total-a'].charAt(0) === '+' && this.response['variacao-consumo-total-a'].charAt(1) !== '0', 'green': this.response['variacao-consumo-total-a'].charAt(0) === '-'}" style="margin-bottom: 0px; float: right; line-height: 16px">{{this.response['variacao-consumo-total-a']}}%</p>
             <br>
             <p class="small-text" style="line-height: 12px; float: left;">{{consumo_relativo_a}}% do consumo total</p>
-            <p class="small-text" style="float: right; line-height: 12px;">Desde ontem</p>
+            <p class="small-text" style="float: right; line-height: 12px;">Desde o dia anterior</p>
         </div>
         <!-- Fase B -->
         <p class="big-text" style="float: left; line-height: 32px; margin-right: 10px;">B</p>
@@ -62,7 +62,7 @@
             <p class="coloured-text" [ngClass]="{'red': this.response['variacao-consumo-total-b'].charAt(0) === '+' && this.response['variacao-consumo-total-b'].charAt(1) !== '0', 'green': this.response['variacao-consumo-total-b'].charAt(0) === '-'}" style="margin-bottom: 0px; float: right; line-height: 16px">{{this.response['variacao-consumo-total-b']}}%</p>
             <br>
             <p class="small-text" style="line-height: 12px; float: left;">{{consumo_relativo_b}}% do consumo total</p>
-            <p class="small-text" style="float: right; line-height: 12px;">Desde ontem</p>
+            <p class="small-text" style="float: right; line-height: 12px;">Desde o dia anterior</p>
         </div>
         <!-- Fase C -->
         <p class="big-text" style="float: left; line-height: 32px; margin-right: 10px;">C</p>
@@ -71,7 +71,7 @@
             <p class="coloured-text" [ngClass]="{'red': this.response['variacao-consumo-total-c'].charAt(0) === '+' && this.response['variacao-consumo-total-c'].charAt(1) !== '0', 'green': this.response['variacao-consumo-total-c'].charAt(0) === '-'}" style="margin-bottom: 0px; float: right; line-height: 16px">{{this.response['variacao-consumo-total-c']}}%</p>
             <br>
             <p class="small-text" style="line-height: 12px; float: left;">{{consumo_relativo_c}}% do consumo total</p>
-            <p class="small-text" style="float: right; line-height: 12px;">Desde ontem</p>
+            <p class="small-text" style="float: right; line-height: 12px;">Desde o dia anterior</p>
         </div>  
     </div>
     
@@ -81,7 +81,7 @@
         <div style="border-bottom: 3px solid #0388BE; width: 30px; margin-bottom: 18px;"></div>
         <p class="big-text" style="margin-bottom: 37px;">{{this.response['demanda-maxima']}} kW</p>
         <p class="coloured-text" [ngClass]="{'red': this.response['variacao-demanda-maxima'].charAt(0) === '+' && this.response['variacao-demanda-maxima'].charAt(1) !== '0', 'green': this.response['variacao-demanda-maxima'].charAt(0) === '-'}" style="margin-bottom: 4px;">{{this.response['variacao-demanda-maxima']}}%</p>
-        <p class="small-text">Desde ontem</p>
+        <p class="small-text">Desde o dia anterior</p>
     </div>
 
     <!-- Consumo acumulado -->
