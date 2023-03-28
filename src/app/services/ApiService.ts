@@ -7,9 +7,9 @@ import { HttpClient, HttpParams } from '@angular/common/http';
 
 export class ApiService {
     backendURLConsumoDiario = "http://127.0.0.1:8000/day-consumption-dashboard";
-    backendURLConsumoMensal = "http://127.0.0.1:8000/"; //Mudar quando implementado
-    backendURLFinanceiroDiario = "http://127.0.0.1:8000/"; //Mudar quando implementado
-    backendURLFinanceiroMensal  = "http://127.0.0.1:8000/"; //Mudar quando implementado
+    backendURLConsumoMensal = "http://127.0.0.1:8000/month-consumption-dashboard";
+    backendURLFinanceiroDiario = "http://127.0.0.1:8000/day-financial-dashboard";
+    backendURLFinanceiroMensal  = "http://127.0.0.1:8000/month-financial-dashboard";
 
     constructor(private http: HttpClient){}
 
