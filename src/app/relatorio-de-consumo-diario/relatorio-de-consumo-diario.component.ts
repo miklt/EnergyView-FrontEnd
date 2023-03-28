@@ -12,7 +12,7 @@ export class RelatorioDeConsumoDiarioComponent{
   date = new FormControl(new Date());
   maxDate = new Date();
   theresResponse : number = 1;
-  progressBarValue : number = 0;
+  progressBarValue : number = 100;
 
   constructor(private apiClient : ApiService){
     //Separates the date in day, month and year to make a formatted string
@@ -45,12 +45,8 @@ export class RelatorioDeConsumoDiarioComponent{
     //Uses the aforementioned dateString to get the data for the view
     this.getData(dateString);
 
-    //Loads the loading bar
-    for(let i = 0; i <= 100; i++){
-      setTimeout(() => {
-        this.progressBarValue += 1;
-      }, 5);
-    }
+    //Loads the progress bar
+    this.loadProgressBar();
   }
     
   async getData(dateString: string){
@@ -80,5 +76,11 @@ export class RelatorioDeConsumoDiarioComponent{
         eval(scriptTags[i].innerHTML);
       }
     }, 5);
+  }
+
+  loadProgressBar(){
+    this.progressBarValue = 0;
+    setTimeout(() => {this.progressBarValue = 99;}, 1);
+    setTimeout(() => {this.progressBarValue = 100;}, 500);
   }
 }

@@ -1,4 +1,5 @@
-<mat-progress-bar *ngIf="this.progressBarValue < 100" mode="determinate" [value]="this.progressBarValue"></mat-progress-bar>
+<!-- Progress bar between date changes -->
+<mat-progress-bar class="my-progress-bar" *ngIf="this.progressBarValue < 100" color="accent" mode="determinate" [value]="this.progressBarValue" style="position: absolute; z-index: 1; top: -1px"></mat-progress-bar>
 
 <!-- Title and date selector -->
 <div style="margin-top: 40px; margin-left: 50px; margin-right: 50px; display: inline-block; width: calc(100% - 100px); min-width: 785px;">
@@ -23,7 +24,7 @@
         <img src="/assets/sad.png" style="height: 100px; margin-bottom: 30px;">
         <p class="light-grey no-space" style="font-size: 40px; margin-bottom: 30px;">Erro 500</p>
         <p class="light-grey no-space" style="font-size: 15px;">Ops! Não existem dados para este dia, por favor selecione outra data.</p>
-        <p class="light-grey no-space" style="font-size: 15px;">Se você acredita que isso seja um erro contate o admnistrador de seu sistema.</p>
+        <p class="light-grey no-space" style="font-size: 15px;">Se você acredita que isso seja um erro contate o administrador de seu sistema.</p>
     </div>
 </ng-template>
 
