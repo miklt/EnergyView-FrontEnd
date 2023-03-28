@@ -15,8 +15,15 @@
     </div>
 </div>
 
+<!-- No response case -->
+<ng-template #noResponse>
+    <div style="margin-top: 10px; margin-left: 50px; margin-right: 50px; display: inline-block; width: calc(100% - 100px); min-width: 785px;">
+        <p class="container-title-text" style="margin-bottom: 37px;">Não encontramos dados para esse dia =(</p>
+    </div>
+</ng-template>
+
 <!-- Containers -->
-<div style="margin-top: 10px; margin-left: 50px; margin-right: 50px; display: inline-block; width: calc(100% - 100px); min-width: 785px;">
+<div *ngIf="this.theresResponse; else noResponse" style="margin-top: 10px; margin-left: 50px; margin-right: 50px; display: inline-block; width: calc(100% - 100px); min-width: 785px;">
 
     <!-- Consumo total -->
     <div class="container" style="width: calc((100%/2 - 110px)/2); height: 153px; float: left;">
