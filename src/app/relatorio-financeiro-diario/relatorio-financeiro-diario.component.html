@@ -34,16 +34,16 @@
     <!-- Custo total -->
     <div class="container" style="width: calc(100%/2 - 50px); height: 153px; float: left;">
         <p class="container-title-text" style="margin-bottom: 37px;">Custo total</p>
-        <p class="big-text" style="margin-bottom: 37px;">R$ 10,00</p>
-        <p class="coloured-text red" style="margin-bottom: 4px;">+ 5,25%</p>
+        <p class="big-text" style="margin-bottom: 37px;">R$ {{this.response['custo-total']}}</p>
+        <p class="coloured-text" [ngClass]="{'red': this.response['variacao-custo-total']?.charAt(0) === '+' && this.response['variacao-custo-total']?.charAt(1) !== '0', 'green': this.response['variacao-custo-total']?.charAt(0) === '-'}" style="margin-bottom: 4px;">{{this.response['variacao-custo-total']}}%</p>
         <p class="small-text">Desde o dia anterior</p>
     </div>
 
     <!-- Custo médio -->
     <div class="container" style="width: calc(100%/2 - 50px); height: 153px; float: left; margin-right: 0px;">
         <p class="container-title-text" style="margin-bottom: 37px;">Custo médio por hora</p>
-        <p class="big-text" style="margin-bottom: 37px;">R$ 0,42 / hora</p>
-        <p class="coloured-text red" style="margin-bottom: 4px;">+ 7,05%</p>
+        <p class="big-text" style="margin-bottom: 37px;">R$ {{this.response['custo-medio']}} / hora</p>
+        <p class="coloured-text" [ngClass]="{'red': this.response['variacao-custo-medio']?.charAt(0) === '+' && this.response['variacao-custo-medio']?.charAt(1) !== '0', 'green': this.response['variacao-custo-medio']?.charAt(0) === '-'}" style="margin-bottom: 4px;">{{this.response['variacao-custo-medio']}}%</p>
         <p class="small-text">Desde o dia anterior</p>
     </div>
 
