@@ -41,6 +41,8 @@ export class RelatorioDeConsumoMensalComponent {
   response : any = {} as any;
   date = new FormControl(moment());
   maxDate = moment();
+  theresResponse : number = 1;
+  progressBarValue : number = 100;
 
   setMonthAndYear(normalizedMonthAndYear: Moment, datepicker: MatDatepicker<Moment>) {
     const ctrlValue = this.date.value!;
@@ -74,26 +76,43 @@ export class RelatorioDeConsumoMensalComponent {
 
     //Uses the aforementioned dateString to get the data for the view
     this.getData(dateString);
+
+    //Loads the progress bar
+    this.loadProgressBar();
   }
 
   async getData(dateString: string){
     //Gets the response using the ApiService
     this.response = await this.apiClient.getResponse(dateString, "consumo");
-
-    //Sets the chart's divs innerHTML
-    let consumo_acumulado = document.getElementById("chartConsumoAcumulado");
-    let curva_carga = document.getElementById("chartCurvaDeCarga");
-    curva_carga!.innerHTML = this.response["curva-de-carga"];
-    consumo_acumulado!.innerHTML = this.response["consumo-acumulado"];
-
-    let scriptTags = curva_carga!.getElementsByTagName('script');
-    for (let i = 0; i < scriptTags.length; i++) {
-      eval(scriptTags[i].innerHTML);
+    if(Object.keys(this.response).length === 0){
+      this.theresResponse = 0;
+      return;
     }
+    else this.theresResponse = 1;
 
-    scriptTags = consumo_acumulado!.getElementsByTagName('script');
-    for (let i = 0; i < scriptTags.length; i++) {
-      eval(scriptTags[i].innerHTML);
-    }
+    setTimeout(() => { //Waits for 5ms to make sure the ngIf has changed the view
+      //Sets the chart's divs innerHTML
+      let consumo_acumulado = document.getElementById("chartConsumoAcumulado");
+      let curva_carga = document.getElementById("chartCurvaDeCarga");
+      
+      curva_carga!.innerHTML = this.response["curva-de-carga"];
+      consumo_acumulado!.innerHTML = this.response["consumo-acumulado"];
+
+      let scriptTags = curva_carga!.getElementsByTagName('script');
+      for (let i = 0; i < scriptTags.length; i++) {
+        eval(scriptTags[i].innerHTML);
+      }
+
+      scriptTags = consumo_acumulado!.getElementsByTagName('script');
+      for (let i = 0; i < scriptTags.length; i++) {
+        eval(scriptTags[i].innerHTML);
+      }
+    }, 5);
+  }
+
+  loadProgressBar(){
+    this.progressBarValue = 0;
+    setTimeout(() => {this.progressBarValue = 99;}, 1);
+    setTimeout(() => {this.progressBarValue = 100;}, 500);
   }
 }

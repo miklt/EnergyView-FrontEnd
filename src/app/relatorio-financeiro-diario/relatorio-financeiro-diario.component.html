@@ -1,3 +1,6 @@
+<!-- Progress bar between date changes -->
+<mat-progress-bar class="my-progress-bar" *ngIf="this.progressBarValue < 100" color="accent" mode="determinate" [value]="this.progressBarValue" style="position: absolute; z-index: 1; top: -1px"></mat-progress-bar>
+
 <!-- Title and date selector -->
 <div style="margin-top: 40px; margin-left: 50px; margin-right: 50px; display: inline-block; width: calc(100% - 100px); min-width: 785px;">
     <p class="view-title-text" style="float: left; margin-right: 40px; line-height: 56px;">Relatório Financeiro</p>
@@ -15,8 +18,18 @@
     </div>
 </div>
 
+<!-- No response case -->
+<ng-template #noResponse>
+    <div class="center" style="text-align: center; margin-top: 10px; margin-left: 50px; margin-right: 50px; display: inline-block; width: calc(100% - 100px); min-width: 785px;">
+        <img src="/assets/sad.png" style="height: 100px; margin-bottom: 30px;">
+        <p class="light-grey no-space" style="font-size: 40px; margin-bottom: 30px;">Erro 500</p>
+        <p class="light-grey no-space" style="font-size: 15px;">Ops! Não existem dados para este dia, por favor selecione outra data.</p>
+        <p class="light-grey no-space" style="font-size: 15px;">Se você acredita que isso seja um erro contate o administrador de seu sistema.</p>
+    </div>
+</ng-template>
+
 <!-- Containers -->
-<div style="margin-top: 10px; margin-left: 50px; margin-right: 50px; display: inline-block; width: calc(100% - 100px); min-width: 785px;">
+<div *ngIf="this.theresResponse; else noResponse" style="margin-top: 10px; margin-left: 50px; margin-right: 50px; display: inline-block; width: calc(100% - 100px); min-width: 785px;">
 
     <!-- Custo total -->
     <div class="container" style="width: calc(100%/2 - 50px); height: 153px; float: left;">

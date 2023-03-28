@@ -41,6 +41,8 @@ export class RelatorioFinanceiroMensalComponent {
   response : any = {} as any;
   date = new FormControl(moment());
   maxDate = moment();
+  theresResponse : number = 1;
+  progressBarValue : number = 100;
 
   setMonthAndYear(normalizedMonthAndYear: Moment, datepicker: MatDatepicker<Moment>) {
     const ctrlValue = this.date.value!;
@@ -74,19 +76,36 @@ export class RelatorioFinanceiroMensalComponent {
 
     //Uses the aforementioned dateString to get the data for the view
     this.getData(dateString);
+
+    //Loads the progress bar
+    this.loadProgressBar();
   }
 
   async getData(dateString: string){
     //Gets the response using the ApiService
     this.response = await this.apiClient.getResponse(dateString, "financeiro");
-
-    //Sets the chart's divs innerHTML
-    let serie_historica = document.getElementById("chartSerieHistorica");
-    serie_historica!.innerHTML = this.response["serie-historica"];
-
-    let scriptTags = serie_historica!.getElementsByTagName('script');
-    for (let i = 0; i < scriptTags.length; i++) {
-      eval(scriptTags[i].innerHTML);
+    if(Object.keys(this.response).length === 0){
+      this.theresResponse = 0;
+      return;
     }
+    else this.theresResponse = 1;
+
+    setTimeout(() => { //Waits for 5ms to make sure the ngIf has changed the view
+      //Sets the chart's divs innerHTML
+      let serie_historica = document.getElementById("chartSerieHistorica");
+
+      serie_historica!.innerHTML = this.response["serie-historica"];
+
+      let scriptTags = serie_historica!.getElementsByTagName('script');
+      for (let i = 0; i < scriptTags.length; i++) {
+        eval(scriptTags[i].innerHTML);
+      }
+    }, 5);
+  }
+
+  loadProgressBar(){
+    this.progressBarValue = 0;
+    setTimeout(() => {this.progressBarValue = 99;}, 1);
+    setTimeout(() => {this.progressBarValue = 100;}, 500);
   }
 }
