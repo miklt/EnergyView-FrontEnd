@@ -9,6 +9,7 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { LOCALE_ID } from '@angular/core';
 import { HttpClient, HttpClientModule, HttpParams } from '@angular/common/http';
 import { LoadingBarRouterModule } from '@ngx-loading-bar/router';
+import '@angular/common/locales/global/pt-PT';
 // Angular Material
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatSidenavModule } from '@angular/material/sidenav';
@@ -69,9 +70,9 @@ const appRoutes : Routes = [
     MatProgressBarModule
   ],
   providers: [
-    {provide: LOCALE_ID, useValue: 'pt-BR'},
+    {provide: LOCALE_ID, useValue: 'pt-PT'},
     ApiService
   ],
   bootstrap: [AppComponent]
 })
-export class AppModule { }
+export class AppModule {}

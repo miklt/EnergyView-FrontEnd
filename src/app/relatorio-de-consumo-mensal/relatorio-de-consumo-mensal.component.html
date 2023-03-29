@@ -38,7 +38,7 @@
     <!-- Consumo total -->
     <div class="container" style="width: calc((100%/2 - 110px)/2); height: 153px; float: left;">
         <p class="container-title-text" style="margin-bottom: 37px;">Consumo total</p>
-        <p class="big-text" style="margin-bottom: 37px;">{{this.response['consumo-total']/1000}} kWh</p>
+        <p class="big-text" style="margin-bottom: 37px;">{{this.response['consumo-total']/1000 | number:'':'pt-PT'}} kWh</p>
         <p class="coloured-text" [ngClass]="{'red': this.response['variacao-consumo-total']?.charAt(0) === '+' && this.response['variacao-consumo-total']?.charAt(1) !== '0', 'green': this.response['variacao-consumo-total']?.charAt(0) === '-'}" style="margin-bottom: 4px;">{{this.response['variacao-consumo-total']}}%</p>
         <p class="small-text">Desde o mês anterior</p>
     </div>
@@ -66,7 +66,7 @@
         <!-- Fase A -->
         <p class="big-text" style="float: left; line-height: 32px; margin-right: 10px;">A</p>
         <div style="width: calc(100% - 30px); display: inline-block; margin-bottom: 10px;">
-            <p class="coloured-text" style="margin-bottom: 0px; font-size: 16px; line-height: 16px; float: left;">{{this.response['consumo-total-a']/1000}} kWh</p>
+            <p class="coloured-text" style="margin-bottom: 0px; font-size: 16px; line-height: 16px; float: left;">{{this.response['consumo-total-a']/1000 | number:'':'pt-PT'}} kWh</p>
             <p class="coloured-text" [ngClass]="{'red': this.response['variacao-consumo-total-a']?.charAt(0) === '+' && this.response['variacao-consumo-total-a']?.charAt(1) !== '0', 'green': this.response['variacao-consumo-total-a']?.charAt(0) === '-'}" style="margin-bottom: 0px; float: right; line-height: 16px">{{this.response['variacao-consumo-total-a']}}%</p>
             <br>
             <p class="small-text" style="line-height: 12px; float: left;">{{(this.response['consumo-total-a']/this.response['consumo-total']*100).toFixed(0)}}% do consumo total</p>
@@ -75,7 +75,7 @@
         <!-- Fase B -->
         <p class="big-text" style="float: left; line-height: 32px; margin-right: 10px;">B</p>
         <div style="width: calc(100% - 30px); display: inline-block; margin-bottom: 10px;">
-            <p class="coloured-text" style="margin-bottom: 0px; font-size: 16px; line-height: 16px; float: left;">{{this.response['consumo-total-b']/1000}} kWh</p>
+            <p class="coloured-text" style="margin-bottom: 0px; font-size: 16px; line-height: 16px; float: left;">{{this.response['consumo-total-b']/1000 | number:'':'pt-PT'}} kWh</p>
             <p class="coloured-text" [ngClass]="{'red': this.response['variacao-consumo-total-b']?.charAt(0) === '+' && this.response['variacao-consumo-total-b']?.charAt(1) !== '0', 'green': this.response['variacao-consumo-total-b']?.charAt(0) === '-'}" style="margin-bottom: 0px; float: right; line-height: 16px">{{this.response['variacao-consumo-total-b']}}%</p>
             <br>
             <p class="small-text" style="line-height: 12px; float: left;">{{(this.response['consumo-total-b']/this.response['consumo-total']*100).toFixed(0)}}% do consumo total</p>
@@ -84,7 +84,7 @@
         <!-- Fase C -->
         <p class="big-text" style="float: left; line-height: 32px; margin-right: 10px;">C</p>
         <div style="width: calc(100% - 30px); display: inline-block;">
-            <p class="coloured-text" style="margin-bottom: 0px; font-size: 16px; line-height: 16px; float: left;">{{this.response['consumo-total-c']/1000}} kWh</p>
+            <p class="coloured-text" style="margin-bottom: 0px; font-size: 16px; line-height: 16px; float: left;">{{this.response['consumo-total-c']/1000 | number:'':'pt-PT'}} kWh</p>
             <p class="coloured-text" [ngClass]="{'red': this.response['variacao-consumo-total-c']?.charAt(0) === '+' && this.response['variacao-consumo-total-c']?.charAt(1) !== '0', 'green': this.response['variacao-consumo-total-c']?.charAt(0) === '-'}" style="margin-bottom: 0px; float: right; line-height: 16px">{{this.response['variacao-consumo-total-c']}}%</p>
             <br>
             <p class="small-text" style="line-height: 12px; float: left;">{{(this.response['consumo-total-c']/this.response['consumo-total']*100).toFixed(0)}}% do consumo total</p>
