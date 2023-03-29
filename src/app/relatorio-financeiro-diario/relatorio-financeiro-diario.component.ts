@@ -11,7 +11,7 @@ export class RelatorioFinanceiroDiarioComponent {
   response : any = {} as any;
   date = new FormControl(new Date());
   maxDate = new Date();
-  theresResponse : number = 1;
+  theresResponse : number = 0;
   progressBarValue : number = 100;
 
   constructor(private apiClient : ApiService){

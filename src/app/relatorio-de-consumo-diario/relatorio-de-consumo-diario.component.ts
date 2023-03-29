@@ -11,7 +11,7 @@ export class RelatorioDeConsumoDiarioComponent{
   response : any = {} as any;
   date = new FormControl(new Date());
   maxDate = new Date();
-  theresResponse : number = 1;
+  theresResponse : number = 0;
   progressBarValue : number = 100;
 
   constructor(private apiClient : ApiService){
@@ -58,7 +58,7 @@ export class RelatorioDeConsumoDiarioComponent{
     }
     else this.theresResponse = 1;
 
-    setTimeout(() => { //Waits for 5ms to make sure the ngIf has changed the view
+    setTimeout(() => { //Waits for 1ms to make sure the ngIf has changed the view
       //Sets the chart's divs innerHTML
       let consumo_acumulado = document.getElementById("chartConsumoAcumulado");
       let curva_carga = document.getElementById("chartCurvaDeCarga");
@@ -75,7 +75,7 @@ export class RelatorioDeConsumoDiarioComponent{
       for (let i = 0; i < scriptTags.length; i++) {
         eval(scriptTags[i].innerHTML);
       }
-    }, 5);
+    }, 1);
   }
 
   loadProgressBar(){

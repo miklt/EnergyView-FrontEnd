@@ -41,7 +41,7 @@ export class RelatorioFinanceiroMensalComponent {
   response : any = {} as any;
   date = new FormControl(moment());
   maxDate = moment();
-  theresResponse : number = 1;
+  theresResponse : number = 0;
   progressBarValue : number = 100;
 
   setMonthAndYear(normalizedMonthAndYear: Moment, datepicker: MatDatepicker<Moment>) {
