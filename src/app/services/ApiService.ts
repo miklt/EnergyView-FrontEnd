@@ -6,10 +6,18 @@ import { HttpClient, HttpParams } from '@angular/common/http';
 })
 
 export class ApiService {
+  // Credenciais de conexao na VM da AWS
+  /*
     backendURLConsumoDiario = "http://44.203.100.131:80/day-consumption-dashboard";
     backendURLConsumoMensal = "http://44.203.100.131:80/month-consumption-dashboard";
     backendURLFinanceiroDiario = "http://44.203.100.131:80/day-financial-dashboard";
     backendURLFinanceiroMensal  = "http://44.203.100.131:80/month-financial-dashboard";
+
+  */
+    backendURLConsumoDiario = "http://127.0.0.1:8000/day-consumption-dashboard";
+    backendURLConsumoMensal = "http://127.0.0.1:8000/month-consumption-dashboard";
+    backendURLFinanceiroDiario = "http://127.0.0.1:8000/day-financial-dashboard";
+    backendURLFinanceiroMensal  = "http://127.0.0.1:8000/month-financial-dashboard";
 
     constructor(private http: HttpClient){}
 
