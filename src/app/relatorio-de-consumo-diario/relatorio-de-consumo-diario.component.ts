@@ -1,20 +1,21 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { FormControl } from '@angular/forms';
-import { ApiService } from '../services/ApiService';
+import { DataService } from '../services/data.service';
 
 @Component({
   selector: 'app-relatorio-de-consumo-diario',
   templateUrl: './relatorio-de-consumo-diario.component.html',
   styleUrls: ['./relatorio-de-consumo-diario.component.css']
 })
-export class RelatorioDeConsumoDiarioComponent{
-  response : any = {} as any;
+export class RelatorioDeConsumoDiarioComponent implements OnInit{
+  data : any = null;
   date = new FormControl(new Date());
   maxDate = new Date();
-  theresResponse : number = 0;
-  progressBarValue : number = 100;
+  theresResponse : boolean = false;
 
-  constructor(private apiClient : ApiService){
+  constructor(private dataService: DataService){}
+
+  ngOnInit(): void {
     //Separates the date in day, month and year to make a formatted string
     var day = this.date.getRawValue()!.getDate();
     var month = this.date.getRawValue()!.getMonth() + 1; //For some reason month goes from 0 to 11
@@ -44,43 +45,34 @@ export class RelatorioDeConsumoDiarioComponent{
 
     //Uses the aforementioned dateString to get the data for the view
     this.getData(dateString);
-
-    //Loads the progress bar
-    this.loadProgressBar();
   }
     
-  async getData(dateString: string){
-    //Gets the response using the ApiService
-    this.response = await this.apiClient.getResponse(dateString, "consumo");
-    if(Object.keys(this.response).length === 0){
-      this.theresResponse = 0;
-      return;
-    }
-    else this.theresResponse = 1;
-
-    setTimeout(() => { //Waits for 1ms to make sure the ngIf has changed the view
+  getData(dateString: string){
+    //Gets the response using the dataService
+    this.dataService.getDailyConsumptionData(dateString).subscribe((response) => {
+      this.theresResponse = true;
+      this.data = response;
       //Sets the chart's divs innerHTML
-      let consumo_acumulado = document.getElementById("chartConsumoAcumulado");
-      let curva_carga = document.getElementById("chartCurvaDeCarga");
-      
-      curva_carga!.innerHTML = this.response["curva-de-carga"];
-      consumo_acumulado!.innerHTML = this.response["consumo-acumulado"];
+      setTimeout(() => { //Waits for 1ms to make sure the ngIf has changed the view
+        let consumo_acumulado = document.getElementById("chartConsumoAcumulado");
+        let curva_carga = document.getElementById("chartCurvaDeCarga");
+        
+        curva_carga!.innerHTML = this.data["curva-de-carga"];
+        consumo_acumulado!.innerHTML = this.data["consumo-acumulado"];
 
-      let scriptTags = curva_carga!.getElementsByTagName('script');
-      for (let i = 0; i < scriptTags.length; i++) {
-        eval(scriptTags[i].innerHTML);
-      }
+        let scriptTags = curva_carga!.getElementsByTagName('script');
+        for (let i = 0; i < scriptTags.length; i++) {
+          eval(scriptTags[i].innerHTML);
+        }
 
-      scriptTags = consumo_acumulado!.getElementsByTagName('script');
-      for (let i = 0; i < scriptTags.length; i++) {
-        eval(scriptTags[i].innerHTML);
-      }
-    }, 1);
-  }
-
-  loadProgressBar(){
-    this.progressBarValue = 0;
-    setTimeout(() => {this.progressBarValue = 99;}, 1);
-    setTimeout(() => {this.progressBarValue = 100;}, 500);
+        scriptTags = consumo_acumulado!.getElementsByTagName('script');
+        for (let i = 0; i < scriptTags.length; i++) {
+          eval(scriptTags[i].innerHTML);
+        }
+      }, 1);
+    }, () => {
+      this.theresResponse = false;
+      this.data = null;
+    });
   }
 }
