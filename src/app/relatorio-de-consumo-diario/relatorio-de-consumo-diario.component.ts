@@ -9,70 +9,72 @@ import { DataService } from '../services/data.service';
 })
 export class RelatorioDeConsumoDiarioComponent implements OnInit{
   data : any = null;
-  date = new FormControl(new Date());
-  maxDate = new Date();
-  theresResponse : boolean = false;
+  date : FormControl<Date|null> = new FormControl<Date>(new Date()); // Initializes date with today's date
+  maxDate : Date = new Date();
 
-  constructor(private dataService: DataService){}
+  constructor(private dataService: DataService) { }
 
   ngOnInit(): void {
-    //Separates the date in day, month and year to make a formatted string
-    var day = this.date.getRawValue()!.getDate();
-    var month = this.date.getRawValue()!.getMonth() + 1; //For some reason month goes from 0 to 11
-    var year = this.date.getRawValue()!.getFullYear();
-
-    //Handles the date so that dateString is always YYYY-MM-DD
-    if(day <= 9 && month <= 9) dateString = year + "-" + "0" + month + "-" + "0" + day;
-    else if(day <= 9) var dateString = year + "-" + month + "-" + "0" + day;
-    else if(month <= 9) var dateString = year + "-" + "0" + month + "-" + day;
-    else var dateString = year + "-" + month + "-" + day;
-
-    //Uses the aforementioned dateString to get the data for the view
-    this.getData(dateString);
+    this.onDateSelect();
   }
   
-  onDateChange(event: any){
-    //Separates the date in day, month and year to make a formatted string
-    var day = event.getDate();
-    var month = event.getMonth() + 1; //For some reason month goes from 0 to 11
-    var year = event.getFullYear();
-    
-    //Handles the date so that dateString is always YYYY-MM-DD
-    if(day <= 9 && month <= 9) dateString = year + "-" + "0" + month + "-" + "0" + day;
-    else if(day <= 9) var dateString = year + "-" + month + "-" + "0" + day;
-    else if(month <= 9) var dateString = year + "-" + "0" + month + "-" + day;
-    else var dateString = year + "-" + month + "-" + day;
+  // Updates data with the selected date
+  onDateSelect(): void{
+    // Separates the date in day, month and year to make a formatted YYYY-MM-DD string
+    const day = this.date.getRawValue()!.getDate();
+    const month = this.date.getRawValue()!.getMonth() + 1; // For some reason month goes from 0 to 11
+    const year = this.date.getRawValue()!.getFullYear();
+    const dateString = this.formatDateString(year, month, day);
+    this.getData(dateString); // Uses the aforementioned dateString to get the data for the view
+  }
 
-    //Uses the aforementioned dateString to get the data for the view
-    this.getData(dateString);
+  // Handles the date so that dateString is always YYYY-MM-DD
+  formatDateString(year: number, month: number, day: number): string {
+    const pad = (n: number) => (n < 10 ? '0' + n : n.toString()); // Adds a 0 before the number if n is < 10
+    return `${year}-${pad(month)}-${pad(day)}`;
   }
     
-  getData(dateString: string){
-    //Gets the response using the dataService
-    this.dataService.getDailyConsumptionData(dateString).subscribe((response) => {
-      this.theresResponse = true;
-      this.data = response;
-      //Sets the chart's divs innerHTML
-      setTimeout(() => { //Waits for 1ms to make sure the ngIf has changed the view
-        let consumo_acumulado = document.getElementById("chartConsumoAcumulado");
-        let curva_carga = document.getElementById("chartCurvaDeCarga");
-        
-        curva_carga!.innerHTML = this.data["curva-de-carga"];
-        consumo_acumulado!.innerHTML = this.data["consumo-acumulado"];
-
-        let scriptTags = curva_carga!.getElementsByTagName('script');
-        for (let i = 0; i < scriptTags.length; i++) {
-          eval(scriptTags[i].innerHTML);
-        }
-
-        scriptTags = consumo_acumulado!.getElementsByTagName('script');
-        for (let i = 0; i < scriptTags.length; i++) {
-          eval(scriptTags[i].innerHTML);
-        }
-      }, 1);
-    }, () => {
-      this.theresResponse = false;
-      this.data = null;
+  // Gets the data for the view using the dataService
+  getData(dateString: string): void {
+    this.dataService.getDailyConsumptionData(dateString).subscribe({
+      next: (response) => {
+        this.data = response;
+        setTimeout(() => { // Uses setTimeout with no delay to wait for the view to render
+          const consumo_acumulado = document.getElementById('chartConsumoAcumulado');
+          const curva_carga = document.getElementById('chartCurvaDeCarga');
+          if (consumo_acumulado && curva_carga) {
+            // Sets the chart's html and calls executeScripts for each element
+            consumo_acumulado.innerHTML = this.data['consumo-acumulado'];
+            this.executeScripts(consumo_acumulado);
+            curva_carga.innerHTML = this.data['curva-de-carga']
+            this.executeScripts(curva_carga);
+          }
+        }, 0);
+      },
+      error: () => {
+        this.data = null;
+      }
     });
+  }
+
+  // Execute the chart's scripts
+  executeScripts(element: HTMLElement): void {
+    // Get all script elements within the provided HTMLElement
+    let scriptTags = element.getElementsByTagName('script');
+    
+    // Loop through each script element
+    for (let i = 0; i < scriptTags.length; i++) {
+      // Get the content of the current script element
+      const scriptContent = scriptTags[i].textContent;
+      if (scriptContent) {
+        try {
+          const scriptFunction = new Function(scriptContent); // Create a new function from the script content
+          scriptFunction(); // Execute the newly created script function
+        } 
+        catch (error) {
+          console.error(`Error executing the chart's script: ${error}`);
+        }
+      }
+    }
   }
 }

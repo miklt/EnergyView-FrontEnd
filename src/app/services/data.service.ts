@@ -10,19 +10,19 @@ export class DataService {
 
   getDailyConsumptionData(dateString: string): Observable<any> {
     const url = 'http://143.107.102.8:8083/day-consumption-dashboard';
-    const params = new HttpParams().set("day", dateString);
+    const params = new HttpParams().set('day', dateString);
     return this.http.get(url, {params});
   }
 
   getMonthlyConsumptionData(dateString: string): Observable<any> {
     const url = 'http://143.107.102.8:8083/month-consumption-dashboard';
-    const params = new HttpParams().set("month", dateString);
+    const params = new HttpParams().set('month', dateString);
     return this.http.get(url, {params});
   }
 
   getMonthlyFinancialData(dateString: string): Observable<any> {
     const url = 'http://143.107.102.8:8083/month-financial-dashboard';
-    const params = new HttpParams().set("month", dateString);
+    const params = new HttpParams().set('month', dateString);
     return this.http.get(url, {params});
   }
 }
