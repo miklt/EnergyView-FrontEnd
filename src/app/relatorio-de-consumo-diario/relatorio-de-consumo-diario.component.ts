@@ -5,7 +5,7 @@ import { DataService } from '../services/data.service';
 @Component({
   selector: 'app-relatorio-de-consumo-diario',
   templateUrl: './relatorio-de-consumo-diario.component.html',
-  styleUrls: ['./relatorio-de-consumo-diario.component.css']
+  styleUrls: ['./relatorio-de-consumo-diario.component.scss']
 })
 export class RelatorioDeConsumoDiarioComponent implements OnInit{
   data : any = null;

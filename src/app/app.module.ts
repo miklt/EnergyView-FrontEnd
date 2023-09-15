@@ -23,6 +23,7 @@ import { SideBarComponent } from './side-bar/side-bar.component';
 import { RelatorioDeConsumoDiarioComponent } from './relatorio-de-consumo-diario/relatorio-de-consumo-diario.component';
 import { RelatorioDeConsumoMensalComponent } from './relatorio-de-consumo-mensal/relatorio-de-consumo-mensal.component';
 import { RelatorioFinanceiroMensalComponent } from './relatorio-financeiro-mensal/relatorio-financeiro-mensal.component';
+import { NoDataComponent } from './no-data/no-data.component';
 
 @NgModule({
   declarations: [
@@ -30,7 +31,8 @@ import { RelatorioFinanceiroMensalComponent } from './relatorio-financeiro-mensa
     SideBarComponent,
     RelatorioDeConsumoDiarioComponent,
     RelatorioDeConsumoMensalComponent,
-    RelatorioFinanceiroMensalComponent
+    RelatorioFinanceiroMensalComponent,
+    NoDataComponent
   ],
   imports: [
     BrowserModule,

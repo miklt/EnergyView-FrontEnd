@@ -1,8 +1,8 @@
 <div style="margin-left: 40px; margin-top: 50px;">
     <!-- Logo -->
-    <a class="invisible no-space" routerLink="">
+    <div routerLink="">
         <img src="/assets/garsoft.png" style="cursor: pointer; height: 35px; margin-bottom: 50px;">
-    </a>
+    </div>
     
     <!-- Demanda atual -->
     <p matBadge="1" matBadgeOverlap="false" class="big-text white" style="margin-bottom: 4px; width: fit-content;">{{this.demandaAtual}} W</p>
@@ -10,17 +10,13 @@
 </div>
 
 <!-- Relatorio de consumo -->
-<a class="invisible no-space" routerLink="/relatorio-de-consumo/diario">
-    <div class="not-selected" routerLink="/relatorio-de-consumo" routerLinkActive="selected" style="margin-bottom: 5px;">
-        <img src="/assets/relatorio-de-consumo.png" style="float: left; margin-right: 10px;">
-        <p class="container-title-text white">Relatório de consumo</p>
-    </div>
-</a>
+<div class="side-bar-item" routerLink="/relatorio-de-consumo" routerLinkActive="selected">
+    <img class="item-image" src="/assets/relatorio-de-consumo.png">
+    <p class="container-title-text white">Relatório de consumo</p>
+</div>
 
 <!-- Relatorio financeiro -->
-<a class="invisible no-space" routerLink="/relatorio-financeiro/diario">
-    <div class="not-selected" routerLink="/relatorio-financeiro" routerLinkActive="selected" style="margin-bottom: 5px;">
-        <img src="/assets/relatorio-financeiro.png" style="float: left; margin-right: 10px;">
-        <p class="container-title-text white">Relatório financeiro</p>
-    </div>
-</a>
+<div class="side-bar-item" routerLink="/relatorio-financeiro" routerLinkActive="selected">
+    <img class="item-image" src="/assets/relatorio-financeiro.png">
+    <p class="container-title-text white">Relatório financeiro</p>
+</div>

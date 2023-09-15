@@ -7,6 +7,7 @@ import { RelatorioFinanceiroMensalComponent } from './relatorio-financeiro-mensa
 const routes : Routes = [
   {path: '', redirectTo: '/relatorio-de-consumo/diario', pathMatch: 'full'},
   {path: 'relatorio-de-consumo', children: [
+    {path: '', redirectTo: 'diario', pathMatch: 'full'},
     {path: 'diario', component: RelatorioDeConsumoDiarioComponent},
     {path: 'mensal', component: RelatorioDeConsumoMensalComponent}
   ]},

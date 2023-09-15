@@ -1,106 +1,108 @@
-<!-- Title and date selector -->
-<div style="margin-top: 40px; margin-left: 50px; margin-right: 50px; display: inline-block; width: calc(100% - 100px); min-width: 785px;">
-    <p class="view-title-text" style="float: left; margin-right: 40px; line-height: 56px;">Relatório de Consumo</p>
-    <p routerLink="/relatorio-de-consumo/diario" class="container-title-text dark-grey underline" style="float: left; line-height: 56px; margin-right: 20px; cursor: pointer;">Diário</p>
-    <p routerLink="/relatorio-de-consumo/mensal" class="container-title-text dark-grey" style="float: left; line-height: 56px; cursor: pointer;">Mensal</p>
-    <div style="float: right;">
-        <mat-form-field>
-            <mat-label>Escolha uma data</mat-label>
-            <input matInput [max]="maxDate" [matDatepicker]="picker" [formControl]="date" (dateInput)="onDateSelect()">
-            <mat-datepicker-toggle matIconSuffix [for]="picker">
-                <mat-icon matDatepickerToggleIcon>keyboard_arrow_down</mat-icon>
-            </mat-datepicker-toggle>
-            <mat-datepicker #picker></mat-datepicker>
-        </mat-form-field>
-    </div>
-</div>
-
-<!-- No response case -->
-<div *ngIf="!data" class="center" style="text-align: center; margin-top: 10px; margin-left: 50px; margin-right: 50px; display: inline-block; width: calc(100% - 100px); min-width: 785px;">
-    <img src="/assets/sad.png" style="height: 100px; margin-bottom: 30px;">
-    <p class="light-grey no-space" style="font-size: 40px; margin-bottom: 30px;">Ops!</p>
-    <p class="light-grey no-space" style="font-size: 15px;">Não existem dados para a data selecionada, por favor selecione outra data.</p>
-    <p class="light-grey no-space" style="font-size: 15px;">Se você acredita que isso seja um erro contate o administrador de seu sistema.</p>
-</div>
-
-<!-- Containers -->
-<div *ngIf="data" style="margin-top: 10px; margin-left: 50px; margin-right: 50px; display: inline-block; width: calc(100% - 100px); min-width: 785px;">
-
-    <!-- Consumo total -->
-    <div class="container" style="width: calc((100%/2 - 110px)/2); height: 153px; float: left;">
-        <p class="container-title-text" style="margin-bottom: 37px;">Consumo total</p>
-        <p class="big-text" style="margin-bottom: 37px;">{{data['consumo-total']/1000 | number:'1.2-2':'pt-PT'}} kWh</p>
-        <p class="coloured-text" [ngClass]="{'red': data['variacao-consumo-total']?.charAt(0) === '+' && data['variacao-consumo-total']?.charAt(1) !== '0', 'green': data['variacao-consumo-total']?.charAt(0) === '-'}" style="margin-bottom: 4px;">{{data['variacao-consumo-total']}}%</p>
-        <p class="small-text">Desde o dia anterior</p>
-    </div>
-
-    <!-- Horario de pico -->
-    <div class="container" style="width: calc((100%/2 - 110px)/2); height: 153px; float: left;">
-        <p class="container-title-text" style="margin-bottom: 37px;">Horário de pico</p>
-        <p class="big-text" style="margin-bottom: 37px;">{{data['horario-de-pico']}}</p>
-        <p class="coloured-text" style="margin-bottom: 4px;">{{data['horario-de-pico-ontem']}}</p>
-        <p class="small-text">No dia anterior</p>
-    </div>
-
-    <!-- Demanda media -->
-    <div class="container" style="width: calc(100%/2 - 50px); height: 153px; float: left; margin-right: 0px;">
-        <p class="container-title-text" style="margin-bottom: 16px;">Demanda média</p>
-        <div style="border-bottom: 3px dashed #0388BE; width: 30px; margin-bottom: 18px;"></div>
-        <p class="big-text" style="margin-bottom: 37px;">{{data['demanda-media']}} W</p>
-        <p class="coloured-text" [ngClass]="{'red': data['variacao-demanda-media']?.charAt(0) === '+' && data['variacao-demanda-media']?.charAt(1) !== '0', 'green': data['variacao-demanda-media']?.charAt(0) === '-'}" style="margin-bottom: 4px;">{{data['variacao-demanda-media']}}%</p>
-        <p class="small-text">Desde o dia anterior</p>
-    </div>
-
-    <!-- Consumo por fase -->
-    <div class="container" style="width: calc(100%/2 - 50px); height: 163px; float: left; padding-bottom: 30px;">
-        <p class="container-title-text" style="margin-bottom: 31px;">Consumo por fase</p>
-        <!-- Fase A -->
-        <p class="big-text" style="float: left; line-height: 32px; margin-right: 10px;">A</p>
-        <div style="width: calc(100% - 30px); display: inline-block; margin-bottom: 10px;">
-            <p class="coloured-text" style="margin-bottom: 0px; font-size: 16px; line-height: 16px; float: left;">{{data['consumo-total-a']/1000 | number:'1.2-2':'pt-PT'}} kWh</p>
-            <p class="coloured-text" [ngClass]="{'red': data['variacao-consumo-total-a']?.charAt(0) === '+' && data['variacao-consumo-total-a']?.charAt(1) !== '0', 'green': data['variacao-consumo-total-a']?.charAt(0) === '-'}" style="margin-bottom: 0px; float: right; line-height: 16px">{{data['variacao-consumo-total-a']}}%</p>
-            <br>
-            <p class="small-text" style="line-height: 12px; float: left;">{{(data['consumo-total-a']/data['consumo-total']*100).toFixed(0)}}% do consumo total</p>
-            <p class="small-text" style="float: right; line-height: 12px;">Desde o dia anterior</p>
+<div class="view-container">
+    <!-- Title and date selector -->
+    <div style="display: inline-block; width: 100%;">
+        <p class="view-title-text" style="float: left; margin-right: 40px; line-height: 56px;">Relatório de Consumo</p>
+        <p routerLink="/relatorio-de-consumo/diario" class="container-title-text dark-grey underline" style="float: left; line-height: 56px; margin-right: 20px; cursor: pointer;">Diário</p>
+        <p routerLink="/relatorio-de-consumo/mensal" class="container-title-text dark-grey" style="float: left; line-height: 56px; cursor: pointer;">Mensal</p>
+        <div style="float: right;">
+            <mat-form-field>
+                <mat-label>Escolha uma data</mat-label>
+                <input matInput [max]="maxDate" [matDatepicker]="picker" [formControl]="date" (dateInput)="onDateSelect()">
+                <mat-datepicker-toggle matIconSuffix [for]="picker">
+                    <mat-icon matDatepickerToggleIcon>keyboard_arrow_down</mat-icon>
+                </mat-datepicker-toggle>
+                <mat-datepicker #picker></mat-datepicker>
+            </mat-form-field>
         </div>
-        <!-- Fase B -->
-        <p class="big-text" style="float: left; line-height: 32px; margin-right: 10px;">B</p>
-        <div style="width: calc(100% - 30px); display: inline-block; margin-bottom: 10px;">
-            <p class="coloured-text" style="margin-bottom: 0px; font-size: 16px; line-height: 16px; float: left;">{{data['consumo-total-b']/1000 | number:'1.2-2':'pt-PT'}} kWh</p>
-            <p class="coloured-text" [ngClass]="{'red': data['variacao-consumo-total-b']?.charAt(0) === '+' && data['variacao-consumo-total-b']?.charAt(1) !== '0', 'green': data['variacao-consumo-total-b']?.charAt(0) === '-'}" style="margin-bottom: 0px; float: right; line-height: 16px">{{data['variacao-consumo-total-b']}}%</p>
-            <br>
-            <p class="small-text" style="line-height: 12px; float: left;">{{(data['consumo-total-b']/data['consumo-total']*100).toFixed(0)}}% do consumo total</p>
-            <p class="small-text" style="float: right; line-height: 12px;">Desde o dia anterior</p>
+    </div>
+
+    <!-- No response screen -->
+    <app-no-data *ngIf="!data"></app-no-data>
+
+    <div *ngIf="data">
+        <!-- Containers -->
+        <div class="containers-container">
+            <!-- Consumo total -->
+            <div class="container">
+                <p class="container-title-text" style="margin-bottom: 37px;">Consumo total</p>
+                <p class="big-text" style="margin-bottom: 37px;">{{data['consumo-total']/1000 | number:'1.2-2':'pt-PT'}} kWh</p>
+                <p class="coloured-text" [ngClass]="{'red': data['variacao-consumo-total']?.charAt(0) === '+' && data['variacao-consumo-total']?.charAt(1) !== '0', 'green': data['variacao-consumo-total']?.charAt(0) === '-'}" style="margin-bottom: 4px;">{{data['variacao-consumo-total']}}%</p>
+                <p class="small-text">Desde o dia anterior</p>
+            </div>
+
+            <!-- Horario de pico -->
+            <div class="container">
+                <p class="container-title-text" style="margin-bottom: 37px;">Horário de pico</p>
+                <p class="big-text" style="margin-bottom: 37px;">{{data['horario-de-pico']}}</p>
+                <p class="coloured-text" style="margin-bottom: 4px;">{{data['horario-de-pico-ontem']}}</p>
+                <p class="small-text">No dia anterior</p>
+            </div>
+
+            <!-- Consumo por fase -->
+            <div class="container">
+                <p class="container-title-text" style="margin-bottom: 31px;">Consumo por fase</p>
+                <!-- Fase A -->
+                <p class="big-text">A</p>
+                <div>
+                    <p class="coloured-text" style="margin-bottom: 0px; font-size: 16px; line-height: 16px; float: left;">{{data['consumo-total-a']/1000 | number:'1.2-2':'pt-PT'}} kWh</p>
+                    <p class="coloured-text" [ngClass]="{'red': data['variacao-consumo-total-a']?.charAt(0) === '+' && data['variacao-consumo-total-a']?.charAt(1) !== '0', 'green': data['variacao-consumo-total-a']?.charAt(0) === '-'}" style="margin-bottom: 0px; float: right; line-height: 16px">{{data['variacao-consumo-total-a']}}%</p>
+                    <br>
+                    <p class="small-text" style="line-height: 12px; float: left;">{{(data['consumo-total-a']/data['consumo-total']*100).toFixed(0)}}% do consumo total</p>
+                    <p class="small-text" style="float: right; line-height: 12px;">Desde o dia anterior</p>
+                </div>
+                <!-- Fase B -->
+                <p class="big-text">B</p>
+                <div>
+                    <p class="coloured-text" style="margin-bottom: 0px; font-size: 16px; line-height: 16px; float: left;">{{data['consumo-total-b']/1000 | number:'1.2-2':'pt-PT'}} kWh</p>
+                    <p class="coloured-text" [ngClass]="{'red': data['variacao-consumo-total-b']?.charAt(0) === '+' && data['variacao-consumo-total-b']?.charAt(1) !== '0', 'green': data['variacao-consumo-total-b']?.charAt(0) === '-'}" style="margin-bottom: 0px; float: right; line-height: 16px">{{data['variacao-consumo-total-b']}}%</p>
+                    <br>
+                    <p class="small-text" style="line-height: 12px; float: left;">{{(data['consumo-total-b']/data['consumo-total']*100).toFixed(0)}}% do consumo total</p>
+                    <p class="small-text" style="float: right; line-height: 12px;">Desde o dia anterior</p>
+                </div>
+                <!-- Fase C -->
+                <p class="big-text">C</p>
+                <div>
+                    <p class="coloured-text" style="margin-bottom: 0px; font-size: 16px; line-height: 16px; float: left;">{{data['consumo-total-c']/1000 | number:'1.2-2':'pt-PT'}} kWh</p>
+                    <p class="coloured-text" [ngClass]="{'red': data['variacao-consumo-total-c']?.charAt(0) === '+' && data['variacao-consumo-total-c']?.charAt(1) !== '0', 'green': data['variacao-consumo-total-c']?.charAt(0) === '-'}" style="margin-bottom: 0px; float: right; line-height: 16px">{{data['variacao-consumo-total-c']}}%</p>
+                    <br>
+                    <p class="small-text" style="line-height: 12px; float: left;">{{(data['consumo-total-c']/data['consumo-total']*100).toFixed(0)}}% do consumo total</p>
+                    <p class="small-text" style="float: right; line-height: 12px;">Desde o dia anterior</p>
+                </div>  
+            </div>
         </div>
-        <!-- Fase C -->
-        <p class="big-text" style="float: left; line-height: 32px; margin-right: 10px;">C</p>
-        <div style="width: calc(100% - 30px); display: inline-block;">
-            <p class="coloured-text" style="margin-bottom: 0px; font-size: 16px; line-height: 16px; float: left;">{{data['consumo-total-c']/1000 | number:'1.2-2':'pt-PT'}} kWh</p>
-            <p class="coloured-text" [ngClass]="{'red': data['variacao-consumo-total-c']?.charAt(0) === '+' && data['variacao-consumo-total-c']?.charAt(1) !== '0', 'green': data['variacao-consumo-total-c']?.charAt(0) === '-'}" style="margin-bottom: 0px; float: right; line-height: 16px">{{data['variacao-consumo-total-c']}}%</p>
-            <br>
-            <p class="small-text" style="line-height: 12px; float: left;">{{(data['consumo-total-c']/data['consumo-total']*100).toFixed(0)}}% do consumo total</p>
-            <p class="small-text" style="float: right; line-height: 12px;">Desde o dia anterior</p>
-        </div>  
-    </div>
-    
-    <!-- Demanda maxima -->
-    <div class="container" style="width: calc(100%/2 - 50px); height: 153px; float: left; margin-right: 0px;">
-        <p class="container-title-text" style="margin-bottom: 16px;">Demanda máxima</p>
-        <div style="border-bottom: 3px solid #0388BE; width: 30px; margin-bottom: 18px;"></div>
-        <p class="big-text" style="margin-bottom: 37px;">{{data['demanda-maxima']}} W</p>
-        <p class="coloured-text" [ngClass]="{'red': data['variacao-demanda-maxima']?.charAt(0) === '+' && data['variacao-demanda-maxima']?.charAt(1) !== '0', 'green': data['variacao-demanda-maxima']?.charAt(0) === '-'}" style="margin-bottom: 4px;">{{data['variacao-demanda-maxima']}}%</p>
-        <p class="small-text">Desde o dia anterior</p>
-    </div>
 
-    <!-- Consumo acumulado -->
-    <div class="container" style="width: calc(100%/2 - 50px); float: left;">
-        <p class="container-title-text" style="margin-bottom: 37px;">Consumo acumulado</p>
-        <div id="chartConsumoAcumulado"></div>
-    </div>
+        <div class="containers-container">
+            <!-- Demanda media -->
+            <div class="container">
+                <p class="container-title-text" style="margin-bottom: 16px;">Demanda média</p>
+                <div style="border-bottom: 3px dashed #0388BE; width: 30px; margin-bottom: 18px;"></div>
+                <p class="big-text" style="margin-bottom: 37px;">{{data['demanda-media']}} W</p>
+                <p class="coloured-text" [ngClass]="{'red': data['variacao-demanda-media']?.charAt(0) === '+' && data['variacao-demanda-media']?.charAt(1) !== '0', 'green': data['variacao-demanda-media']?.charAt(0) === '-'}" style="margin-bottom: 4px;">{{data['variacao-demanda-media']}}%</p>
+                <p class="small-text">Desde o dia anterior</p>
+            </div>
+            
+            <!-- Demanda maxima -->
+            <div class="container">
+                <p class="container-title-text" style="margin-bottom: 16px;">Demanda máxima</p>
+                <div style="border-bottom: 3px solid #0388BE; width: 30px; margin-bottom: 18px;"></div>
+                <p class="big-text" style="margin-bottom: 37px;">{{data['demanda-maxima']}} W</p>
+                <p class="coloured-text" [ngClass]="{'red': data['variacao-demanda-maxima']?.charAt(0) === '+' && data['variacao-demanda-maxima']?.charAt(1) !== '0', 'green': data['variacao-demanda-maxima']?.charAt(0) === '-'}" style="margin-bottom: 4px;">{{data['variacao-demanda-maxima']}}%</p>
+                <p class="small-text">Desde o dia anterior</p>
+            </div>
+        </div>
 
-    <!-- Curva de carga -->
-    <div class="container" style="width: calc(100%/2 - 50px); float: left; margin-right: 0px;">
-        <p class="container-title-text" style="margin-bottom: 37px;">Curva de carga</p>
-        <div id="chartCurvaDeCarga"></div>
+        <div class="containers-container">
+            <!-- Consumo acumulado -->
+            <div class="container">
+                <p class="container-title-text" style="margin-bottom: 37px;">Consumo acumulado</p>
+                <div id="chartConsumoAcumulado"></div>
+            </div>
+
+            <!-- Curva de carga -->
+            <div class="container">
+                <p class="container-title-text" style="margin-bottom: 37px;">Curva de carga</p>
+                <div id="chartCurvaDeCarga"></div>
+            </div>
+        </div>
     </div>
 </div>

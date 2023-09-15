@@ -23,7 +23,7 @@ export const MY_FORMATS = {
 @Component({
   selector: 'app-relatorio-de-consumo-mensal',
   templateUrl: './relatorio-de-consumo-mensal.component.html',
-  styleUrls: ['./relatorio-de-consumo-mensal.component.css'],
+  styleUrls: ['./relatorio-de-consumo-mensal.component.scss'],
   providers: [
     {
       provide: DateAdapter,
