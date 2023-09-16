@@ -53,15 +53,18 @@ export class RelatorioDeConsumoMensalComponent implements OnInit{
   }
 
   // Updates the date picker's width for responsiveness
-  updateDatePickerWidth(): void {
+  updateDatePickerWidth() {
     const titleContainer = this.elementRef.nativeElement.querySelector('.title-container');
     const datePicker = this.elementRef.nativeElement.querySelector('.date-picker');
+    const consumptionTitleContainer = this.elementRef.nativeElement.querySelector('.consumption-title-container');
     // Checks if the title container's width is less than or equal to 600px
     if (titleContainer.clientWidth <= 600) {
       datePicker.style.width = '100%';
+      consumptionTitleContainer.style.justifyContent = 'space-between'
     } 
     else {
       datePicker.style.removeProperty('width');
+      consumptionTitleContainer.style.justifyContent = 'flex-start'
     }
   }
 
