@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { AfterViewChecked, Component, ElementRef, OnInit } from '@angular/core';
 import { FormControl } from '@angular/forms';
 import { DataService } from '../services/data.service';
 
@@ -7,15 +7,35 @@ import { DataService } from '../services/data.service';
   templateUrl: './relatorio-de-consumo-diario.component.html',
   styleUrls: ['./relatorio-de-consumo-diario.component.scss']
 })
-export class RelatorioDeConsumoDiarioComponent implements OnInit{
+export class RelatorioDeConsumoDiarioComponent implements OnInit, AfterViewChecked{
   data : any = null;
   date : FormControl<Date|null> = new FormControl<Date>(new Date()); // Initializes date with today's date
   maxDate : Date = new Date();
 
-  constructor(private dataService: DataService) { }
+  constructor(private dataService: DataService, private elementRef: ElementRef) { }
 
   ngOnInit(): void {
     this.onDateSelect();
+  }
+
+  ngAfterViewChecked() {
+    this.updateDatePickerWidth();
+  }
+
+  // Updates the date picker's width for responsiveness
+  updateDatePickerWidth() {
+    const titleContainer = this.elementRef.nativeElement.querySelector('.title-container');
+    const datePicker = this.elementRef.nativeElement.querySelector('.date-picker');
+
+    // Check if the title container's width is less than or equal to 750px
+    if (titleContainer.clientWidth <= 600) {
+      // Apply width: 100% to the date-picker
+      datePicker.style.width = '100%';
+    } 
+    else {
+      // Remove the width style if it's not needed
+      datePicker.style.removeProperty('width');
+    }
   }
   
   // Updates data with the selected date

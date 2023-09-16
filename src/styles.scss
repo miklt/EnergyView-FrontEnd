@@ -1,3 +1,5 @@
+// Configuration
+
 html, body { 
     height: 100%; 
 }
@@ -6,6 +8,8 @@ body, p {
     margin: 0;
     font-family: 'Lato';
 }
+
+// Colors
 
 .white {
     color: #ffffff;
@@ -31,8 +35,129 @@ body, p {
     color: #0388BE;
 }
 
+// Text
+
+.biggest-text {
+    font-size: 40px;
+}
+
+.bigger-text {
+    font-weight: 700;
+    font-size: 24px;
+}
+
+.big-text {
+    font-weight: 700;
+    font-size: 20px;
+}
+
+.normal-text {
+    font-weight: 400;
+    font-size: 16px;
+
+    &.clickable {
+        cursor: pointer;
+    }
+
+    &.underline {
+        text-decoration: underline;
+        text-underline-offset: 4px;
+    }
+
+    &.bold {
+        font-weight: 800;
+    }
+}
+
+.small-text {
+    font-weight: 400;
+    font-size: 12px;
+
+    &.base-line {
+        margin-top: 4px;
+    }
+
+    &.phase-base-line {
+        margin-top: 2px;
+    }
+
+    &.bold {
+        font-weight: 800;
+    }
+}
+
+// Common use
+
+.flex-column-center {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    height: 100%;
+}
+
+.flex-row-start {
+    display: flex;
+    justify-content: start;
+    
+    &.column-gap-10px {
+        column-gap: 10px;
+    }
+}
+
+.flex-row-space-between {
+    display: flex;
+    justify-content: space-between;
+}
+
+.text-align-right {
+    text-align: right;
+}
+
+.mt-5px {
+    margin-top: 5px;
+}
+
+.mb-5px {
+    margin-bottom: 5px;
+}
+
+.mb-20px {
+    margin-bottom: 20px;
+}
+
+// Component classes
+
 .view-container {
-    margin: 50px;
+    margin: 40px 50px 40px 50px;
+}
+
+.title-container {
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    column-gap: 20px;
+    row-gap: 20px;
+    width: 100%;
+    margin-bottom: 30px;
+
+    .consumption-title-container {
+        flex-grow: 1;
+        display: flex;
+        justify-content: start;
+        column-gap: 25px;
+
+        p {
+            line-height: 24px;
+        }
+    }
+
+    .date-picker {
+        width: 200px;
+
+        .mat-mdc-form-field-subscript-wrapper {
+            height: 0px;
+        }
+    }
 }
 
 .containers-container {
@@ -50,37 +175,11 @@ body, p {
         box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.05);
         color: #252525;
         background-color: #ffffff;
-        padding: 20px 20px 40px 20px;
+        padding: 30px;
         width: 300px;
+        min-height: 150px;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
     }
-}
-
-.view-title-text {
-    font-weight: 700;
-    font-size: 24px;
-}
-
-.big-text {
-    font-weight: 700;
-    font-size: 20px;
-}
-
-.container-title-text {
-    font-weight: 400;
-    font-size: 16px;
-}
-
-.small-text {
-    font-weight: 400;
-    font-size: 12px;
-}
-
-.coloured-text {
-    font-weight: 800;
-    font-size: 12px;
-}
-
-.underline {
-    text-decoration: underline;
-    text-underline-offset: 4px;
 }
