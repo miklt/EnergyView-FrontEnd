@@ -78,7 +78,8 @@
                             <p class="small-text bold" [ngClass]="{
                             'red': data['variacao-consumo-total-a']?.charAt(0) === '+' && data['variacao-consumo-total-a']?.charAt(1) !== '0', 
                             'green': data['variacao-consumo-total-a']?.charAt(0) === '-'}">
-                                {{ data['variacao-consumo-total-a'] }}%</p>
+                                {{ data['variacao-consumo-total-a'] }}%
+                            </p>
                             <p class="small-text phase-base-line">Desde o dia anterior</p>
                         </div>
                     </div>
@@ -97,7 +98,8 @@
                             <p class="small-text bold" [ngClass]="{
                             'red': data['variacao-consumo-total-b']?.charAt(0) === '+' && data['variacao-consumo-total-b']?.charAt(1) !== '0', 
                             'green': data['variacao-consumo-total-b']?.charAt(0) === '-'}">
-                                {{ data['variacao-consumo-total-b'] }}%</p>
+                                {{ data['variacao-consumo-total-b'] }}%
+                            </p>
                             <p class="small-text phase-base-line">Desde o dia anterior</p>
                         </div>
                     </div>
@@ -116,7 +118,8 @@
                             <p class="small-text bold" [ngClass]="{
                             'red': data['variacao-consumo-total-c']?.charAt(0) === '+' && data['variacao-consumo-total-c']?.charAt(1) !== '0', 
                             'green': data['variacao-consumo-total-c']?.charAt(0) === '-'}">
-                                {{ data['variacao-consumo-total-c'] }}%</p>
+                                {{ data['variacao-consumo-total-c'] }}%
+                            </p>
                             <p class="small-text phase-base-line">Desde o dia anterior</p>
                         </div>
                     </div>
@@ -129,11 +132,15 @@
             <div class="container">
                 <div>
                     <p class="normal-text mb-20px">Demanda média</p>
-                    <div style="border-bottom: 3px dashed #0388BE; width: 30px;"></div>
+                    <div class="blue-line dashed"></div>
                 </div>
-                <p class="big-text">{{data['demanda-media']}} W</p>
+                <p class="big-text">{{ data['demanda-media'] }} W</p>
                 <div>
-                    <p class="small-text bold" [ngClass]="{'red': data['variacao-demanda-media']?.charAt(0) === '+' && data['variacao-demanda-media']?.charAt(1) !== '0', 'green': data['variacao-demanda-media']?.charAt(0) === '-'}">{{data['variacao-demanda-media']}}%</p>
+                    <p class="small-text bold" [ngClass]="{
+                    'red': data['variacao-demanda-media']?.charAt(0) === '+' && data['variacao-demanda-media']?.charAt(1) !== '0', 
+                    'green': data['variacao-demanda-media']?.charAt(0) === '-'}">
+                        {{ data['variacao-demanda-media'] }}%
+                    </p>
                 <p class="small-text base-line">Desde o dia anterior</p>
                 </div>
             </div>
@@ -141,11 +148,15 @@
             <div class="container">
                 <div>
                     <p class="normal-text mb-20px">Demanda máxima</p>
-                    <div style="border-bottom: 3px solid #0388BE; width: 30px;"></div>
+                    <div class="blue-line"></div>
                 </div>                
-                <p class="big-text">{{data['demanda-maxima']}} W</p>
+                <p class="big-text">{{ data['demanda-maxima'] }} W</p>
                 <div>
-                    <p class="small-text bold" [ngClass]="{'red': data['variacao-demanda-maxima']?.charAt(0) === '+' && data['variacao-demanda-maxima']?.charAt(1) !== '0', 'green': data['variacao-demanda-maxima']?.charAt(0) === '-'}">{{data['variacao-demanda-maxima']}}%</p>
+                    <p class="small-text bold" [ngClass]="{
+                    'red': data['variacao-demanda-maxima']?.charAt(0) === '+' && data['variacao-demanda-maxima']?.charAt(1) !== '0', 
+                    'green': data['variacao-demanda-maxima']?.charAt(0) === '-'}">
+                        {{ data['variacao-demanda-maxima'] }}%
+                    </p>
                     <p class="small-text base-line">Desde o dia anterior</p>
                 </div>
             </div>
