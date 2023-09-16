@@ -1,4 +1,4 @@
-import { AfterViewChecked, Component, ElementRef, OnInit } from '@angular/core';
+import { Component, ElementRef, HostListener, OnInit } from '@angular/core';
 import { FormControl } from '@angular/forms';
 import { DataService } from '../services/data.service';
 
@@ -7,18 +7,22 @@ import { DataService } from '../services/data.service';
   templateUrl: './relatorio-de-consumo-diario.component.html',
   styleUrls: ['./relatorio-de-consumo-diario.component.scss']
 })
-export class RelatorioDeConsumoDiarioComponent implements OnInit, AfterViewChecked{
-  data : any = null;
-  date : FormControl<Date|null> = new FormControl<Date>(new Date()); // Initializes date with today's date
-  maxDate : Date = new Date();
+export class RelatorioDeConsumoDiarioComponent implements OnInit{
+  data: any = null;
+  loading: boolean = true;
+  date: FormControl<Date|null> = new FormControl<Date>(new Date()); // Initializes date with today's date
+  maxDate: Date = new Date();
 
   constructor(private dataService: DataService, private elementRef: ElementRef) { }
 
   ngOnInit(): void {
     this.onDateSelect();
+    this.updateDatePickerWidth();
   }
 
-  ngAfterViewChecked() {
+  // Listens to the resizing of the window
+  @HostListener('window:resize', ['$event'])
+  onResize() {
     this.updateDatePickerWidth();
   }
 
@@ -26,14 +30,11 @@ export class RelatorioDeConsumoDiarioComponent implements OnInit, AfterViewCheck
   updateDatePickerWidth() {
     const titleContainer = this.elementRef.nativeElement.querySelector('.title-container');
     const datePicker = this.elementRef.nativeElement.querySelector('.date-picker');
-
-    // Check if the title container's width is less than or equal to 750px
+    // Checks if the title container's width is less than or equal to 600px
     if (titleContainer.clientWidth <= 600) {
-      // Apply width: 100% to the date-picker
       datePicker.style.width = '100%';
     } 
     else {
-      // Remove the width style if it's not needed
       datePicker.style.removeProperty('width');
     }
   }
@@ -56,10 +57,12 @@ export class RelatorioDeConsumoDiarioComponent implements OnInit, AfterViewCheck
     
   // Gets the data for the view using the dataService
   getData(dateString: string): void {
+    this.loading = true;
     this.dataService.getDailyConsumptionData(dateString).subscribe({
       next: (response) => {
         this.data = response;
-        setTimeout(() => { // Uses setTimeout with no delay to wait for the view to render
+        this.loading = false;
+        setTimeout(() => { // Uses setTimeout to wait for the view to render
           const consumo_acumulado = document.getElementById('chartConsumoAcumulado');
           const curva_carga = document.getElementById('chartCurvaDeCarga');
           if (consumo_acumulado && curva_carga) {
@@ -73,23 +76,23 @@ export class RelatorioDeConsumoDiarioComponent implements OnInit, AfterViewCheck
       },
       error: () => {
         this.data = null;
+        this.loading = false;
       }
     });
   }
 
-  // Execute the chart's scripts
+  // Executes the chart's scripts
   executeScripts(element: HTMLElement): void {
-    // Get all script elements within the provided HTMLElement
+    // Gets all script elements within the provided HTMLElement
     let scriptTags = element.getElementsByTagName('script');
-    
-    // Loop through each script element
+    // Loops through each script element
     for (let i = 0; i < scriptTags.length; i++) {
-      // Get the content of the current script element
+      // Gets the content of the current script element
       const scriptContent = scriptTags[i].textContent;
       if (scriptContent) {
         try {
-          const scriptFunction = new Function(scriptContent); // Create a new function from the script content
-          scriptFunction(); // Execute the newly created script function
+          const scriptFunction = new Function(scriptContent); // Creates a new function from the script content
+          scriptFunction(); // Executes the newly created script function
         } 
         catch (error) {
           console.error(`Error executing the chart's script: ${error}`);

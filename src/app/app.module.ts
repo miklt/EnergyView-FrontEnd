@@ -18,8 +18,9 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatInputModule } from '@angular/material/input';
 import { MatSelectModule } from '@angular/material/select';
 import { MatNativeDateModule } from '@angular/material/core';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 // Components
-import { SideBarComponent } from './side-bar/side-bar.component';
+import { SideNavComponent } from './side-nav/side-nav.component';
 import { RelatorioDeConsumoDiarioComponent } from './relatorio-de-consumo-diario/relatorio-de-consumo-diario.component';
 import { RelatorioDeConsumoMensalComponent } from './relatorio-de-consumo-mensal/relatorio-de-consumo-mensal.component';
 import { RelatorioFinanceiroMensalComponent } from './relatorio-financeiro-mensal/relatorio-financeiro-mensal.component';
@@ -28,7 +29,7 @@ import { NoDataComponent } from './no-data/no-data.component';
 @NgModule({
   declarations: [
     AppComponent,
-    SideBarComponent,
+    SideNavComponent,
     RelatorioDeConsumoDiarioComponent,
     RelatorioDeConsumoMensalComponent,
     RelatorioFinanceiroMensalComponent,
@@ -49,6 +50,7 @@ import { NoDataComponent } from './no-data/no-data.component';
     MatNativeDateModule,
     ReactiveFormsModule,
     HttpClientModule,
+    MatProgressSpinnerModule
   ],
   providers: [
     {provide: LOCALE_ID, useValue: 'pt-PT'},

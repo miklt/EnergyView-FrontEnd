@@ -1,10 +1,15 @@
 <mat-sidenav-container>
   <!-- Left-positioned side bar -->
-  <mat-sidenav mode="side" opened style="width: 320px; border: 0px; background-color: #0388BE;">
-    <app-side-bar></app-side-bar>
+  <mat-sidenav #sidenav [mode]="sideNavMode" [opened]="sideNavIsOpened"  
+  style="width: 320px; border: 0px; background-color: #0388BE;">
+    <app-side-nav [showCloseSideNavButton]="isMobile" (closeSideNavEvent)="closeSidenav()"></app-side-nav>
   </mat-sidenav>
   <!-- Router outlet (content) -->
   <mat-sidenav-content style="height: 100vh; background-color: #f8f8f8;">
+    <div *ngIf="isMobile" class="top-bar">
+      <img src="/assets/hamburger.png" (click)="toggleSidenav()">
+      <img class="logo-img" src="/assets/logo.png" routerLink="">
+    </div>   
     <router-outlet></router-outlet>
   </mat-sidenav-content>
 </mat-sidenav-container>

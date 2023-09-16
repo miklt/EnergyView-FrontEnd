@@ -23,10 +23,16 @@
         </mat-form-field>
     </div>
 
-    <!-- No response screen -->
-    <app-no-data *ngIf="!data"></app-no-data>
+    <!-- Loading -->
+    <div *ngIf="loading" class="flex-row-center mt-60px">
+        <mat-spinner></mat-spinner>
+    </div>
+    
 
-    <div *ngIf="data">
+    <!-- No response screen -->
+    <app-no-data *ngIf="!data && !loading"></app-no-data>
+
+    <div *ngIf="data && !loading">
         <!-- Containers -->
         <div class="containers-container">
             <!-- Consumo total -->
@@ -42,7 +48,6 @@
                     <p class="small-text base-line">Desde o dia anterior</p>
                 </div>
             </div>
-
             <!-- Horario de pico -->
             <div class="container">
                 <p class="normal-text">Horário de pico</p>
@@ -52,10 +57,9 @@
                     <p class="small-text base-line">No dia anterior</p>
                 </div>
             </div>
-
             <!-- Consumo por fase -->
             <div class="container">
-                <p class="normal-text">Consumo por fase</p>
+                <p class="normal-text mb-20px">Consumo por fase</p>
                 <div>
                     <!-- Fase A -->
                     <div class="flex-row-space-between">
@@ -130,9 +134,7 @@
                     <p class="small-text bold" [ngClass]="{'red': data['variacao-demanda-media']?.charAt(0) === '+' && data['variacao-demanda-media']?.charAt(1) !== '0', 'green': data['variacao-demanda-media']?.charAt(0) === '-'}">{{data['variacao-demanda-media']}}%</p>
                 <p class="small-text base-line">Desde o dia anterior</p>
                 </div>
-                
             </div>
-            
             <!-- Demanda maxima -->
             <div class="container">
                 <div>
@@ -153,7 +155,6 @@
                 <p class="normal-text mb-20px">Consumo acumulado</p>
                 <div id="chartConsumoAcumulado"></div>
             </div>
-
             <!-- Curva de carga -->
             <div class="container">
                 <p class="normal-text mb-20px">Curva de carga</p>

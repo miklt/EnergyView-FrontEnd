@@ -1,4 +1,4 @@
-import { Component, ViewEncapsulation, OnInit } from '@angular/core';
+import { Component, ViewEncapsulation, OnInit, ElementRef, HostListener } from '@angular/core';
 import { FormControl } from '@angular/forms';
 import { MomentDateAdapter, MAT_MOMENT_DATE_ADAPTER_OPTIONS } from '@angular/material-moment-adapter';
 import { DateAdapter, MAT_DATE_FORMATS, MAT_DATE_LOCALE } from '@angular/material/core';
@@ -35,27 +35,37 @@ export const MY_FORMATS = {
   ],
   encapsulation: ViewEncapsulation.None,
 })
-
 export class RelatorioDeConsumoMensalComponent implements OnInit{
-  date = new FormControl(moment());
-  maxDate = moment();
+  date: FormControl<Moment|null> = new FormControl(moment());
+  maxDate: Moment = moment();
 
-  constructor(){}
+  constructor(private elementRef: ElementRef) { }
 
   ngOnInit(): void {
-    // Separates the date in day, month and year to make a formatted string
-    var month = this.date.getRawValue()!.toDate().getMonth() + 1; //For some reason month goes from 0 to 11
-    var year = this.date.getRawValue()!.toDate().getFullYear();
-
-    // Handles the date so that dateString is always YYYY-MM
-    if(month <= 9) var dateString = year + "-" + "0" + month;
-    else var dateString = year + "-" + month;
-
-    // Uses the aforementioned dateString to get the data for the view
-    // this.getData(dateString);
+    this.updateDatePickerWidth();
+    this.onDateSelect();
   }
 
-  setMonthAndYear(normalizedMonthAndYear: Moment, datepicker: MatDatepicker<Moment>) {
+  // Listens to the resizing of the window
+  @HostListener('window:resize', ['$event'])
+  onResize(): void {
+    this.updateDatePickerWidth();
+  }
+
+  // Updates the date picker's width for responsiveness
+  updateDatePickerWidth(): void {
+    const titleContainer = this.elementRef.nativeElement.querySelector('.title-container');
+    const datePicker = this.elementRef.nativeElement.querySelector('.date-picker');
+    // Checks if the title container's width is less than or equal to 600px
+    if (titleContainer.clientWidth <= 600) {
+      datePicker.style.width = '100%';
+    } 
+    else {
+      datePicker.style.removeProperty('width');
+    }
+  }
+
+  setMonthAndYear(normalizedMonthAndYear: Moment, datepicker: MatDatepicker<Moment>): void {
     const ctrlValue = this.date.value!;
     ctrlValue.month(normalizedMonthAndYear.month());
     ctrlValue.year(normalizedMonthAndYear.year());
@@ -63,16 +73,17 @@ export class RelatorioDeConsumoMensalComponent implements OnInit{
     datepicker.close();
   }
 
-  onDateChange(event: any){
+  onDateSelect(): void {
     // Separates the date in day, month and year to make a formatted string
-    var month = event.toDate().getMonth() + 1; //For some reason month goes from 0 to 11
-    var year = event.toDate().getFullYear();
+    const month = this.date.getRawValue()!.toDate().getMonth() + 1; // For some reason month goes from 0 to 11
+    const year = this.date.getRawValue()!.toDate().getFullYear();
+    const dateString = this.formatDateString(year, month);
+    // this.getData(dateString); // Uses the aforementioned dateString to get the data for the view
+  }
 
-    // Handles the date so that dateString is always YYYY-MM
-    if(month <= 9) var dateString = year + "-" + "0" + month;
-    else var dateString = year + "-" + month;
-
-    // Uses the aforementioned dateString to get the data for the view
-    // this.getData(dateString);
+  // Handles the date so that dateString is always YYYY-MM
+  formatDateString(year: number, month: number): string {
+    const pad = (n: number) => (n < 10 ? '0' + n : n.toString()); // Adds a 0 before the number if n is < 10
+    return `${year}-${pad(month)}`;
   }
 }

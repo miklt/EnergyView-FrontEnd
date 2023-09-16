@@ -1,3 +1,5 @@
+@import 'custom-colors.scss';
+
 // Configuration
 
 html, body { 
@@ -12,27 +14,27 @@ body, p {
 // Colors
 
 .white {
-    color: #ffffff;
+    color: $white;
 }
 
 .light-grey {
-    color: #666666;
+    color: $light-grey;
 }
 
 .dark-grey {
-    color: #252525;
+    color: $dark-grey;
 }
 
 .red {
-    color: #F90000;
+    color: $red;
 }
 
 .green {
-    color: #3A8300;
+    color: $green;
 }
 
 .blue {
-    color: #0388BE;
+    color: $blue;
 }
 
 // Text
@@ -95,9 +97,15 @@ body, p {
     height: 100%;
 }
 
+.flex-column-space-between {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
 .flex-row-start {
     display: flex;
-    justify-content: start;
+    justify-content: flex-start;
     
     &.column-gap-10px {
         column-gap: 10px;
@@ -107,6 +115,13 @@ body, p {
 .flex-row-space-between {
     display: flex;
     justify-content: space-between;
+    width: 100%;
+}
+
+.flex-row-center {
+    display: flex;
+    justify-content: center;
+    width: 100%;
 }
 
 .text-align-right {
@@ -117,6 +132,10 @@ body, p {
     margin-top: 5px;
 }
 
+.mt-60px {
+    margin-top: 60px;
+}
+
 .mb-5px {
     margin-bottom: 5px;
 }
@@ -125,10 +144,19 @@ body, p {
     margin-bottom: 20px;
 }
 
+.mb-50px {
+    margin-bottom: 50px;
+}
+
 // Component classes
 
 .view-container {
-    margin: 40px 50px 40px 50px;
+    margin: 50px;
+
+    // Changes margin when on mobile
+    @media (max-width: 800px) {
+        margin: 25px;
+    }
 }
 
 .title-container {
@@ -143,7 +171,7 @@ body, p {
     .consumption-title-container {
         flex-grow: 1;
         display: flex;
-        justify-content: start;
+        justify-content: flex-start;
         column-gap: 25px;
 
         p {

@@ -1,0 +1,19 @@
+@import '../styles/custom-colors.scss';
+
+.top-bar {
+    height: 40px;
+    padding: 10px 25px 10px 25px;
+    background-color: $blue;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+
+    img {
+        margin: 5px 0;
+        height: 30px;
+    }
+
+    .logo-img {
+        justify-self: center;
+    }
+}
