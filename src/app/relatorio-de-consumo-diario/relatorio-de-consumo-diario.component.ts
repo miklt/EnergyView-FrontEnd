@@ -26,7 +26,7 @@ export class RelatorioDeConsumoDiarioComponent implements OnInit{
     this.updateDatePickerWidth();
   }
 
-  // Updates the date picker's width for responsiveness
+  // Updates the date picker's and the title's width for responsiveness
   updateDatePickerWidth() {
     const titleContainer = this.elementRef.nativeElement.querySelector('.title-container');
     const datePicker = this.elementRef.nativeElement.querySelector('.date-picker');
