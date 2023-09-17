@@ -17,17 +17,18 @@ export class RelatorioDeConsumoDiarioComponent implements OnInit{
 
   ngOnInit(): void {
     this.onDateSelect();
-    this.updateDatePickerWidth();
+    this.updateSizes();
   }
 
   // Listens to the resizing of the window
   @HostListener('window:resize', ['$event'])
   onResize() {
-    this.updateDatePickerWidth();
+    this.updateSizes();
   }
 
-  // Updates the date picker's and the title's width for responsiveness
-  updateDatePickerWidth() {
+  // Updates the size of elements for responsiveness
+  updateSizes(): void {
+    // Updates title and date picker
     const titleContainer = this.elementRef.nativeElement.querySelector('.title-container');
     const datePicker = this.elementRef.nativeElement.querySelector('.date-picker');
     const consumptionTitleContainer = this.elementRef.nativeElement.querySelector('.consumption-title-container');
@@ -40,6 +41,16 @@ export class RelatorioDeConsumoDiarioComponent implements OnInit{
       datePicker.style.removeProperty('width');
       consumptionTitleContainer.style.justifyContent = 'flex-start'
     }
+    // Updates charts
+    setTimeout(() => { // Uses setTimeout to wait for the view to resize
+      const consumo_acumulado = document.getElementById('chartConsumoAcumulado');
+      const curva_carga = document.getElementById('chartCurvaDeCarga');
+      if (consumo_acumulado && curva_carga) {
+        // Calls executeScripts for each chart to make them resize
+        this.executeScripts(consumo_acumulado);
+        this.executeScripts(curva_carga);
+      }
+    }, 250);
   }
   
   // Updates data with the selected date

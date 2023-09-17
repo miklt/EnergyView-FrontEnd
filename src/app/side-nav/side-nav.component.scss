@@ -1,6 +1,8 @@
+@import '../../styles/custom-colors.scss';
+
 .mat-badge-content {
-    background: #4DED30 !important;
-    color: #4DED30 !important;
+    background: $light-green !important;
+    color: $light-green !important;
     width: 5px !important;
     height: 5px !important;
     line-height: 5px !important;
@@ -34,11 +36,11 @@
     
     .logo-img {
         cursor: pointer;
-        height: 35px;
+        height: 32px;
     }
 
     .close-sidenav-button {
-        line-height: 35px;
+        line-height: 32px;
         cursor: pointer;
     }
 }

@@ -42,18 +42,19 @@ export class RelatorioDeConsumoMensalComponent implements OnInit{
   constructor(private elementRef: ElementRef) { }
 
   ngOnInit(): void {
-    this.updateDatePickerWidth();
     this.onDateSelect();
+    this.updateSizes();
   }
 
   // Listens to the resizing of the window
   @HostListener('window:resize', ['$event'])
   onResize(): void {
-    this.updateDatePickerWidth();
+    this.updateSizes();
   }
 
-  // Updates the date picker's and the title's width for responsiveness
-  updateDatePickerWidth() {
+  // Updates the size of elements for responsiveness
+  updateSizes() {
+    // Updates title and date picker
     const titleContainer = this.elementRef.nativeElement.querySelector('.title-container');
     const datePicker = this.elementRef.nativeElement.querySelector('.date-picker');
     const consumptionTitleContainer = this.elementRef.nativeElement.querySelector('.consumption-title-container');
@@ -68,13 +69,18 @@ export class RelatorioDeConsumoMensalComponent implements OnInit{
     }
   }
 
-  setMonthAndYear(normalizedMonthAndYear: Moment, datepicker: MatDatepicker<Moment>): void {
-    const ctrlValue = this.date.value!;
-    ctrlValue.month(normalizedMonthAndYear.month());
-    ctrlValue.year(normalizedMonthAndYear.year());
-    this.date.setValue(ctrlValue);
-    datepicker.close();
-  }
+// Sets the month and year of the MatDatepicker control to the provided values.
+setMonthAndYear(normalizedMonthAndYear: Moment, datepicker: MatDatepicker<Moment>): void {
+  // Gets the current value of the MatDatepicker control
+  const ctrlValue = this.date.value!;
+  // Sets the month and year to the ones of the normalizedMonthAndYear
+  ctrlValue.month(normalizedMonthAndYear.month());
+  ctrlValue.year(normalizedMonthAndYear.year());
+  // Updates the value of the MatDatepicker control with the new month and year
+  this.date.setValue(ctrlValue);
+  // Closes the MatDatepicker after setting the new values
+  datepicker.close();
+}
 
   onDateSelect(): void {
     // Separates the date in day, month and year to make a formatted string

@@ -9,7 +9,8 @@
     <div *ngIf="isMobile" class="top-bar">
       <img class="cursor-pointer" src="/assets/hamburger.png" (click)="toggleSidenav()">
       <img class="logo-img cursor-pointer" src="/assets/logo.png" routerLink="">
-    </div>   
+    </div> 
+    <!-- Content -->
     <router-outlet></router-outlet>
   </mat-sidenav-content>
 </mat-sidenav-container>
