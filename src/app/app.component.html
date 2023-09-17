@@ -5,9 +5,10 @@
   </mat-sidenav>
   <!-- Router outlet (content) -->
   <mat-sidenav-content class="content">
+    <!-- Top bar for mobile devices -->
     <div *ngIf="isMobile" class="top-bar">
-      <img src="/assets/hamburger.png" (click)="toggleSidenav()">
-      <img class="logo-img" src="/assets/logo.png" routerLink="">
+      <img class="cursor-pointer" src="/assets/hamburger.png" (click)="toggleSidenav()">
+      <img class="logo-img cursor-pointer" src="/assets/logo.png" routerLink="">
     </div>   
     <router-outlet></router-outlet>
   </mat-sidenav-content>
