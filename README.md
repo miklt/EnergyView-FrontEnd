@@ -1,5 +1,5 @@
 <h1 align="center">
-  <img src="https://github.com/GARSoftPoli/EnergyView-FrontEnd/assets/116766653/b6eb20ea-290a-4006-ae19-3de289f4264f" height="80">
+  <img src="https://github.com/GARSoftPoli/EnergyView-FrontEnd/assets/116766653/b6eb20ea-290a-4006-ae19-3de289f4264f" height="70">
 </h1>
 
 <p align="center">EnergyView is a research and development initiative in the burgeoning field of Digital Twins, designed to revolutionize the way we monitor and comprehend real-time energy consumption. With a distributed and intelligent approach, EnergyView provides a comprehensive and detailed view of energy consumption within an environment, enabling precise analysis and informed decision-making.</p>
@@ -43,15 +43,15 @@ Where:
 
 * **N**: Is the number of the aforementioned created issue.
 * **type**: Describes the purpose of the commit (e.g., feat, fix, chore, docs, style, refactor, test).
-* **message**: Is aA brief, descriptive message of the change.
+* **message**: Is a brief, descriptive message of the change, in the imperative form.
 
 For example:
 
 ```
-#123 feat: adds new button
+#123 feat: add new button
 ```
 <p align="center">
-  <img src="https://github.com/GARSoftPoli/EnergyView-FrontEnd/assets/83798084/d5ced3c8-ccf1-4ce7-8d60-a4e1fb5a7f4c" height="350">
+  <img src="https://github.com/GARSoftPoli/EnergyView-FrontEnd/assets/83798084/0ca42d29-0518-4862-ad38-bfa08d265ca4" height="350">
 </p>
 
 The types are as follows:
