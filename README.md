@@ -1,8 +1,10 @@
-<h1>
+<h1 align="center">
   <img src="https://github.com/GARSoftPoli/EnergyView-FrontEnd/assets/116766653/b6eb20ea-290a-4006-ae19-3de289f4264f" height="80">
 </h1>
 
-This project was created with [Angular CLI](https://github.com/angular/angular-cli) version 15.2.4 as a product of GARSoft's ownership, do not copy or redistribute this code without granted permission.
+<p align="center">EnergyView is a research and development initiative in the burgeoning field of Digital Twins, designed to revolutionize the way we monitor and comprehend real-time energy consumption. With a distributed and intelligent approach, EnergyView provides a comprehensive and detailed view of energy consumption within an environment, enabling precise analysis and informed decision-making.</p>
+
+<p align="center">This project is a product of GARSoft's ownership, do not copy or redistribute this code without granted permission.</p>
 
 ## How to run
 
@@ -31,7 +33,7 @@ Please ensure that you replace YYYYMMDD with the current date, formatted as Year
 
 #### Adapted conventional commits pattern
 
-Use conventional commits to maintain a consistent and informative commit history. Each commit message should follow this format:
+When commiting, always make use of our modified conventional commit pattern to ensure the maintenance of a consistent and informative commit history. Each commit message must conform to the prescribed format, as outlined below:
 
 ```
 #N type: message
@@ -48,8 +50,12 @@ For example:
 ```
 #123 feat: adds new button
 ```
+<p align="center">
+  <img src="https://github.com/GARSoftPoli/EnergyView-FrontEnd/assets/83798084/d5ced3c8-ccf1-4ce7-8d60-a4e1fb5a7f4c" height="350">
+</p>
 
 The types are as follows:
+
 
 * **test**: Indicates any type of creation or modification of test code. Example: Creation of unit tests.
 * **feat**: Indicates the development of a new feature in the project. Example: Adding a service, functionality, endpoint, etc.
