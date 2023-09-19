@@ -1,10 +1,10 @@
-<h1 align="center">
-  <img src="https://github.com/GARSoftPoli/EnergyView-FrontEnd/assets/116766653/b6eb20ea-290a-4006-ae19-3de289f4264f" height="70">
+<h1>
+  <img src="https://github.com/GARSoftPoli/EnergyView-FrontEnd/assets/116766653/b6eb20ea-290a-4006-ae19-3de289f4264f" height="60">
 </h1>
 
-<p align="center">EnergyView is a research and development initiative in the burgeoning field of Digital Twins, designed to revolutionize the way we monitor and comprehend real-time energy consumption. With a distributed and intelligent approach, EnergyView provides a comprehensive and detailed view of energy consumption within an environment, enabling precise analysis and informed decision-making.</p>
+<p>EnergyView is a research and development initiative in the burgeoning field of Digital Twins, designed to revolutionize the way we monitor and comprehend real-time energy consumption. With a distributed and intelligent approach, EnergyView provides a comprehensive and detailed view of energy consumption within an environment, enabling precise analysis and informed decision-making.</p>
 
-<p align="center">This project is a product of GARSoft's ownership, do not copy or redistribute this code without granted permission.</p>
+<p>This project is a product of GARSoft's ownership, do not copy or redistribute this code without granted permission.</p>
 
 ## How to run
 
@@ -26,8 +26,9 @@ Prior to initiating any development endeavors, it is imperative to create an iss
 
 When developing, your work branch should be named following the naming pattern:
 
-* For **features**: YYYYMMDD/feat/name-of-feature
-* For **fixes**: YYYYMMDD/fix/name-of-fix
+* **features**: YYYYMMDD/feat/name-of-feature
+* **fixes**: YYYYMMDD/fix/name-of-fix
+* **refactoring**: YYYYMMDD/refactor/name-of-refactor
 
 Please ensure that you replace YYYYMMDD with the current date, formatted as Year-Month-Day.
 
