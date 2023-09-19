@@ -12,8 +12,8 @@ Note that this code requires Angular and Node.js to work.
 
 1. Clone the repository on a local directory;
 2. Inside the repository's directory open a terminal;
-3. Run `npm i` to install dependencies;
-4. Run `npm run start` to serve the app;
+3. Run `npm install` to install dependencies;
+4. Run `npm run dev` to serve the app in the development enviroment or `npm run prod` for the production enviroment;
 5. After compiling the app should be served on [http://localhost:4200/](http://localhost:4200/),
 
 ## Workflow
