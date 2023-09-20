@@ -16,6 +16,12 @@ Note that this code requires Angular and Node.js to work.
 4. Run `npm run dev` to serve the app in the development environment or `npm run prod` for the production environment;
 5. After compiling the app should be served on [http://localhost:4200/](http://localhost:4200/),
 
+### Testing and linting
+
+* To execute unit tests run `npm run test`.
+* To execute the TypeScript linter run `npm run lint:ts`, to execute and solve fixable errors run `npm run lint:fix-ts`.
+
+
 ## Workflow
 
 ### Issue creation

@@ -61,33 +61,40 @@ export class RelatorioDeConsumoMensalComponent implements OnInit{
     // Checks if the title container's width is less than or equal to 600px
     if (titleContainer.clientWidth <= 600) {
       datePicker.style.width = '100%';
-      consumptionTitleContainer.style.justifyContent = 'space-between'
+      consumptionTitleContainer.style.justifyContent = 'space-between';
     } 
     else {
       datePicker.style.removeProperty('width');
-      consumptionTitleContainer.style.justifyContent = 'flex-start'
+      consumptionTitleContainer.style.justifyContent = 'flex-start';
     }
   }
 
-// Sets the month and year of the MatDatepicker control to the provided values.
-setMonthAndYear(normalizedMonthAndYear: Moment, datepicker: MatDatepicker<Moment>): void {
+  // Sets the month and year of the MatDatepicker control to the provided values.
+  setMonthAndYear(normalizedMonthAndYear: Moment, datepicker: MatDatepicker<Moment>): void {
   // Gets the current value of the MatDatepicker control
-  const ctrlValue = this.date.value!;
-  // Sets the month and year to the ones of the normalizedMonthAndYear
-  ctrlValue.month(normalizedMonthAndYear.month());
-  ctrlValue.year(normalizedMonthAndYear.year());
-  // Updates the value of the MatDatepicker control with the new month and year
-  this.date.setValue(ctrlValue);
-  // Closes the MatDatepicker after setting the new values
-  datepicker.close();
-}
+    const ctrlValue = this.date.value;
+    if (ctrlValue) {
+      // Sets the month and year to the ones of the normalizedMonthAndYear
+      ctrlValue.month(normalizedMonthAndYear.month());
+      ctrlValue.year(normalizedMonthAndYear.year());
+      // Updates the value of the MatDatepicker control with the new month and year
+      this.date.setValue(ctrlValue);
+      // Closes the MatDatepicker after setting the new values
+      datepicker.close();
+    }
+  }
 
-  onDateSelect(): void {
-    // Separates the date in day, month and year to make a formatted string
-    const month = this.date.getRawValue()!.toDate().getMonth() + 1; // For some reason month goes from 0 to 11
-    const year = this.date.getRawValue()!.toDate().getFullYear();
-    const dateString = this.formatDateString(year, month);
-    // this.getData(dateString); // Uses the aforementioned dateString to get the data for the view
+  // Updates data with the selected date
+  onDateSelect(): void{
+    // const dateRawValue = this.date.getRawValue();
+    // if (dateRawValue) {
+    //   // Separates the date in day, month and year to make a formatted YYYY-MM-DD string
+    //   const day = dateRawValue.getDate();
+    //   const month = dateRawValue.getMonth() + 1; // For some reason month goes from 0 to 11
+    //   const year = dateRawValue.getFullYear();
+    //   const dateString = this.formatDateString(year, month, day);
+    //   this.getData(dateString); // Uses the aforementioned dateString to get the data for the view
+    // }
   }
 
   // Handles the date so that dateString is always YYYY-MM

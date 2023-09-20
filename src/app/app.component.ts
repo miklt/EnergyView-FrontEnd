@@ -33,14 +33,18 @@ export class AppComponent implements OnInit{
         this.sideNavMode = 'over';
         this.isMobile = true;
       }
-      if (this.sideNavIsOpened === true) this.sideNavIsOpened = false; // Closes the sidenav if not already closed
+      if (this.sideNavIsOpened === true) {
+        this.sideNavIsOpened = false; // Closes the sidenav if not already closed
+      } 
     }
     else {
       if (this.sideNavMode === 'over') {
         this.sideNavMode = 'side';
         this.isMobile = false;
       }
-      if(this.sideNavIsOpened === false) this.sideNavIsOpened = true; // Opens the sidenav if not already open
+      if (this.sideNavIsOpened === false) {
+        this.sideNavIsOpened = true; // Opens the sidenav if not already open
+      } 
     }
   }
 

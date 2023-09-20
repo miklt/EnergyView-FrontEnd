@@ -9,8 +9,7 @@ describe('RelatorioFinanceiroMensalComponent', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       declarations: [ RelatorioFinanceiroMensalComponent ]
-    })
-    .compileComponents();
+    }).compileComponents();
 
     fixture = TestBed.createComponent(RelatorioFinanceiroMensalComponent);
     component = fixture.componentInstance;

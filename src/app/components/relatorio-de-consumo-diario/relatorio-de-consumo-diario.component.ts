@@ -1,6 +1,7 @@
 import { Component, ElementRef, HostListener, OnInit } from '@angular/core';
 import { FormControl } from '@angular/forms';
-import { DataService } from '../services/data.service';
+import { DataService } from '../../services/data.service';
+import { DailyConsumptionData } from '../../interfaces/daily-consumption-data';
 
 @Component({
   selector: 'app-relatorio-de-consumo-diario',
@@ -8,7 +9,7 @@ import { DataService } from '../services/data.service';
   styleUrls: ['./relatorio-de-consumo-diario.component.scss']
 })
 export class RelatorioDeConsumoDiarioComponent implements OnInit{
-  data: any = null;
+  data: DailyConsumptionData | null = null;
   loading: boolean = true;
   date: FormControl<Date|null> = new FormControl<Date>(new Date()); // Initializes date with today's date
   maxDate: Date = new Date();
@@ -35,11 +36,11 @@ export class RelatorioDeConsumoDiarioComponent implements OnInit{
     // Checks if the title container's width is less than or equal to 600px
     if (titleContainer.clientWidth <= 600) {
       datePicker.style.width = '100%';
-      consumptionTitleContainer.style.justifyContent = 'space-between'
+      consumptionTitleContainer.style.justifyContent = 'space-between';
     } 
     else {
       datePicker.style.removeProperty('width');
-      consumptionTitleContainer.style.justifyContent = 'flex-start'
+      consumptionTitleContainer.style.justifyContent = 'flex-start';
     }
     // Updates charts
     setTimeout(() => { // Uses setTimeout to wait for the view to resize
@@ -55,12 +56,15 @@ export class RelatorioDeConsumoDiarioComponent implements OnInit{
   
   // Updates data with the selected date
   onDateSelect(): void{
-    // Separates the date in day, month and year to make a formatted YYYY-MM-DD string
-    const day = this.date.getRawValue()!.getDate();
-    const month = this.date.getRawValue()!.getMonth() + 1; // For some reason month goes from 0 to 11
-    const year = this.date.getRawValue()!.getFullYear();
-    const dateString = this.formatDateString(year, month, day);
-    this.getData(dateString); // Uses the aforementioned dateString to get the data for the view
+    const dateRawValue = this.date.getRawValue();
+    if (dateRawValue) {
+      // Separates the date in day, month and year to make a formatted YYYY-MM-DD string
+      const day = dateRawValue.getDate();
+      const month = dateRawValue.getMonth() + 1; // For some reason month goes from 0 to 11
+      const year = dateRawValue.getFullYear();
+      const dateString = this.formatDateString(year, month, day);
+      this.getData(dateString); // Uses the aforementioned dateString to get the data for the view
+    }
   }
 
   // Handles the date so that dateString is always YYYY-MM-DD
@@ -79,11 +83,11 @@ export class RelatorioDeConsumoDiarioComponent implements OnInit{
         setTimeout(() => { // Uses setTimeout to wait for the view to render
           const consumo_acumulado = document.getElementById('chartConsumoAcumulado');
           const curva_carga = document.getElementById('chartCurvaDeCarga');
-          if (consumo_acumulado && curva_carga) {
+          if (this.data && consumo_acumulado && curva_carga) {
             // Sets the chart's html and calls executeScripts for each element
             consumo_acumulado.innerHTML = this.data['consumo-acumulado'];
             this.executeScripts(consumo_acumulado);
-            curva_carga.innerHTML = this.data['curva-de-carga']
+            curva_carga.innerHTML = this.data['curva-de-carga'];
             this.executeScripts(curva_carga);
           }
         }, 0);
@@ -98,7 +102,7 @@ export class RelatorioDeConsumoDiarioComponent implements OnInit{
   // Executes the chart's scripts
   executeScripts(element: HTMLElement): void {
     // Gets all script elements within the provided HTMLElement
-    let scriptTags = element.getElementsByTagName('script');
+    const scriptTags = element.getElementsByTagName('script');
     // Loops through each script element
     for (let i = 0; i < scriptTags.length; i++) {
       // Gets the content of the current script element

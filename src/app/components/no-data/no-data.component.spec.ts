@@ -9,8 +9,7 @@ describe('NoDataComponent', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       declarations: [ NoDataComponent ]
-    })
-    .compileComponents();
+    }).compileComponents();
 
     fixture = TestBed.createComponent(NoDataComponent);
     component = fixture.componentInstance;
