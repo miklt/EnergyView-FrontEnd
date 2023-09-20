@@ -1,5 +1,5 @@
 <h1>
-  <img src="https://github.com/GARSoftPoli/EnergyView-FrontEnd/assets/116766653/b6eb20ea-290a-4006-ae19-3de289f4264f" height="60">
+  <img src="./images/logo.png" height="60">
 </h1>
 
 <p>EnergyView is a research and development initiative in the burgeoning field of Digital Twins, designed to revolutionize the way we monitor and comprehend real-time energy consumption. With a distributed and intelligent approach, EnergyView provides a comprehensive and detailed view of energy consumption within an environment, enabling precise analysis and informed decision-making.</p>
@@ -18,9 +18,16 @@ Note that this code requires Angular and Node.js to work.
 
 ### Testing and linting
 
-* To execute unit tests run `npm run test`.
-* To execute the TypeScript linter run `npm run lint:ts`, to execute and solve fixable errors run `npm run lint:fix-ts`.
+In order to commit, your code will be checked and should:
+1. Pass all unit tests (and those should have minimum code coverage).
+2. Pass all linters.
 
+You can run the pre-commit checks on-demand running the following commands:
+* To execute the pre-commit checks run `npm run pre-commit`.
+  * To execute unit tests run `npm run test`.
+  * To execute the linters run `npm run lint`, to execute and solve fixable errors and warnings run `npm run lint-fix`.
+    * To execute the TypeScript linter run `npm run lint:ts`, to execute and solve fixable errors and warnings  run `npm run lint:ts-fix`.
+    * To execute the SCSS linter run `npm run lint:scss`, to execute and solve fixable errors and warnings  run `npm run lint:scss-fix`.
 
 ## Workflow
 
@@ -58,7 +65,7 @@ For example:
 #123 feat: add new button
 ```
 <p align="center">
-  <img src="https://github.com/GARSoftPoli/EnergyView-FrontEnd/assets/83798084/0ca42d29-0518-4862-ad38-bfa08d265ca4" height="350">
+  <img src="./images/commits.png" height="350">
 </p>
 
 The types are as follows:

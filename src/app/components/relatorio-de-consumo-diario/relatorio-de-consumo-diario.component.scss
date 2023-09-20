@@ -1,8 +1,8 @@
-@import '../../../styles/custom-colors.scss';
+@import '../../../styles/custom-colors';
 
-.blue-line {
-    border-bottom: 3px solid $blue; 
+.blue-line { 
     width: 30px;
+    border-bottom: 3px solid $blue;
 
     &.dashed {
         border-bottom: 3px dashed $blue; 
