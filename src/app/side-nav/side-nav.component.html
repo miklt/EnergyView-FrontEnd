@@ -1,0 +1,21 @@
+<div class="logo-container">
+    <!-- Logo -->
+    <div class="flex-row-space-between mb-50px">
+        <img class="logo-img" src="/assets/logo.png" routerLink="">
+        <!-- Close side nav -->
+        <p *ngIf="showCloseSideNavButton" (click)="closeSideNav()" class="normal-text bold white close-sidenav-button">X</p>
+    </div>
+    <!-- Demanda atual -->
+    <p matBadge="1" matBadgeOverlap="false" class="big-text white mb-5px">{{this.demandaAtual}} W</p>
+    <p class="normal-text white">Demanda atual</p>
+</div>
+<!-- Relatorio de consumo -->
+<div class="side-nav-item" routerLink="/relatorio-de-consumo" routerLinkActive="selected">
+    <img class="item-image" src="/assets/relatorio-de-consumo.png">
+    <p class="normal-text white">Relatório de consumo</p>
+</div>
+<!-- Relatorio financeiro -->
+<div class="side-nav-item" routerLink="/relatorio-financeiro" routerLinkActive="selected">
+    <img class="item-image" src="/assets/relatorio-financeiro.png">
+    <p class="normal-text white">Relatório financeiro</p>
+</div>

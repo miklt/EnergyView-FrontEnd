@@ -1,0 +1,221 @@
+@import 'custom-colors.scss';
+
+// Configuration
+
+html, body { 
+    height: 100%; 
+}
+
+body, p { 
+    margin: 0;
+    font-family: 'Lato';
+}
+
+// Colors
+
+.white {
+    color: $white;
+}
+
+.light-grey {
+    color: $light-grey;
+}
+
+.dark-grey {
+    color: $dark-grey;
+}
+
+.red {
+    color: $red;
+}
+
+.green {
+    color: $green;
+}
+
+.light-green {
+    color: $light-green
+}
+
+.blue {
+    color: $blue;
+}
+
+// Text
+
+.biggest-text {
+    font-size: 40px;
+}
+
+.bigger-text {
+    font-weight: 700;
+    font-size: 24px;
+}
+
+.big-text {
+    font-weight: 700;
+    font-size: 20px;
+}
+
+.normal-text {
+    font-weight: 400;
+    font-size: 16px;
+
+    &.underline {
+        text-decoration: underline;
+        text-underline-offset: 4px;
+    }
+
+    &.bold {
+        font-weight: 800;
+    }
+}
+
+.small-text {
+    font-weight: 400;
+    font-size: 12px;
+
+    &.base-line {
+        margin-top: 4px;
+    }
+
+    &.phase-base-line {
+        margin-top: 2px;
+    }
+
+    &.bold {
+        font-weight: 800;
+    }
+}
+
+// Common use
+
+.cursor-pointer {
+    cursor: pointer;
+}
+
+.flex-column-center {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    height: 100%;
+}
+
+.flex-column-space-between {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.flex-row-start {
+    display: flex;
+    justify-content: flex-start;
+    
+    &.column-gap-10px {
+        column-gap: 10px;
+    }
+
+    &.column-gap-20px {
+        column-gap: 20px;
+    }
+}
+
+.flex-row-space-between {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+}
+
+.flex-row-center {
+    display: flex;
+    justify-content: center;
+    width: 100%;
+}
+
+.text-align-right {
+    text-align: right;
+}
+
+.mt-5px {
+    margin-top: 5px;
+}
+
+.mt-60px {
+    margin-top: 60px;
+}
+
+.mb-5px {
+    margin-bottom: 5px;
+}
+
+.mb-20px {
+    margin-bottom: 20px;
+}
+
+.mb-50px {
+    margin-bottom: 50px;
+}
+
+// Component classes
+
+.view-container {
+    margin: 50px;
+
+    // Changes margin when on mobile
+    @media (max-width: 800px) {
+        margin: 25px;
+    }
+}
+
+.title-container {
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    column-gap: 20px;
+    row-gap: 20px;
+    width: 100%;
+    margin-bottom: 30px;
+
+    .consumption-title-container {
+        flex-grow: 1;
+        display: flex;
+        justify-content: flex-start;
+        column-gap: 25px;
+
+        p {
+            line-height: 24px;
+        }
+    }
+
+    .date-picker {
+        width: 200px;
+
+        .mat-mdc-form-field-subscript-wrapper {
+            height: 0px;
+        }
+    }
+}
+
+.containers-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    column-gap: 20px;
+    row-gap: 20px;
+    margin-top: 10px;
+    margin-bottom: 20px;
+
+    .container {
+        flex-grow: 1;
+        border-radius: 10px;
+        box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.05);
+        color: #252525;
+        background-color: #ffffff;
+        padding: 30px;
+        width: 300px;
+        min-height: 150px;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+    }
+}

@@ -1,11 +1,16 @@
-<ngx-loading-bar [includeSpinner]="false" height="3px"></ngx-loading-bar>
 <mat-sidenav-container>
   <!-- Left-positioned side bar -->
-  <mat-sidenav mode="side" opened style="width: 320px; border: 0px; background-color: #0388BE;">
-    <app-side-bar></app-side-bar>
+  <mat-sidenav #sidenav class="side-nav" [mode]="sideNavMode" [opened]="sideNavIsOpened">
+    <app-side-nav [showCloseSideNavButton]="isMobile" (closeSideNavEvent)="closeSidenav()"></app-side-nav>
   </mat-sidenav>
   <!-- Router outlet (content) -->
-  <mat-sidenav-content style="height: 100vh; background-color: #f8f8f8;">
+  <mat-sidenav-content class="content">
+    <!-- Top bar for mobile devices -->
+    <div *ngIf="isMobile" class="top-bar">
+      <img class="cursor-pointer" src="/assets/hamburger.png" (click)="toggleSidenav()">
+      <img class="logo-img cursor-pointer" src="/assets/logo.png" routerLink="">
+    </div> 
+    <!-- Content -->
     <router-outlet></router-outlet>
   </mat-sidenav-content>
 </mat-sidenav-container>

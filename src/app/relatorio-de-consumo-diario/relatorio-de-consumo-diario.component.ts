@@ -1,86 +1,117 @@
-import { Component } from '@angular/core';
+import { Component, ElementRef, HostListener, OnInit } from '@angular/core';
 import { FormControl } from '@angular/forms';
-import { ApiService } from '../services/ApiService';
+import { DataService } from '../services/data.service';
 
 @Component({
   selector: 'app-relatorio-de-consumo-diario',
   templateUrl: './relatorio-de-consumo-diario.component.html',
-  styleUrls: ['./relatorio-de-consumo-diario.component.css']
+  styleUrls: ['./relatorio-de-consumo-diario.component.scss']
 })
-export class RelatorioDeConsumoDiarioComponent{
-  response : any = {} as any;
-  date = new FormControl(new Date());
-  maxDate = new Date();
-  theresResponse : number = 0;
-  progressBarValue : number = 100;
+export class RelatorioDeConsumoDiarioComponent implements OnInit{
+  data: any = null;
+  loading: boolean = true;
+  date: FormControl<Date|null> = new FormControl<Date>(new Date()); // Initializes date with today's date
+  maxDate: Date = new Date();
 
-  constructor(private apiClient : ApiService){
-    //Separates the date in day, month and year to make a formatted string
-    var day = this.date.getRawValue()!.getDate();
-    var month = this.date.getRawValue()!.getMonth() + 1; //For some reason month goes from 0 to 11
-    var year = this.date.getRawValue()!.getFullYear();
+  constructor(private dataService: DataService, private elementRef: ElementRef) { }
 
-    //Handles the date so that dateString is always YYYY-MM-DD
-    if(day <= 9 && month <= 9) dateString = year + "-" + "0" + month + "-" + "0" + day;
-    else if(day <= 9) var dateString = year + "-" + month + "-" + "0" + day;
-    else if(month <= 9) var dateString = year + "-" + "0" + month + "-" + day;
-    else var dateString = year + "-" + month + "-" + day;
+  ngOnInit(): void {
+    this.onDateSelect();
+    this.updateSizes();
+  }
 
-    //Uses the aforementioned dateString to get the data for the view
-    this.getData(dateString);
+  // Listens to the resizing of the window
+  @HostListener('window:resize', ['$event'])
+  onResize() {
+    this.updateSizes();
+  }
+
+  // Updates the size of elements for responsiveness
+  updateSizes(): void {
+    // Updates title and date picker
+    const titleContainer = this.elementRef.nativeElement.querySelector('.title-container');
+    const datePicker = this.elementRef.nativeElement.querySelector('.date-picker');
+    const consumptionTitleContainer = this.elementRef.nativeElement.querySelector('.consumption-title-container');
+    // Checks if the title container's width is less than or equal to 600px
+    if (titleContainer.clientWidth <= 600) {
+      datePicker.style.width = '100%';
+      consumptionTitleContainer.style.justifyContent = 'space-between'
+    } 
+    else {
+      datePicker.style.removeProperty('width');
+      consumptionTitleContainer.style.justifyContent = 'flex-start'
+    }
+    // Updates charts
+    setTimeout(() => { // Uses setTimeout to wait for the view to resize
+      const consumo_acumulado = document.getElementById('chartConsumoAcumulado');
+      const curva_carga = document.getElementById('chartCurvaDeCarga');
+      if (consumo_acumulado && curva_carga) {
+        // Calls executeScripts for each chart to make them resize
+        this.executeScripts(consumo_acumulado);
+        this.executeScripts(curva_carga);
+      }
+    }, 250);
   }
   
-  onDateChange(event: any){
-    //Separates the date in day, month and year to make a formatted string
-    var day = event.getDate();
-    var month = event.getMonth() + 1; //For some reason month goes from 0 to 11
-    var year = event.getFullYear();
-    
-    //Handles the date so that dateString is always YYYY-MM-DD
-    if(day <= 9 && month <= 9) dateString = year + "-" + "0" + month + "-" + "0" + day;
-    else if(day <= 9) var dateString = year + "-" + month + "-" + "0" + day;
-    else if(month <= 9) var dateString = year + "-" + "0" + month + "-" + day;
-    else var dateString = year + "-" + month + "-" + day;
+  // Updates data with the selected date
+  onDateSelect(): void{
+    // Separates the date in day, month and year to make a formatted YYYY-MM-DD string
+    const day = this.date.getRawValue()!.getDate();
+    const month = this.date.getRawValue()!.getMonth() + 1; // For some reason month goes from 0 to 11
+    const year = this.date.getRawValue()!.getFullYear();
+    const dateString = this.formatDateString(year, month, day);
+    this.getData(dateString); // Uses the aforementioned dateString to get the data for the view
+  }
 
-    //Uses the aforementioned dateString to get the data for the view
-    this.getData(dateString);
-
-    //Loads the progress bar
-    this.loadProgressBar();
+  // Handles the date so that dateString is always YYYY-MM-DD
+  formatDateString(year: number, month: number, day: number): string {
+    const pad = (n: number) => (n < 10 ? '0' + n : n.toString()); // Adds a 0 before the number if n is < 10
+    return `${year}-${pad(month)}-${pad(day)}`;
   }
     
-  async getData(dateString: string){
-    //Gets the response using the ApiService
-    this.response = await this.apiClient.getResponse(dateString, "consumo");
-    if(Object.keys(this.response).length === 0){
-      this.theresResponse = 0;
-      return;
+  // Gets the data for the view using the dataService
+  getData(dateString: string): void {
+    this.loading = true;
+    this.dataService.getDailyConsumptionData(dateString).subscribe({
+      next: (response) => {
+        this.data = response;
+        this.loading = false;
+        setTimeout(() => { // Uses setTimeout to wait for the view to render
+          const consumo_acumulado = document.getElementById('chartConsumoAcumulado');
+          const curva_carga = document.getElementById('chartCurvaDeCarga');
+          if (consumo_acumulado && curva_carga) {
+            // Sets the chart's html and calls executeScripts for each element
+            consumo_acumulado.innerHTML = this.data['consumo-acumulado'];
+            this.executeScripts(consumo_acumulado);
+            curva_carga.innerHTML = this.data['curva-de-carga']
+            this.executeScripts(curva_carga);
+          }
+        }, 0);
+      },
+      error: () => {
+        this.data = null;
+        this.loading = false;
+      }
+    });
+  }
+
+  // Executes the chart's scripts
+  executeScripts(element: HTMLElement): void {
+    // Gets all script elements within the provided HTMLElement
+    let scriptTags = element.getElementsByTagName('script');
+    // Loops through each script element
+    for (let i = 0; i < scriptTags.length; i++) {
+      // Gets the content of the current script element
+      const scriptContent = scriptTags[i].textContent;
+      if (scriptContent) {
+        try {
+          const scriptFunction = new Function(scriptContent); // Creates a new function from the script content
+          scriptFunction(); // Executes the newly created script function
+        } 
+        catch (error) {
+          console.error(`Error executing the chart's script: ${error}`);
+        }
+      }
     }
-    else this.theresResponse = 1;
-
-    setTimeout(() => { //Waits for 1ms to make sure the ngIf has changed the view
-      //Sets the chart's divs innerHTML
-      let consumo_acumulado = document.getElementById("chartConsumoAcumulado");
-      let curva_carga = document.getElementById("chartCurvaDeCarga");
-      
-      curva_carga!.innerHTML = this.response["curva-de-carga"];
-      consumo_acumulado!.innerHTML = this.response["consumo-acumulado"];
-
-      let scriptTags = curva_carga!.getElementsByTagName('script');
-      for (let i = 0; i < scriptTags.length; i++) {
-        eval(scriptTags[i].innerHTML);
-      }
-
-      scriptTags = consumo_acumulado!.getElementsByTagName('script');
-      for (let i = 0; i < scriptTags.length; i++) {
-        eval(scriptTags[i].innerHTML);
-      }
-    }, 1);
-  }
-
-  loadProgressBar(){
-    this.progressBarValue = 0;
-    setTimeout(() => {this.progressBarValue = 99;}, 1);
-    setTimeout(() => {this.progressBarValue = 100;}, 500);
   }
 }
