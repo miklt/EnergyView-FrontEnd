@@ -38,6 +38,13 @@
 
 .logo-container {
     margin: 50px 40px;
+
+    .logo-img-container {
+        display: flex;
+        justify-content: space-between;
+        width: 100%;
+        margin-bottom: 50px;
+    }
     
     .logo-img {
         cursor: pointer;

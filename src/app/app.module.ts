@@ -25,6 +25,7 @@ import { RelatorioDeConsumoDiarioComponent } from './components/relatorio-de-con
 import { RelatorioDeConsumoMensalComponent } from './components/relatorio-de-consumo-mensal/relatorio-de-consumo-mensal.component';
 import { RelatorioFinanceiroMensalComponent } from './components/relatorio-financeiro-mensal/relatorio-financeiro-mensal.component';
 import { NoDataComponent } from './components/no-data/no-data.component';
+import { LoaderComponent } from './components/loader/loader.component';
 
 @NgModule({
   declarations: [
@@ -33,7 +34,8 @@ import { NoDataComponent } from './components/no-data/no-data.component';
     RelatorioDeConsumoDiarioComponent,
     RelatorioDeConsumoMensalComponent,
     RelatorioFinanceiroMensalComponent,
-    NoDataComponent
+    NoDataComponent,
+    LoaderComponent
   ],
   imports: [
     BrowserModule,

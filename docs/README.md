@@ -16,18 +16,19 @@ Note that this code requires Angular and Node.js to work.
 4. Run `npm run dev` to serve the app in the development environment or `npm run prod` for the production environment;
 5. After compiling the app should be served on [http://localhost:4200/](http://localhost:4200/),
 
-### Testing and linting
+## Testing, linting and commit hooks
 
-In order to commit, your code will be checked and should:
+When commiting, your code will be checked and should:
 1. Pass all unit tests (and those should have minimum code coverage).
 2. Pass all linters.
 
 You can run the pre-commit checks on-demand running the following commands:
 * To execute the pre-commit checks run `npm run pre-commit`.
   * To execute unit tests run `npm run test`.
-  * To execute the linters run `npm run lint`, to execute and solve fixable errors and warnings run `npm run lint-fix`.
-    * To execute the TypeScript linter run `npm run lint:ts`, to execute and solve fixable errors and warnings  run `npm run lint:ts-fix`.
-    * To execute the SCSS linter run `npm run lint:scss`, to execute and solve fixable errors and warnings  run `npm run lint:scss-fix`.
+  * To execute the linters run `npm run lint`, to execute and solve auto-fixable errors and warnings run `npm run lint-fix`.
+    * To execute the TypeScript linter run `npm run lint:ts`, to execute and solve auto-fixable errors and warnings  run `npm run lint:ts-fix`.
+    * To execute the SCSS linter run `npm run lint:scss`, to execute and solve auto-fixable errors and warnings  run `npm run lint:scss-fix`.
+    * To execute the HTML linter run `npm run lint:html`.
 
 ## Workflow
 
@@ -104,6 +105,8 @@ Closes #123
 
 Adds new button to the daily consumption dashboard page.
 ```
+
+Someone else should review and approve the code. After approval, you can merge the request and delete the work branch.
 
 ### Example workflow
 
