@@ -8,7 +8,7 @@ import { DailyConsumptionData } from '../../interfaces/daily-consumption-data';
   templateUrl: './relatorio-de-consumo-diario.component.html',
   styleUrls: ['./relatorio-de-consumo-diario.component.scss']
 })
-export class RelatorioDeConsumoDiarioComponent implements OnInit{
+export class RelatorioDeConsumoDiarioComponent implements OnInit {
   data: DailyConsumptionData | null = null;
   loading: boolean = true;
   date: FormControl<Date|null> = new FormControl<Date>(new Date()); // Initializes date with today's date
@@ -22,25 +22,27 @@ export class RelatorioDeConsumoDiarioComponent implements OnInit{
   }
 
   // Listens to the resizing of the window
-  @HostListener('window:resize', ['$event'])
-  onResize() {
+  @HostListener('window:resize')
+  onResize(): void {
     this.updateSizes();
   }
 
   // Updates the size of elements for responsiveness
   updateSizes(): void {
     // Updates title and date picker
-    const titleContainer = this.elementRef.nativeElement.querySelector('.title-container');
-    const datePicker = this.elementRef.nativeElement.querySelector('.date-picker');
-    const consumptionTitleContainer = this.elementRef.nativeElement.querySelector('.consumption-title-container');
-    // Checks if the title container's width is less than or equal to 600px
-    if (titleContainer.clientWidth <= 600) {
-      datePicker.style.width = '100%';
-      consumptionTitleContainer.style.justifyContent = 'space-between';
-    } 
-    else {
-      datePicker.style.removeProperty('width');
-      consumptionTitleContainer.style.justifyContent = 'flex-start';
+    const titleContainer = document.getElementById('titleContainer');
+    const datePicker = document.getElementById('datePicker');
+    const consumptionTitleContainer = document.getElementById('consumptionTitleContainer');
+    if (titleContainer && datePicker && consumptionTitleContainer) {
+      // Checks if the title container's width is less than or equal to 600px
+      if (titleContainer.clientWidth <= 600) {
+        datePicker.style.width = '100%';
+        consumptionTitleContainer.style.justifyContent = 'space-between';
+      } 
+      else {
+        datePicker.style.removeProperty('width');
+        consumptionTitleContainer.style.justifyContent = 'flex-start';
+      }
     }
     // Updates charts
     setTimeout(() => { // Uses setTimeout to wait for the view to resize
@@ -55,7 +57,7 @@ export class RelatorioDeConsumoDiarioComponent implements OnInit{
   }
   
   // Updates data with the selected date
-  onDateSelect(): void{
+  onDateSelect(): void {
     const dateRawValue = this.date.getRawValue();
     if (dateRawValue) {
       // Separates the date in day, month and year to make a formatted YYYY-MM-DD string
@@ -108,13 +110,8 @@ export class RelatorioDeConsumoDiarioComponent implements OnInit{
       // Gets the content of the current script element
       const scriptContent = scriptTags[i].textContent;
       if (scriptContent) {
-        try {
-          const scriptFunction = new Function(scriptContent); // Creates a new function from the script content
-          scriptFunction(); // Executes the newly created script function
-        } 
-        catch (error) {
-          console.error(`Error executing the chart's script: ${error}`);
-        }
+        const scriptFunction = new Function(scriptContent); // Creates a new function from the script content
+        scriptFunction(); // Executes the newly created script function
       }
     }
   }

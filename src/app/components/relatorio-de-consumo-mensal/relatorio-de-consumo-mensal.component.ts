@@ -3,10 +3,9 @@ import { FormControl } from '@angular/forms';
 import { MomentDateAdapter, MAT_MOMENT_DATE_ADAPTER_OPTIONS } from '@angular/material-moment-adapter';
 import { DateAdapter, MAT_DATE_FORMATS, MAT_DATE_LOCALE } from '@angular/material/core';
 import { MatDatepicker } from '@angular/material/datepicker';
-import * as _moment from 'moment';
 import { default as _rollupMoment, Moment } from 'moment';
 
-const moment = _rollupMoment || _moment;
+const moment = _rollupMoment;
 
 export const MY_FORMATS = {
   parse: {
@@ -35,37 +34,38 @@ export const MY_FORMATS = {
   ],
   encapsulation: ViewEncapsulation.None,
 })
-export class RelatorioDeConsumoMensalComponent implements OnInit{
+export class RelatorioDeConsumoMensalComponent implements OnInit {
   date: FormControl<Moment|null> = new FormControl(moment());
   maxDate: Moment = moment();
 
   constructor(private elementRef: ElementRef) { }
 
   ngOnInit(): void {
-    this.onDateSelect();
     this.updateSizes();
   }
 
   // Listens to the resizing of the window
-  @HostListener('window:resize', ['$event'])
+  @HostListener('window:resize')
   onResize(): void {
     this.updateSizes();
   }
 
   // Updates the size of elements for responsiveness
-  updateSizes() {
+  updateSizes(): void {
     // Updates title and date picker
-    const titleContainer = this.elementRef.nativeElement.querySelector('.title-container');
-    const datePicker = this.elementRef.nativeElement.querySelector('.date-picker');
-    const consumptionTitleContainer = this.elementRef.nativeElement.querySelector('.consumption-title-container');
-    // Checks if the title container's width is less than or equal to 600px
-    if (titleContainer.clientWidth <= 600) {
-      datePicker.style.width = '100%';
-      consumptionTitleContainer.style.justifyContent = 'space-between';
-    } 
-    else {
-      datePicker.style.removeProperty('width');
-      consumptionTitleContainer.style.justifyContent = 'flex-start';
+    const titleContainer = document.getElementById('titleContainer');
+    const datePicker = document.getElementById('datePicker');
+    const consumptionTitleContainer = document.getElementById('consumptionTitleContainer');
+    if (titleContainer && datePicker && consumptionTitleContainer) {
+      // Checks if the title container's width is less than or equal to 600px
+      if (titleContainer.clientWidth <= 600) {
+        datePicker.style.width = '100%';
+        consumptionTitleContainer.style.justifyContent = 'space-between';
+      } 
+      else {
+        datePicker.style.removeProperty('width');
+        consumptionTitleContainer.style.justifyContent = 'flex-start';
+      }
     }
   }
 
@@ -81,20 +81,8 @@ export class RelatorioDeConsumoMensalComponent implements OnInit{
       this.date.setValue(ctrlValue);
       // Closes the MatDatepicker after setting the new values
       datepicker.close();
+      // this.onDateSelect();
     }
-  }
-
-  // Updates data with the selected date
-  onDateSelect(): void{
-    // const dateRawValue = this.date.getRawValue();
-    // if (dateRawValue) {
-    //   // Separates the date in day, month and year to make a formatted YYYY-MM-DD string
-    //   const day = dateRawValue.getDate();
-    //   const month = dateRawValue.getMonth() + 1; // For some reason month goes from 0 to 11
-    //   const year = dateRawValue.getFullYear();
-    //   const dateString = this.formatDateString(year, month, day);
-    //   this.getData(dateString); // Uses the aforementioned dateString to get the data for the view
-    // }
   }
 
   // Handles the date so that dateString is always YYYY-MM

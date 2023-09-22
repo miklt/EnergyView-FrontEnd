@@ -19,4 +19,15 @@ describe('SideBarComponent', () => {
   it('should create', () => {
     expect(component).toBeTruthy();
   });
+
+  it('should emit the closeSideNavEvent', () => {
+    // Create a spy on the EventEmitter
+    spyOn(component.closeSideNavEvent, 'emit');
+
+    // Call the closeSideNav function
+    component.closeSideNav();
+
+    // Expect that the emit method of the EventEmitter was called with no arguments
+    expect(component.closeSideNavEvent.emit).toHaveBeenCalledWith();
+  });
 });

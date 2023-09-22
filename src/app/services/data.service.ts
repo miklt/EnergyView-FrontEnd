@@ -8,7 +8,7 @@ import { DailyConsumptionData } from '../interfaces/daily-consumption-data';
   providedIn: 'root'
 })
 export class DataService {
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient) { }
 
   getDailyConsumptionData(date: string): Observable<DailyConsumptionData> {
     const url = `${environment.apiUrl}/day-consumption-dashboard`;

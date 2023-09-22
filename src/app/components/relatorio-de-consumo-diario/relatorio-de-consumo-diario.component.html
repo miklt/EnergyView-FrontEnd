@@ -1,7 +1,7 @@
 <div class="view-container">
     <!-- Title and date picker -->
-    <div class="title-container">
-        <div class="consumption-title-container">
+    <div class="title-container" id="titleContainer">
+        <div class="consumption-title-container" id="consumptionTitleContainer">
             <div class="flex-column-center">
                 <p class="bigger-text">Relatório de Consumo</p>
             </div>
@@ -15,7 +15,7 @@
             </div>
         </div>
         <!-- Date picker -->
-        <mat-form-field class="date-picker">
+        <mat-form-field class="date-picker" id="datePicker">
             <mat-label>Escolha uma data</mat-label>
             <input matInput [max]="maxDate" [matDatepicker]="picker" [formControl]="date" (dateInput)="onDateSelect()">
             <mat-datepicker-toggle matIconSuffix [for]="picker">
@@ -29,7 +29,7 @@
     <app-loader [loading]="loading"></app-loader>
     
     <!-- No response screen -->
-    <app-no-data *ngIf="!data && !loading"></app-no-data>
+    <app-no-data [noData]="!data && !loading"></app-no-data>
 
     <div *ngIf="data && !loading">
         <!-- Containers -->
@@ -37,7 +37,7 @@
             <!-- Consumo total -->
             <div class="container">
                 <p class="normal-text">Consumo total</p>
-                <p class="big-text">{{ data['consumo-total'] / 1000 | number:'1.2-2':'pt-PT' }} kWh</p>
+                <p class="big-text">{{ data['consumo-total'] / 1000 | number:'1.2-2' }} kWh</p>
                 <div>
                     <p class="small-text bold" [ngClass]="{'red': data['variacao-consumo-total'].charAt(0) === '+' && data['variacao-consumo-total'].charAt(1) !== '0', 'green': data['variacao-consumo-total'].charAt(0) === '-'}">
                         {{ data['variacao-consumo-total'] }}%
@@ -65,8 +65,8 @@
                                 <p class="big-text">A</p>
                             </div>
                             <div>
-                                <p class="normal-text bold">{{ data['consumo-total-a'] / 1000 | number:'1.2-2':'pt-PT' }} kWh</p>
-                                <p class="small-text">{{ (data['consumo-total-a'] / data['consumo-total'] * 100).toFixed(0) }}% do consumo total</p>
+                                <p class="normal-text bold">{{ data['consumo-total-a'] / 1000 | number:'1.2-2' }} kWh</p>
+                                <p class="small-text">{{ (data['consumo-total-a'] / data['consumo-total'] * 100) | number:'1.0-0' }}% do consumo total</p>
                             </div>
                         </div>
                         <div class="text-align-right">
@@ -83,8 +83,8 @@
                                 <p class="big-text">B</p>
                             </div>
                             <div>
-                                <p class="normal-text bold">{{ data['consumo-total-b'] / 1000 | number:'1.2-2':'pt-PT' }} kWh</p>
-                                <p class="small-text">{{ (data['consumo-total-b'] / data['consumo-total'] * 100).toFixed(0) }}% do consumo total</p>
+                                <p class="normal-text bold">{{ data['consumo-total-b'] / 1000 | number:'1.2-2' }} kWh</p>
+                                <p class="small-text">{{ (data['consumo-total-b'] / data['consumo-total'] * 100) | number:'1.0-0' }}% do consumo total</p>
                             </div>
                         </div>
                         <div class="text-align-right">
@@ -101,8 +101,8 @@
                                 <p class="big-text">C</p>
                             </div>
                             <div>
-                                <p class="normal-text bold">{{ data['consumo-total-c'] / 1000 | number:'1.2-2':'pt-PT' }} kWh</p>
-                                <p class="small-text">{{ (data['consumo-total-c'] / data['consumo-total'] * 100).toFixed(0) }}% do consumo total</p>
+                                <p class="normal-text bold">{{ data['consumo-total-c'] / 1000 | number:'1.2-2' }} kWh</p>
+                                <p class="small-text">{{ (data['consumo-total-c'] / data['consumo-total'] * 100) | number:'1.0-0' }}% do consumo total</p>
                             </div>
                         </div>
                         <div class="text-align-right">

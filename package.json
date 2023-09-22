@@ -4,8 +4,8 @@
   "scripts": {
     "ng": "ng",
     "prod": "ng serve --configuration production",
-    "dev": "ng serve --configuration development",
-    "build": "ng build --configuration production",
+    "dev": "ng serve --configuration development --open",
+    "build": "ng build --configuration production --open",
     "watch": "ng build --watch --configuration development",
     "test": "ng test",
     "lint": "npm run lint:ts && npm run lint:scss && npm run lint:html",
@@ -14,8 +14,8 @@
     "lint:ts-fix": "eslint . --fix",
     "lint:scss": "npx stylelint **/*.scss",
     "lint:scss-fix": "npx stylelint **/*.scss --fix",
-    "lint:html": "npx htmlhint",
-    "pre-commit": "npm run lint"
+    "lint:html": "npx htmlhint --ignore=**/coverage/**",
+    "pre-commit": "npm run lint && npm run test"
   },
   "private": true,
   "dependencies": {
@@ -50,8 +50,10 @@
     "karma": "~6.4.0",
     "karma-chrome-launcher": "~3.1.0",
     "karma-coverage": "~2.2.0",
+    "karma-coverage-istanbul-reporter": "^3.0.3",
     "karma-jasmine": "~5.1.0",
     "karma-jasmine-html-reporter": "~2.0.0",
+    "karma-viewport": "^1.0.9",
     "stylelint": "^15.10.3",
     "stylelint-config-clean-order": "^5.2.0",
     "stylelint-config-standard-scss": "^11.0.0",

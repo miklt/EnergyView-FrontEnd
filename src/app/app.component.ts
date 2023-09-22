@@ -6,7 +6,7 @@ import { MatDrawerMode, MatSidenav } from '@angular/material/sidenav';
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss']
 })
-export class AppComponent implements OnInit{
+export class AppComponent implements OnInit {
   title: string = 'EnergyView';
   sideNavMode: MatDrawerMode = 'side';
   sideNavIsOpened: boolean = true;
@@ -19,7 +19,7 @@ export class AppComponent implements OnInit{
 
   // Listens to resizing of the window
   @HostListener('window:resize', ['$event'])
-  onResize() {
+  onResize(): void {
     this.updateSideNav(); // Update the sidenav whenever the window is resized
   }
 

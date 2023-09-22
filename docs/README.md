@@ -6,9 +6,11 @@
 
 <p>This project is a product of GARSoft's ownership, do not copy or redistribute this code without granted permission.</p>
 
-## How to run
+## Dependencies & running
 
-Note that this code requires Angular and Node.js to work.
+This project relies on Angular, Node.js and Google Chrome (unit tests run in ChromeHeadless), make sure you have all of them installed before starting. 
+
+### How to run
 
 1. Clone the repository on a local directory;
 2. Inside the repository's directory open a terminal;
@@ -16,15 +18,16 @@ Note that this code requires Angular and Node.js to work.
 4. Run `npm run dev` to serve the app in the development environment or `npm run prod` for the production environment;
 5. After compiling the app should be served on [http://localhost:4200/](http://localhost:4200/),
 
-## Testing, linting and commit hooks
+## Testing, linting & commit hooks
 
 When commiting, your code will be checked and should:
-1. Pass all unit tests (and those should have minimum code coverage).
+1. Pass all unit tests (and those should have 100% code coverage - for further information see below).
 2. Pass all linters.
 
 You can run the pre-commit checks on-demand running the following commands:
 * To execute the pre-commit checks run `npm run pre-commit`.
   * To execute unit tests run `npm run test`.
+    * Unit tests should aim for 100% code coverage, and the current coverage percentage will be reported every time you run the tests. You can precisely identify what your tests do not cover by opening the `index.html` file inside the `coverage` directory and navigating through the pages.
   * To execute the linters run `npm run lint`, to execute and solve auto-fixable errors and warnings run `npm run lint-fix`.
     * To execute the TypeScript linter run `npm run lint:ts`, to execute and solve auto-fixable errors and warnings  run `npm run lint:ts-fix`.
     * To execute the SCSS linter run `npm run lint:scss`, to execute and solve auto-fixable errors and warnings  run `npm run lint:scss-fix`.
@@ -36,7 +39,7 @@ You can run the pre-commit checks on-demand running the following commands:
 
 Prior to initiating any development endeavors, it is imperative to create an issue that succinctly delineates the task at hand. Utilize this issue as a platform for comprehensive discussion and planning of the intended feature or fix.
 
-### Branch naming and commit pattern
+### Branch naming & commit pattern
 
 When developing, your work branch should be named following the naming pattern:
 
