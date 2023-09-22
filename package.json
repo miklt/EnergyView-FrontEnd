@@ -3,9 +3,9 @@
   "version": "1.0.0",
   "scripts": {
     "ng": "ng",
-    "prod": "ng serve --configuration production",
+    "prod": "ng serve --configuration production --open",
     "dev": "ng serve --configuration development --open",
-    "build": "ng build --configuration production --open",
+    "build": "ng build --configuration production",
     "watch": "ng build --watch --configuration development",
     "test": "ng test",
     "lint": "npm run lint:ts && npm run lint:scss && npm run lint:html",
