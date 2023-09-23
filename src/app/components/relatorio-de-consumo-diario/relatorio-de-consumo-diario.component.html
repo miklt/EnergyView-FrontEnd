@@ -151,12 +151,12 @@
             <!-- Consumo acumulado -->
             <div class="container">
                 <p class="normal-text mb-20px">Consumo acumulado</p>
-                <div id="chartConsumoAcumulado"></div>
+                <div id="chartConsumoAcumulado" [innerHTML]="data['consumo-acumulado']"></div>
             </div>
             <!-- Curva de carga -->
             <div class="container">
                 <p class="normal-text mb-20px">Curva de carga</p>
-                <div id="chartCurvaDeCarga"></div>
+                <div id="chartCurvaDeCarga" [innerHTML]="data['curva-de-carga']"></div>
             </div>
         </div>
     </div>

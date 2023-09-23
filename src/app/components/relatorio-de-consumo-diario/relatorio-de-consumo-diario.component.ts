@@ -1,7 +1,8 @@
-import { Component, ElementRef, HostListener, OnInit } from '@angular/core';
+import { Component, HostListener, OnInit } from '@angular/core';
 import { FormControl } from '@angular/forms';
 import { DataService } from '../../services/data.service';
 import { DailyConsumptionData } from '../../interfaces/daily-consumption-data';
+import { DomSanitizer } from '@angular/platform-browser';
 
 @Component({
   selector: 'app-relatorio-de-consumo-diario',
@@ -14,7 +15,7 @@ export class RelatorioDeConsumoDiarioComponent implements OnInit {
   date: FormControl<Date|null> = new FormControl<Date>(new Date()); // Initializes date with today's date
   maxDate: Date = new Date();
 
-  constructor(private dataService: DataService, private elementRef: ElementRef) { }
+  constructor(private dataService: DataService, private sanitizer: DomSanitizer) { }
 
   ngOnInit(): void {
     this.onDateSelect();
@@ -44,16 +45,7 @@ export class RelatorioDeConsumoDiarioComponent implements OnInit {
         consumptionTitleContainer.style.justifyContent = 'flex-start';
       }
     }
-    // Updates charts
-    setTimeout(() => { // Uses setTimeout to wait for the view to resize
-      const consumo_acumulado = document.getElementById('chartConsumoAcumulado');
-      const curva_carga = document.getElementById('chartCurvaDeCarga');
-      if (consumo_acumulado && curva_carga) {
-        // Calls executeScripts for each chart to make them resize
-        this.executeScripts(consumo_acumulado);
-        this.executeScripts(curva_carga);
-      }
-    }, 250);
+    this.executeChartsScripts(100);
   }
   
   // Updates data with the selected date
@@ -81,18 +73,12 @@ export class RelatorioDeConsumoDiarioComponent implements OnInit {
     this.dataService.getDailyConsumptionData(dateString).subscribe({
       next: (response) => {
         this.data = response;
+        // Use DomSanitizer to sanitize the HTML content
+        this.data['consumo-acumulado'] = this.sanitizer.bypassSecurityTrustHtml(String(this.data['consumo-acumulado']));
+        this.data['curva-de-carga'] = this.sanitizer.bypassSecurityTrustHtml(String(this.data['curva-de-carga']));
+        // Loading is done
         this.loading = false;
-        setTimeout(() => { // Uses setTimeout to wait for the view to render
-          const consumo_acumulado = document.getElementById('chartConsumoAcumulado');
-          const curva_carga = document.getElementById('chartCurvaDeCarga');
-          if (this.data && consumo_acumulado && curva_carga) {
-            // Sets the chart's html and calls executeScripts for each element
-            consumo_acumulado.innerHTML = this.data['consumo-acumulado'];
-            this.executeScripts(consumo_acumulado);
-            curva_carga.innerHTML = this.data['curva-de-carga'];
-            this.executeScripts(curva_carga);
-          }
-        }, 0);
+        this.executeChartsScripts(0);
       },
       error: () => {
         this.data = null;
@@ -102,17 +88,27 @@ export class RelatorioDeConsumoDiarioComponent implements OnInit {
   }
 
   // Executes the chart's scripts
-  executeScripts(element: HTMLElement): void {
-    // Gets all script elements within the provided HTMLElement
-    const scriptTags = element.getElementsByTagName('script');
-    // Loops through each script element
-    for (let i = 0; i < scriptTags.length; i++) {
-      // Gets the content of the current script element
-      const scriptContent = scriptTags[i].textContent;
-      if (scriptContent) {
-        const scriptFunction = new Function(scriptContent); // Creates a new function from the script content
-        scriptFunction(); // Executes the newly created script function
+  executeChartsScripts(delay: number): void {
+    setTimeout(() => { // Uses setTimeout to wait for the view to resize or finish loading
+      const consumo_acumulado = document.getElementById('chartConsumoAcumulado');
+      const curva_carga = document.getElementById('chartCurvaDeCarga');
+      if (consumo_acumulado) {
+        // Gets all script elements within the provided HTMLElement
+        const scriptTags = consumo_acumulado.getElementsByTagName('script');
+        // Loops through each script element
+        for (let i = 0; i < scriptTags.length; i++) {
+          const scriptFunction = new Function(String(scriptTags[i].textContent)); // Creates a new function from the script content
+          scriptFunction(); // Executes the newly created script function
+        }
       }
-    }
+      if (curva_carga) {
+        const scriptTags = curva_carga.getElementsByTagName('script');
+        // Loops through each script element
+        for (let i = 0; i < scriptTags.length; i++) {
+          const scriptFunction = new Function(String(scriptTags[i].textContent)); // Creates a new function from the script content
+          scriptFunction(); // Executes the newly created script function
+        }
+      }
+    }, delay);
   }
 }

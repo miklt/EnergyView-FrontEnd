@@ -1,6 +1,8 @@
+import { SafeHtml } from '@angular/platform-browser';
+
 export interface DailyConsumptionData {
-  'consumo-acumulado': string;
-  'curva-de-carga': string;
+  'consumo-acumulado': string | SafeHtml;
+  'curva-de-carga': string | SafeHtml;
   'demanda-maxima': number,
   'demanda-media': number,
   'variacao-demanda-maxima': string,

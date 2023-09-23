@@ -24,7 +24,7 @@ describe('DataService', () => {
     expect(service).toBeTruthy();
   });
 
-  it('should make a GET request to the correct URL  on getDailyConsumptionData', () => {
+  it('should make a GET request to the correct URL on getDailyConsumptionData', () => {
     const date = '2023-09-14'; // The date parameter for the function call
 
     // Call the function
