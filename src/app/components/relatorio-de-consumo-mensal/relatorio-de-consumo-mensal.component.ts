@@ -71,7 +71,7 @@ export class RelatorioDeConsumoMensalComponent implements OnInit {
 
   // Sets the month and year of the MatDatepicker control to the provided values.
   setMonthAndYear(normalizedMonthAndYear: Moment, datepicker: MatDatepicker<Moment>): void {
-  // Gets the current value of the MatDatepicker control
+    // Gets the current value of the MatDatepicker control
     const ctrlValue = this.date.value;
     if (ctrlValue) {
       // Sets the month and year to the ones of the normalizedMonthAndYear

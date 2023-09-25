@@ -44,7 +44,7 @@ describe('AppComponent', () => {
     component.sideNavIsOpened = true;
     // Call the onResize function
     component.onResize();
-    // Add your expectations here for the state of the component after the resize
+    // Expectations for the state of the component after the resize
     expect(component.sideNavMode).toBe('over');
     expect(component.isMobile).toBe(true);
     expect(component.sideNavIsOpened).toBe(false);
@@ -56,7 +56,7 @@ describe('AppComponent', () => {
     component.sideNavIsOpened = false;
     // Call the onResize function
     component.onResize();
-    // Add your expectations here for the state of the component after the resize
+    // Expectations for the state of the component after the resize
     expect(component.sideNavMode).toBe('side');
     expect(component.isMobile).toBe(false);
     expect(component.sideNavIsOpened).toBe(true);

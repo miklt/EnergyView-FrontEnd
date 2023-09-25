@@ -67,10 +67,10 @@ describe('RelatorioDeConsumoDiarioComponent', () => {
     // Create mock elements
     const chartConsumoAcumulado = document.createElement('div');
     chartConsumoAcumulado.id = 'chartConsumoAcumulado';
-    document.body.appendChild(chartConsumoAcumulado); // This adds it to the body of the HTML document
+    document.body.appendChild(chartConsumoAcumulado); // Adds it to the body of the HTML document
     const chartCurvaDeCarga = document.createElement('div');
     chartCurvaDeCarga.id = 'chartCurvaDeCarga';
-    document.body.appendChild(chartCurvaDeCarga); // This adds it to the body of the HTML document
+    document.body.appendChild(chartCurvaDeCarga); // Adds it to the body of the HTML document
     const datePicker = document.getElementById('datePicker');
     const consumptionTitleContainer = document.getElementById('consumptionTitleContainer');
     // Set the viewport size
@@ -96,10 +96,10 @@ describe('RelatorioDeConsumoDiarioComponent', () => {
     // Create mock elements
     const chartConsumoAcumulado = document.createElement('div');
     chartConsumoAcumulado.id = 'chartConsumoAcumulado';
-    document.body.appendChild(chartConsumoAcumulado); // This adds it to the body of the HTML document
+    document.body.appendChild(chartConsumoAcumulado); // Adds it to the body of the HTML document
     const chartCurvaDeCarga = document.createElement('div');
     chartCurvaDeCarga.id = 'chartCurvaDeCarga';
-    document.body.appendChild(chartCurvaDeCarga); // This adds it to the body of the HTML document
+    document.body.appendChild(chartCurvaDeCarga); // Adds it to the body of the HTML document
     const datePicker = document.getElementById('datePicker');
     const consumptionTitleContainer = document.getElementById('consumptionTitleContainer');
     // Set the viewport size
