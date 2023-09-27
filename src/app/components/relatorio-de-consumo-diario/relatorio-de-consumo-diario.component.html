@@ -1,0 +1,163 @@
+<div class="view-container">
+    <!-- Title and date picker -->
+    <div class="title-container" id="titleContainer">
+        <div class="consumption-title-container" id="consumptionTitleContainer">
+            <div class="flex-column-center">
+                <p class="bigger-text">Relatório de Consumo</p>
+            </div>
+            <div class="flex-row-start column-gap-20px">
+                <div class="flex-column-center">
+                    <p class="normal-text dark-grey cursor-pointer underline" routerLink="/relatorio-de-consumo/diario">Diário</p>
+                </div>
+                <div class="flex-column-center">
+                    <p class="normal-text dark-grey cursor-pointer" routerLink="/relatorio-de-consumo/mensal">Mensal</p>
+                </div>
+            </div>
+        </div>
+        <!-- Date picker -->
+        <mat-form-field class="date-picker" id="datePicker">
+            <mat-label>Escolha uma data</mat-label>
+            <input matInput [max]="maxDate" [matDatepicker]="picker" [formControl]="date" (dateInput)="onDateSelect()">
+            <mat-datepicker-toggle matIconSuffix [for]="picker">
+                <mat-icon matDatepickerToggleIcon>keyboard_arrow_down</mat-icon>
+            </mat-datepicker-toggle>
+            <mat-datepicker #picker></mat-datepicker>
+        </mat-form-field>
+    </div>
+
+    <!-- Loading -->
+    <app-loader [loading]="loading"></app-loader>
+    
+    <!-- No response screen -->
+    <app-no-data [noData]="!data && !loading"></app-no-data>
+
+    <div *ngIf="data && !loading">
+        <!-- Containers -->
+        <div class="containers-container">
+            <!-- Consumo total -->
+            <div class="container">
+                <p class="normal-text">Consumo total</p>
+                <p class="big-text">{{ data['consumo-total'] / 1000 | number:'1.2-2' }} kWh</p>
+                <div>
+                    <p class="small-text bold" [ngClass]="{'red': data['variacao-consumo-total'].charAt(0) === '+' && data['variacao-consumo-total'].charAt(1) !== '0', 'green': data['variacao-consumo-total'].charAt(0) === '-'}">
+                        {{ data['variacao-consumo-total'] }}%
+                    </p>
+                    <p class="small-text base-line">Desde o dia anterior</p>
+                </div>
+            </div>
+            <!-- Horario de pico -->
+            <div class="container">
+                <p class="normal-text">Horário de pico</p>
+                <p class="big-text">{{ data['horario-de-pico'] }}</p>
+                <div>
+                    <p class="small-text bold">{{ data['horario-de-pico-ontem'] }}</p>
+                    <p class="small-text base-line">No dia anterior</p>
+                </div>
+            </div>
+            <!-- Consumo por fase -->
+            <div class="container">
+                <p class="normal-text mb-20px">Consumo por fase</p>
+                <div>
+                    <!-- Fase A -->
+                    <div class="flex-row-space-between">
+                        <div class="flex-row-start column-gap-10px">
+                            <div class="flex-column-center">
+                                <p class="big-text">A</p>
+                            </div>
+                            <div>
+                                <p class="normal-text bold">{{ data['consumo-total-a'] / 1000 | number:'1.2-2' }} kWh</p>
+                                <p class="small-text">{{ (data['consumo-total-a'] / data['consumo-total'] * 100) | number:'1.0-0' }}% do consumo total</p>
+                            </div>
+                        </div>
+                        <div class="text-align-right">
+                            <p class="small-text bold" [ngClass]="{'red': data['variacao-consumo-total-a'].charAt(0) === '+' && data['variacao-consumo-total-a'].charAt(1) !== '0', 'green': data['variacao-consumo-total-a'].charAt(0) === '-'}">
+                                {{ data['variacao-consumo-total-a'] }}%
+                            </p>
+                            <p class="small-text phase-base-line">Desde o dia anterior</p>
+                        </div>
+                    </div>
+                    <!-- Fase B -->
+                    <div class="flex-row-space-between mt-5px">
+                        <div class="flex-row-start column-gap-10px">
+                            <div class="flex-column-center">
+                                <p class="big-text">B</p>
+                            </div>
+                            <div>
+                                <p class="normal-text bold">{{ data['consumo-total-b'] / 1000 | number:'1.2-2' }} kWh</p>
+                                <p class="small-text">{{ (data['consumo-total-b'] / data['consumo-total'] * 100) | number:'1.0-0' }}% do consumo total</p>
+                            </div>
+                        </div>
+                        <div class="text-align-right">
+                            <p class="small-text bold" [ngClass]="{'red': data['variacao-consumo-total-b'].charAt(0) === '+' && data['variacao-consumo-total-b'].charAt(1) !== '0', 'green': data['variacao-consumo-total-b'].charAt(0) === '-'}">
+                                {{ data['variacao-consumo-total-b'] }}%
+                            </p>
+                            <p class="small-text phase-base-line">Desde o dia anterior</p>
+                        </div>
+                    </div>
+                    <!-- Fase C -->
+                    <div class="flex-row-space-between mt-5px">
+                        <div class="flex-row-start column-gap-10px">
+                            <div class="flex-column-center">
+                                <p class="big-text">C</p>
+                            </div>
+                            <div>
+                                <p class="normal-text bold">{{ data['consumo-total-c'] / 1000 | number:'1.2-2' }} kWh</p>
+                                <p class="small-text">{{ (data['consumo-total-c'] / data['consumo-total'] * 100) | number:'1.0-0' }}% do consumo total</p>
+                            </div>
+                        </div>
+                        <div class="text-align-right">
+                            <p class="small-text bold" [ngClass]="{'red': data['variacao-consumo-total-c'].charAt(0) === '+' && data['variacao-consumo-total-c'].charAt(1) !== '0', 'green': data['variacao-consumo-total-c'].charAt(0) === '-'}">
+                                {{ data['variacao-consumo-total-c'] }}%
+                            </p>
+                            <p class="small-text phase-base-line">Desde o dia anterior</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="containers-container">
+            <!-- Demanda media -->
+            <div class="container">
+                <div>
+                    <p class="normal-text mb-20px">Demanda média</p>
+                    <div class="blue-line dashed"></div>
+                </div>
+                <p class="big-text">{{ data['demanda-media'] }} W</p>
+                <div>
+                    <p class="small-text bold" [ngClass]="{'red': data['variacao-demanda-media'].charAt(0) === '+' && data['variacao-demanda-media'].charAt(1) !== '0', 'green': data['variacao-demanda-media'].charAt(0) === '-'}">
+                        {{ data['variacao-demanda-media'] }}%
+                    </p>
+                <p class="small-text base-line">Desde o dia anterior</p>
+                </div>
+            </div>
+            <!-- Demanda maxima -->
+            <div class="container">
+                <div>
+                    <p class="normal-text mb-20px">Demanda máxima</p>
+                    <div class="blue-line"></div>
+                </div>                
+                <p class="big-text">{{ data['demanda-maxima'] }} W</p>
+                <div>
+                    <p class="small-text bold" [ngClass]="{'red': data['variacao-demanda-maxima'].charAt(0) === '+' && data['variacao-demanda-maxima'].charAt(1) !== '0', 'green': data['variacao-demanda-maxima'].charAt(0) === '-'}">
+                        {{ data['variacao-demanda-maxima'] }}%
+                    </p>
+                    <p class="small-text base-line">Desde o dia anterior</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="containers-container">
+            <!-- Consumo acumulado -->
+            <div class="container">
+                <p class="normal-text mb-20px">Consumo acumulado</p>
+                <div id="chartConsumoAcumulado" [innerHTML]="data['consumo-acumulado']"></div>
+            </div>
+            <!-- Curva de carga -->
+            <div class="container">
+                <p class="normal-text mb-20px">Curva de carga</p>
+                <div id="chartCurvaDeCarga" [innerHTML]="data['curva-de-carga']"></div>
+            </div>
+        </div>
+    </div>
+</div>

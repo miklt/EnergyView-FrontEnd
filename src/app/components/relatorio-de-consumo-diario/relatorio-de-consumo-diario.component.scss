@@ -1,0 +1,10 @@
+@import '../../../styles/custom-colors';
+
+.blue-line { 
+    width: 30px;
+    border-bottom: 3px solid $blue;
+
+    &.dashed {
+        border-bottom: 3px dashed $blue; 
+    }
+}

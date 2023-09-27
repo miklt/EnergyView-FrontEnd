@@ -29,7 +29,7 @@
               "src/assets"
             ],
             "styles": [
-              "src/theme.scss",
+              "src/styles/theme.scss",
               "src/styles/styles.scss"
             ],
             "scripts": [],
@@ -96,6 +96,7 @@
               "zone.js/testing"
             ],
             "tsConfig": "tsconfig.spec.json",
+            "karmaConfig": "karma.conf.js",
             "assets": [
               "src/favicon.ico",
               "src/assets"
@@ -104,7 +105,8 @@
               "@angular/material/prebuilt-themes/indigo-pink.css",
               "src/styles/styles.scss"
             ],
-            "scripts": []
+            "scripts": [],
+            "codeCoverage": true
           }
         }
       }

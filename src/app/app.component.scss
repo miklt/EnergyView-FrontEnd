@@ -1,9 +1,9 @@
-@import '../styles/custom-colors.scss';
+@import '../styles/custom-colors';
 
 .side-nav {
     width: 320px;
-    border: 0px;
     background-color: $blue;
+    border: 0;
 }
 
 .content {
@@ -11,16 +11,18 @@
     background-color: $lighter-grey;
 
     .top-bar {
-        height: 40px;
-        padding: 10px 25px 10px 25px;
-        background-color: $blue;
-        box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
         display: grid;
         grid-template-columns: repeat(3, 1fr);
+
+        height: 40px;
+        padding: 10px 25px;
+
+        background-color: $blue;
+        box-shadow: 0 4px 10px rgb(0 0 0 / 10%);
     
         img {
-            margin: 5px 0;
             height: 30px;
+            margin: 5px 0;
         }
     
         .logo-img {

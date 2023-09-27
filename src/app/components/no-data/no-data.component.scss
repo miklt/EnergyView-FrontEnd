@@ -1,0 +1,15 @@
+.no-data-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    margin-top: 60px;
+
+    div {
+        text-align: center; 
+    }
+
+    .no-data-img {
+        height: 100px;
+        margin-bottom: 30px;
+    }
+}

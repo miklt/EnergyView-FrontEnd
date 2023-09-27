@@ -6,7 +6,7 @@ import { MatDrawerMode, MatSidenav } from '@angular/material/sidenav';
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss']
 })
-export class AppComponent implements OnInit{
+export class AppComponent implements OnInit {
   title: string = 'EnergyView';
   sideNavMode: MatDrawerMode = 'side';
   sideNavIsOpened: boolean = true;
@@ -19,7 +19,7 @@ export class AppComponent implements OnInit{
 
   // Listens to resizing of the window
   @HostListener('window:resize', ['$event'])
-  onResize() {
+  onResize(): void {
     this.updateSideNav(); // Update the sidenav whenever the window is resized
   }
 
@@ -33,14 +33,18 @@ export class AppComponent implements OnInit{
         this.sideNavMode = 'over';
         this.isMobile = true;
       }
-      if (this.sideNavIsOpened === true) this.sideNavIsOpened = false; // Closes the sidenav if not already closed
+      if (this.sideNavIsOpened === true) {
+        this.sideNavIsOpened = false; // Closes the sidenav if not already closed
+      } 
     }
     else {
       if (this.sideNavMode === 'over') {
         this.sideNavMode = 'side';
         this.isMobile = false;
       }
-      if(this.sideNavIsOpened === false) this.sideNavIsOpened = true; // Opens the sidenav if not already open
+      if (this.sideNavIsOpened === false) {
+        this.sideNavIsOpened = true; // Opens the sidenav if not already open
+      } 
     }
   }
 
