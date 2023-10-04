@@ -53,18 +53,18 @@ export class RelatorioDeConsumoMensalComponent implements OnInit {
   // Updates the size of elements for responsiveness
   updateSizes(): void {
     // Updates title and date picker
-    const titleContainer = document.getElementById('titleContainer');
-    const datePicker = document.getElementById('datePicker');
-    const consumptionTitleContainer = document.getElementById('consumptionTitleContainer');
-    if (titleContainer && datePicker && consumptionTitleContainer) {
+    const titleContainer = document.getElementById('monthlyConsumptionTitleContainer');
+    const titleWrapper = document.getElementById('monthlyConsumptionTitleWrapper');
+    const datePicker = document.getElementById('monthlyConsumptionDatePicker');
+    if (titleContainer && datePicker && titleWrapper) {
       // Checks if the title container's width is less than or equal to 600px
       if (titleContainer.clientWidth <= 600) {
-        datePicker.style.width = '100%';
-        consumptionTitleContainer.style.justifyContent = 'space-between';
+        datePicker.classList.add('wide');
+        titleWrapper.classList.add('wide');
       } 
       else {
-        datePicker.style.removeProperty('width');
-        consumptionTitleContainer.style.justifyContent = 'flex-start';
+        datePicker.classList.remove('wide');
+        titleWrapper.classList.remove('wide');
       }
     }
   }
@@ -81,13 +81,6 @@ export class RelatorioDeConsumoMensalComponent implements OnInit {
       this.date.setValue(ctrlValue);
       // Closes the MatDatepicker after setting the new values
       datepicker.close();
-      // this.onDateSelect();
     }
-  }
-
-  // Handles the date so that dateString is always YYYY-MM
-  formatDateString(year: number, month: number): string {
-    const pad = (n: number) => (n < 10 ? '0' + n : n.toString()); // Adds a 0 before the number if n is < 10
-    return `${year}-${pad(month)}`;
   }
 }

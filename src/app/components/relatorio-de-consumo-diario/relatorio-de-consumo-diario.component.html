@@ -1,7 +1,7 @@
 <div class="view-container">
     <!-- Title and date picker -->
-    <div class="title-container" id="titleContainer">
-        <div class="consumption-title-container" id="consumptionTitleContainer">
+    <div class="title-container" id="dailyConsumptionTitleContainer">
+        <div class="title-wrapper" id="dailyConsumptionTitleWrapper">
             <div class="flex-column-center">
                 <p class="bigger-text">Relatório de Consumo</p>
             </div>
@@ -15,7 +15,7 @@
             </div>
         </div>
         <!-- Date picker -->
-        <mat-form-field class="date-picker" id="datePicker">
+        <mat-form-field class="date-picker" id="dailyConsumptionDatePicker">
             <mat-label>Escolha uma data</mat-label>
             <input matInput [max]="maxDate" [matDatepicker]="picker" [formControl]="date" (dateInput)="onDateSelect()">
             <mat-datepicker-toggle matIconSuffix [for]="picker">
@@ -39,8 +39,8 @@
                 <p class="normal-text">Consumo total</p>
                 <p class="big-text">{{ data['consumo-total'] / 1000 | number:'1.2-2' }} kWh</p>
                 <div>
-                    <p class="small-text bold" [ngClass]="{'red': data['variacao-consumo-total'].charAt(0) === '+' && data['variacao-consumo-total'].charAt(1) !== '0', 'green': data['variacao-consumo-total'].charAt(0) === '-'}">
-                        {{ data['variacao-consumo-total'] }}%
+                    <p class="small-text bold" [ngClass]="{'red': data['variacao-consumo-total'] > 0, 'green': data['variacao-consumo-total'] < 0}">
+                        <span *ngIf="data['variacao-consumo-total'] >= 0">+</span>{{ data['variacao-consumo-total'] }}%
                     </p>
                     <p class="small-text base-line">Desde o dia anterior</p>
                 </div>
@@ -70,8 +70,8 @@
                             </div>
                         </div>
                         <div class="text-align-right">
-                            <p class="small-text bold" [ngClass]="{'red': data['variacao-consumo-total-a'].charAt(0) === '+' && data['variacao-consumo-total-a'].charAt(1) !== '0', 'green': data['variacao-consumo-total-a'].charAt(0) === '-'}">
-                                {{ data['variacao-consumo-total-a'] }}%
+                            <p class="small-text bold" [ngClass]="{'red': data['variacao-consumo-total-a'] > 0, 'green': data['variacao-consumo-total-a'] < 0}">
+                                <span *ngIf="data['variacao-consumo-total-a'] >= 0">+</span>{{ data['variacao-consumo-total-a'] }}%
                             </p>
                             <p class="small-text phase-base-line">Desde o dia anterior</p>
                         </div>
@@ -88,8 +88,8 @@
                             </div>
                         </div>
                         <div class="text-align-right">
-                            <p class="small-text bold" [ngClass]="{'red': data['variacao-consumo-total-b'].charAt(0) === '+' && data['variacao-consumo-total-b'].charAt(1) !== '0', 'green': data['variacao-consumo-total-b'].charAt(0) === '-'}">
-                                {{ data['variacao-consumo-total-b'] }}%
+                            <p class="small-text bold" [ngClass]="{'red': data['variacao-consumo-total-b'] > 0, 'green': data['variacao-consumo-total-b'] < 0}">
+                                <span *ngIf="data['variacao-consumo-total-b'] >= 0">+</span>{{ data['variacao-consumo-total-b'] }}%
                             </p>
                             <p class="small-text phase-base-line">Desde o dia anterior</p>
                         </div>
@@ -106,8 +106,8 @@
                             </div>
                         </div>
                         <div class="text-align-right">
-                            <p class="small-text bold" [ngClass]="{'red': data['variacao-consumo-total-c'].charAt(0) === '+' && data['variacao-consumo-total-c'].charAt(1) !== '0', 'green': data['variacao-consumo-total-c'].charAt(0) === '-'}">
-                                {{ data['variacao-consumo-total-c'] }}%
+                            <p class="small-text bold" [ngClass]="{'red': data['variacao-consumo-total-c'] > 0, 'green': data['variacao-consumo-total-c'] < 0}">
+                                <span *ngIf="data['variacao-consumo-total-c'] >= 0">+</span>{{ data['variacao-consumo-total-c'] }}%
                             </p>
                             <p class="small-text phase-base-line">Desde o dia anterior</p>
                         </div>
@@ -125,8 +125,8 @@
                 </div>
                 <p class="big-text">{{ data['demanda-media'] }} W</p>
                 <div>
-                    <p class="small-text bold" [ngClass]="{'red': data['variacao-demanda-media'].charAt(0) === '+' && data['variacao-demanda-media'].charAt(1) !== '0', 'green': data['variacao-demanda-media'].charAt(0) === '-'}">
-                        {{ data['variacao-demanda-media'] }}%
+                    <p class="small-text bold" [ngClass]="{'red': data['variacao-demanda-media'] > 0, 'green': data['variacao-demanda-media'] < 0}">
+                        <span *ngIf="data['variacao-demanda-media'] >= 0">+</span>{{ data['variacao-demanda-media'] }}%
                     </p>
                 <p class="small-text base-line">Desde o dia anterior</p>
                 </div>
@@ -139,8 +139,8 @@
                 </div>                
                 <p class="big-text">{{ data['demanda-maxima'] }} W</p>
                 <div>
-                    <p class="small-text bold" [ngClass]="{'red': data['variacao-demanda-maxima'].charAt(0) === '+' && data['variacao-demanda-maxima'].charAt(1) !== '0', 'green': data['variacao-demanda-maxima'].charAt(0) === '-'}">
-                        {{ data['variacao-demanda-maxima'] }}%
+                    <p class="small-text bold" [ngClass]="{'red': data['variacao-demanda-maxima'] > 0, 'green': data['variacao-demanda-maxima'] < 0}">
+                        <span *ngIf="data['variacao-demanda-maxima'] >= 0">+</span>{{ data['variacao-demanda-maxima'] }}%
                     </p>
                     <p class="small-text base-line">Desde o dia anterior</p>
                 </div>
@@ -149,14 +149,14 @@
 
         <div class="containers-container">
             <!-- Consumo acumulado -->
-            <div class="container">
+            <div class="container graph">
                 <p class="normal-text mb-20px">Consumo acumulado</p>
-                <div id="chartConsumoAcumulado" [innerHTML]="data['consumo-acumulado']"></div>
+                <iframe [srcdoc]="data['consumo-acumulado']" frameBorder="0"></iframe>
             </div>
             <!-- Curva de carga -->
-            <div class="container">
+            <div class="container graph">
                 <p class="normal-text mb-20px">Curva de carga</p>
-                <div id="chartCurvaDeCarga" [innerHTML]="data['curva-de-carga']"></div>
+                <iframe [srcdoc]="data['curva-de-carga']" frameBorder="0"></iframe>
             </div>
         </div>
     </div>

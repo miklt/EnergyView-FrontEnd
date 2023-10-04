@@ -11,6 +11,11 @@ body, p {
     font-family: Lato, sans-serif;
 }
 
+iframe {
+    width: 100%;
+    height: 100%;
+}
+
 // Colors
 
 .white {
@@ -174,7 +179,7 @@ body, p {
     margin: 50px;
 
     // Changes margin when on mobile
-    @media (width <= 800px) {
+    @media (max-width: 799px) {
         margin: 25px;
     }
 }
@@ -189,11 +194,15 @@ body, p {
     width: 100%;
     margin-bottom: 30px;
 
-    .consumption-title-container {
+    .title-wrapper {
         display: flex;
         flex-grow: 1;
         column-gap: 25px;
         justify-content: flex-start;
+
+        &.wide {
+            justify-content: space-between;
+        }
 
         p {
             line-height: 24px;
@@ -202,6 +211,10 @@ body, p {
 
     .date-picker {
         width: 200px;
+
+        &.wide {
+            width: 100%;
+        }
 
         .mat-mdc-form-field-subscript-wrapper {
             height: 0;
@@ -225,7 +238,6 @@ body, p {
         flex-grow: 1;
         justify-content: space-between;
         
-
         width: 300px;
         min-height: 150px;
         padding: 30px;
@@ -235,5 +247,9 @@ body, p {
         background-color: #fff;
         border-radius: 10px;
         box-shadow: 0 4px 10px rgb(0 0 0 / 5%);
+
+        &.graph {
+            height: 505px;
+        }
     }
 }
