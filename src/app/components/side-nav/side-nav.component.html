@@ -3,7 +3,7 @@
     <div class="logo-img-container">
         <img class="logo-img" src="/assets/logo.png" alt="Logo do EnergyView" routerLink="" (click)="closeSideNav()">
         <!-- Close side nav -->
-        <p class="normal-text bold white close-sidenav-button" *ngIf="showCloseSideNavButton" (click)="closeSideNav()">✖</p>
+        <p class="normal-text bold white close-sidenav-button" *ngIf="isMobile" (click)="closeSideNav()">✖</p>
     </div>
     <!-- Demanda atual -->
     <p class="big-text white mb-5px" matBadge="1" matBadgeOverlap="false" >{{ demandaAtual }} W</p>

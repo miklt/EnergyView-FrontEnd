@@ -1,7 +1,7 @@
 <mat-sidenav-container>
   <!-- Left-positioned side bar -->
   <mat-sidenav class="side-nav" #sidenav [mode]="sideNavMode" [opened]="sideNavIsOpened">
-    <app-side-nav [showCloseSideNavButton]="isMobile" (closeSideNavEvent)="closeSidenav()"></app-side-nav>
+    <app-side-nav [isMobile]="isMobile" (closeSideNavEvent)="closeSidenav()"></app-side-nav>
   </mat-sidenav>
   <!-- Router outlet (content) -->
   <mat-sidenav-content class="content">
