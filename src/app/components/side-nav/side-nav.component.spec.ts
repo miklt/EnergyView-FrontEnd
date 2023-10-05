@@ -25,6 +25,7 @@ describe('SideBarComponent', () => {
     spyOn(component.closeSideNavEvent, 'emit');
 
     // Call the closeSideNav function
+    component.isMobile = true;
     component.closeSideNav();
 
     // Expect that the emit method of the EventEmitter was called with no arguments

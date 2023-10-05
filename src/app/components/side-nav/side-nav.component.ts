@@ -6,12 +6,14 @@ import { Component, EventEmitter, Input, Output } from '@angular/core';
   styleUrls: ['./side-nav.component.scss']
 })
 export class SideNavComponent {
-  @Input() showCloseSideNavButton: boolean = false;
+  @Input() isMobile: boolean = false;
   @Output() closeSideNavEvent: EventEmitter<void> = new EventEmitter<void>();
   demandaAtual = 702;
 
-  // Emits the event to notify the parent component
+  // Emits the event to notify the parent component if on mobile
   closeSideNav() {
-    this.closeSideNavEvent.emit();
+    if (this.isMobile) {
+      this.closeSideNavEvent.emit();
+    }
   }
 }

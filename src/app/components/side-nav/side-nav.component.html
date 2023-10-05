@@ -1,21 +1,21 @@
 <div class="logo-container">
     <!-- Logo -->
     <div class="logo-img-container">
-        <img class="logo-img" src="/assets/logo.png" alt="Logo do EnergyView" routerLink="">
+        <img class="logo-img" src="/assets/logo.png" alt="Logo do EnergyView" routerLink="" (click)="closeSideNav()">
         <!-- Close side nav -->
-        <p class="normal-text bold white close-sidenav-button" *ngIf="showCloseSideNavButton" (click)="closeSideNav()" >X</p>
+        <p class="normal-text bold white close-sidenav-button" *ngIf="isMobile" (click)="closeSideNav()">✖</p>
     </div>
     <!-- Demanda atual -->
     <p class="big-text white mb-5px" matBadge="1" matBadgeOverlap="false" >{{ demandaAtual }} W</p>
     <p class="normal-text white">Demanda atual</p>
 </div>
 <!-- Relatorio de consumo -->
-<div class="side-nav-item" routerLink="/relatorio-de-consumo" routerLinkActive="selected">
+<div class="side-nav-item" routerLink="/relatorio-de-consumo" routerLinkActive="selected" (click)="closeSideNav()">
     <img class="item-image" src="/assets/relatorio-de-consumo.png" alt="Relatório de Consumo">
     <p class="normal-text white">Relatório de consumo</p>
 </div>
 <!-- Relatorio financeiro -->
-<div class="side-nav-item" routerLink="/relatorio-financeiro" routerLinkActive="selected">
+<div class="side-nav-item" routerLink="/relatorio-financeiro" routerLinkActive="selected" (click)="closeSideNav()">
     <img class="item-image" src="/assets/relatorio-financeiro.png" alt="Relatório Financeiro">
     <p class="normal-text white">Relatório financeiro</p>
 </div>

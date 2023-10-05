@@ -31,21 +31,20 @@ export class RelatorioDeConsumoDiarioComponent implements OnInit {
   // Updates the size of elements for responsiveness
   updateSizes(): void {
     // Updates title and date picker
-    const titleContainer = document.getElementById('titleContainer');
-    const datePicker = document.getElementById('datePicker');
-    const consumptionTitleContainer = document.getElementById('consumptionTitleContainer');
-    if (titleContainer && datePicker && consumptionTitleContainer) {
+    const titleContainer = document.getElementById('dailyConsumptionTitleContainer');
+    const titleWrapper = document.getElementById('dailyConsumptionTitleWrapper');
+    const datePicker = document.getElementById('dailyConsumptionDatePicker');
+    if (titleContainer && datePicker && titleWrapper) {
       // Checks if the title container's width is less than or equal to 600px
       if (titleContainer.clientWidth <= 600) {
-        datePicker.style.width = '100%';
-        consumptionTitleContainer.style.justifyContent = 'space-between';
+        datePicker.classList.add('wide');
+        titleWrapper.classList.add('wide');
       } 
       else {
-        datePicker.style.removeProperty('width');
-        consumptionTitleContainer.style.justifyContent = 'flex-start';
+        datePicker.classList.remove('wide');
+        titleWrapper.classList.remove('wide');
       }
     }
-    this.executeChartsScripts(100);
   }
   
   // Updates data with the selected date
@@ -56,15 +55,10 @@ export class RelatorioDeConsumoDiarioComponent implements OnInit {
       const day = dateRawValue.getDate();
       const month = dateRawValue.getMonth() + 1; // For some reason month goes from 0 to 11
       const year = dateRawValue.getFullYear();
-      const dateString = this.formatDateString(year, month, day);
+      // Handles the date so that dateString is always YYYY-MM-DD
+      const dateString = String(year) + '-' + String(month).padStart(2, '0') + '-' + String(day).padStart(2, '0');
       this.getData(dateString); // Uses the aforementioned dateString to get the data for the view
     }
-  }
-
-  // Handles the date so that dateString is always YYYY-MM-DD
-  formatDateString(year: number, month: number, day: number): string {
-    const pad = (n: number) => (n < 10 ? '0' + n : n.toString()); // Adds a 0 before the number if n is < 10
-    return `${year}-${pad(month)}-${pad(day)}`;
   }
     
   // Gets the data for the view using the dataService
@@ -78,37 +72,11 @@ export class RelatorioDeConsumoDiarioComponent implements OnInit {
         this.data['curva-de-carga'] = this.sanitizer.bypassSecurityTrustHtml(String(this.data['curva-de-carga']));
         // Loading is done
         this.loading = false;
-        this.executeChartsScripts(0);
       },
       error: () => {
         this.data = null;
         this.loading = false;
       }
     });
-  }
-
-  // Executes the chart's scripts
-  executeChartsScripts(delay: number): void {
-    setTimeout(() => { // Uses setTimeout to wait for the view to resize or finish loading
-      const consumo_acumulado = document.getElementById('chartConsumoAcumulado');
-      const curva_carga = document.getElementById('chartCurvaDeCarga');
-      if (consumo_acumulado) {
-        // Gets all script elements within the provided HTMLElement
-        const scriptTags = consumo_acumulado.getElementsByTagName('script');
-        // Loops through each script element
-        for (let i = 0; i < scriptTags.length; i++) {
-          const scriptFunction = new Function(String(scriptTags[i].textContent)); // Creates a new function from the script content
-          scriptFunction(); // Executes the newly created script function
-        }
-      }
-      if (curva_carga) {
-        const scriptTags = curva_carga.getElementsByTagName('script');
-        // Loops through each script element
-        for (let i = 0; i < scriptTags.length; i++) {
-          const scriptFunction = new Function(String(scriptTags[i].textContent)); // Creates a new function from the script content
-          scriptFunction(); // Executes the newly created script function
-        }
-      }
-    }, delay);
   }
 }

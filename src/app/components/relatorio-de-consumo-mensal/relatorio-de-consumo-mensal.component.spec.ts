@@ -57,38 +57,37 @@ describe('RelatorioDeConsumoMensalComponent', () => {
   });
 
   it('should update sizes for responsiveness when titleContainer width > 600px', () => {
-    // Create mock elements
-    const datePicker = document.getElementById('datePicker');
-    const consumptionTitleContainer = document.getElementById('consumptionTitleContainer');
+    const titleWrapper = document.getElementById('monthlyConsumptionTitleWrapper');
+    const datePicker = document.getElementById('monthlyConsumptionDatePicker');
     // Set the viewport size
     viewport.set('desktop');
     // Call the updateSizes method
     component.updateSizes();
     // Expectations
-    if (datePicker && consumptionTitleContainer) {
-      expect(datePicker.style.width).toBe('');
-      expect(consumptionTitleContainer.style.justifyContent).toBe('flex-start');
+    if (datePicker && titleWrapper) {
+      expect(datePicker.classList.contains('wide')).toBeFalsy();
+      expect(titleWrapper.classList.contains('wide')).toBeFalsy();
     }
     else {
-      fail('datePicker and consumptionTitleContainer are not defined');
+      fail('datePicker and titleWrapper are not defined');
     }
   });
 
   it('should update sizes for responsiveness when titleContainer width <= 600px', () => {
-    // Create mock elements
-    const datePicker = document.getElementById('datePicker');
-    const consumptionTitleContainer = document.getElementById('consumptionTitleContainer');
+    const titleWrapper = document.getElementById('monthlyConsumptionTitleWrapper');
+    const datePicker = document.getElementById('monthlyConsumptionDatePicker');
     // Set the viewport size
     viewport.set('mobile');
     // Call the updateSizes method
     component.updateSizes();
+    // Advance the virtual clock to allow asynchronous operations to complete
     // Expectations
-    if (datePicker && consumptionTitleContainer) {
-      expect(datePicker.style.width).toBe('100%');
-      expect(consumptionTitleContainer.style.justifyContent).toBe('space-between');
+    if (datePicker && titleWrapper) {
+      expect(datePicker.classList.contains('wide')).toBeTruthy();
+      expect(titleWrapper.classList.contains('wide')).toBeTruthy();
     }
     else {
-      fail('datePicker and consumptionTitleContainer are not defined');
+      fail('datePicker and titleWrapper are not defined');
     }
   });
 
@@ -111,19 +110,5 @@ describe('RelatorioDeConsumoMensalComponent', () => {
       fail('Date value is not defined');
     }
     expect(datepicker.close).toHaveBeenCalled();
-  });
-
-  it('should format date string correctly with 1 digit month', () => {
-    // Calls the function with mocked data
-    const formattedDate = component.formatDateString(2023, 9);
-    // Expectation
-    expect(formattedDate).toBe('2023-09');
-  });
-
-  it('should format date string correctly with 2 digit month', () => {
-    // Calls the function with mocked data
-    const formattedDate = component.formatDateString(2023, 10);
-    // Expectation
-    expect(formattedDate).toBe('2023-10');
   });
 });

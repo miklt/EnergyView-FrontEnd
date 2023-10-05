@@ -5,16 +5,16 @@ export interface DailyConsumptionData {
   'curva-de-carga': string | SafeHtml;
   'demanda-maxima': number,
   'demanda-media': number,
-  'variacao-demanda-maxima': string,
-  'variacao-demanda-media': string,
+  'variacao-demanda-maxima': number,
+  'variacao-demanda-media': number,
   'horario-de-pico': string,
   'horario-de-pico-ontem': string,
   'consumo-total': number,
-  'variacao-consumo-total': string,
+  'variacao-consumo-total': number,
   'consumo-total-a': number,
-  'variacao-consumo-total-a': string,
+  'variacao-consumo-total-a': number,
   'consumo-total-b': number,
-  'variacao-consumo-total-b': string,
+  'variacao-consumo-total-b': number,
   'consumo-total-c': number,
-  'variacao-consumo-total-c': string
+  'variacao-consumo-total-c': number
 }

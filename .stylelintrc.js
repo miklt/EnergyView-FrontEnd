@@ -13,6 +13,7 @@ module.exports = {
 
   // Defines the specific rules and their configurations.
   rules: {
-    "stylistic/no-missing-end-of-source-newline": true // Enforces the presence of a newline at the end of a SCSS file.
+    "stylistic/no-missing-end-of-source-newline": true, // Enforces the presence of a newline at the end of a SCSS file.
+    "media-feature-range-notation": null
   }
 };

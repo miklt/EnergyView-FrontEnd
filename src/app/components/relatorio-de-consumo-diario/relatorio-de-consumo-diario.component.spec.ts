@@ -63,63 +63,40 @@ describe('RelatorioDeConsumoDiarioComponent', () => {
     expect(component.updateSizes).toHaveBeenCalled();
   });
 
-  it('should update sizes for responsiveness when titleContainer width > 600px', fakeAsync(() => {
-    // Create mock elements
-    const chartConsumoAcumulado = document.createElement('div');
-    chartConsumoAcumulado.id = 'chartConsumoAcumulado';
-    document.body.appendChild(chartConsumoAcumulado); // Adds it to the body of the HTML document
-    const chartCurvaDeCarga = document.createElement('div');
-    chartCurvaDeCarga.id = 'chartCurvaDeCarga';
-    document.body.appendChild(chartCurvaDeCarga); // Adds it to the body of the HTML document
-    const datePicker = document.getElementById('datePicker');
-    const consumptionTitleContainer = document.getElementById('consumptionTitleContainer');
+  it('should update sizes for responsiveness when titleContainer width > 600px', () => {
+    const titleWrapper = document.getElementById('dailyConsumptionTitleWrapper');
+    const datePicker = document.getElementById('dailyConsumptionDatePicker');
     // Set the viewport size
     viewport.set('desktop');
-    // Spy to check if it's called
-    spyOn(component, 'executeChartsScripts');
     // Call the updateSizes method
     component.updateSizes();
-    // Advance the virtual clock to allow asynchronous operations to complete
-    tick(101);
     // Expectations
-    if (datePicker && consumptionTitleContainer) {
-      expect(datePicker.style.width).toBe('');
-      expect(consumptionTitleContainer.style.justifyContent).toBe('flex-start');
-      expect(component.executeChartsScripts).toHaveBeenCalled();
+    if (datePicker && titleWrapper) {
+      expect(datePicker.classList.contains('wide')).toBeFalsy();
+      expect(titleWrapper.classList.contains('wide')).toBeFalsy();
     }
     else {
-      fail('datePicker and consumptionTitleContainer are not defined');
+      fail('datePicker and titleWrapper are not defined');
     }
-  }));
+  });
 
-  it('should update sizes for responsiveness when titleContainer width <= 600px', fakeAsync(() => {
-    // Create mock elements
-    const chartConsumoAcumulado = document.createElement('div');
-    chartConsumoAcumulado.id = 'chartConsumoAcumulado';
-    document.body.appendChild(chartConsumoAcumulado); // Adds it to the body of the HTML document
-    const chartCurvaDeCarga = document.createElement('div');
-    chartCurvaDeCarga.id = 'chartCurvaDeCarga';
-    document.body.appendChild(chartCurvaDeCarga); // Adds it to the body of the HTML document
-    const datePicker = document.getElementById('datePicker');
-    const consumptionTitleContainer = document.getElementById('consumptionTitleContainer');
+  it('should update sizes for responsiveness when titleContainer width <= 600px', () => {
+    const titleWrapper = document.getElementById('dailyConsumptionTitleWrapper');
+    const datePicker = document.getElementById('dailyConsumptionDatePicker');
     // Set the viewport size
     viewport.set('mobile');
-    // Spy to check if it's called
-    spyOn(component, 'executeChartsScripts');
     // Call the updateSizes method
     component.updateSizes();
     // Advance the virtual clock to allow asynchronous operations to complete
-    tick(101);
     // Expectations
-    if (datePicker && consumptionTitleContainer) {
-      expect(datePicker.style.width).toBe('100%');
-      expect(consumptionTitleContainer.style.justifyContent).toBe('space-between');
-      expect(component.executeChartsScripts).toHaveBeenCalled();
+    if (datePicker && titleWrapper) {
+      expect(datePicker.classList.contains('wide')).toBeTruthy();
+      expect(titleWrapper.classList.contains('wide')).toBeTruthy();
     }
     else {
-      fail('datePicker and consumptionTitleContainer are not defined');
+      fail('datePicker and titleWrapper are not defined');
     }
-  }));
+  });
 
   it('should call getData with the formatted date when onDateSelect is called', () => {
     // Mock the necessary dependencies or services (e.g., this.date.getRawValue(), this.getData())
@@ -131,20 +108,6 @@ describe('RelatorioDeConsumoDiarioComponent', () => {
     expect(component.getData).toHaveBeenCalledWith('2023-09-14');
   });
 
-  it('should format date string correctly with 1 digit month and day', () => {
-    // Calls the function with mocked data
-    const formattedDate = component.formatDateString(2023, 9, 1);
-    // Expectation
-    expect(formattedDate).toBe('2023-09-01');
-  });
-
-  it('should format date string correctly with 2 digit month and day', () => {
-    // Calls the function with mocked data
-    const formattedDate = component.formatDateString(2023, 10, 10);
-    // Expectation
-    expect(formattedDate).toBe('2023-10-10');
-  });
-
   it('should load data', fakeAsync(() => {
     // Mock the necessary dependencies
     const responseData = {
@@ -152,32 +115,30 @@ describe('RelatorioDeConsumoDiarioComponent', () => {
       'curva-de-carga': '<div>Curva de Carga Chart</div>',
       'demanda-maxima': 0,
       'demanda-media': 0,
-      'variacao-demanda-maxima': '',
-      'variacao-demanda-media': '',
+      'variacao-demanda-maxima': 0,
+      'variacao-demanda-media': 0,
       'horario-de-pico': '',
       'horario-de-pico-ontem': '',
       'consumo-total': 0,
-      'variacao-consumo-total': '',
+      'variacao-consumo-total': 0,
       'consumo-total-a': 0,
-      'variacao-consumo-total-a': '',
+      'variacao-consumo-total-a': 0,
       'consumo-total-b': 0,
-      'variacao-consumo-total-b': '',
+      'variacao-consumo-total-b': 0,
       'consumo-total-c': 0,
-      'variacao-consumo-total-c': ''
+      'variacao-consumo-total-c': 0
     };
     const dateString = '2023-09-14';
     // Spy to check if it's called
     spyOn(service, 'getDailyConsumptionData').and.returnValue(of(responseData));
-    spyOn(component, 'executeChartsScripts');
     // Call getData
     component.getData(dateString);
     // Advance the fakeAsync scheduler
-    tick(1); 
+    tick(); 
     // Expectations
     expect(service.getDailyConsumptionData).toHaveBeenCalledWith(dateString);
     expect(component.data).toEqual(responseData);
     expect(component.loading).toBe(false);
-    expect(component.executeChartsScripts).toHaveBeenCalled();
   }));
 
   it('should not load data', fakeAsync(() => {
@@ -197,35 +158,5 @@ describe('RelatorioDeConsumoDiarioComponent', () => {
     expect(service.getDailyConsumptionData).toHaveBeenCalledWith(dateString);
     expect(component.data).toEqual(null); // Data should not be set
     expect(component.loading).toBe(false); // Loading should be false
-  }));
-
-  it('should execute the scripts', fakeAsync(() => {
-    // Create test elements to be modified by the scripts
-    const testElementConsumoAcumulado = document.createElement('div');
-    testElementConsumoAcumulado.id = 'test-element-consumo-acumulado';
-    const testElementCurvaDeCarga = document.createElement('div');
-    testElementCurvaDeCarga.id = 'test-element-curva-de-carga';
-    document.body.appendChild(testElementConsumoAcumulado);
-    document.body.appendChild(testElementCurvaDeCarga);
-    // Mock ConsumoAcumulado
-    const chartConsumoAcumulado = document.getElementById('chartConsumoAcumulado');
-    if (chartConsumoAcumulado) {
-      const scriptElementConsumoAcumulado = document.createElement('script');
-      scriptElementConsumoAcumulado.textContent = 'document.getElementById("test-element-consumo-acumulado").textContent = "Script executed";';
-      chartConsumoAcumulado.appendChild(scriptElementConsumoAcumulado);
-    }
-    // Mock CurvaDeCarga
-    const chartCurvaDeCarga = document.getElementById('chartCurvaDeCarga');
-    if (chartCurvaDeCarga) {
-      const scriptElementCurvaDeCarga = document.createElement('script');
-      scriptElementCurvaDeCarga.textContent = 'document.getElementById("test-element-curva-de-carga").textContent = "Script executed";';
-      chartCurvaDeCarga.appendChild(scriptElementCurvaDeCarga);
-    }
-    // Call the function to be tested
-    component.executeChartsScripts(0);
-    tick(10);
-    // Check if the script modified the DOM as expected
-    expect(testElementConsumoAcumulado.textContent).toBe('Script executed');
-    expect(testElementConsumoAcumulado.textContent).toBe('Script executed');
   }));
 });
