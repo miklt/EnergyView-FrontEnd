@@ -45,6 +45,7 @@ export class RelatorioDeConsumoDiarioComponent implements OnInit {
         titleWrapper.classList.remove('wide');
       }
     }
+    this.executeChartsScripts(100);
   }
   
   // Updates data with the selected date
@@ -72,11 +73,38 @@ export class RelatorioDeConsumoDiarioComponent implements OnInit {
         this.data['curva-de-carga'] = this.sanitizer.bypassSecurityTrustHtml(String(this.data['curva-de-carga']));
         // Loading is done
         this.loading = false;
+        this.executeChartsScripts();
       },
       error: () => {
         this.data = null;
         this.loading = false;
       }
     });
+  }
+
+  // Executes the chart's scripts
+  executeChartsScripts(delay: number = 0): void {
+    setTimeout(() => { // Uses setTimeout to wait for the view to resize or finish loading
+      const consumo_acumulado = document.getElementById('chartConsumoAcumulado');
+      const curva_carga = document.getElementById('chartCurvaDeCarga');
+      if (consumo_acumulado) {
+        // Gets all script elements within the provided HTMLElement
+        const scriptTags = consumo_acumulado.getElementsByTagName('script');
+        // Loops through each script element
+        for (let i = 0; i < scriptTags.length; i++) {
+          const scriptFunction = new Function(String(scriptTags[i].textContent)); // Creates a new function from the script content
+          scriptFunction(); // Executes the newly created script function
+        }
+      }
+      if (curva_carga) {
+        // Gets all script elements within the provided HTMLElement
+        const scriptTags = curva_carga.getElementsByTagName('script');
+        // Loops through each script element
+        for (let i = 0; i < scriptTags.length; i++) {
+          const scriptFunction = new Function(String(scriptTags[i].textContent)); // Creates a new function from the script content
+          scriptFunction(); // Executes the newly created script function
+        }
+      }
+    }, delay);
   }
 }

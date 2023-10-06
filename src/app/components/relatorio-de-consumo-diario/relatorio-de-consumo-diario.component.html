@@ -149,14 +149,14 @@
 
         <div class="containers-container">
             <!-- Consumo acumulado -->
-            <div class="container graph">
+            <div class="container">
                 <p class="normal-text mb-20px">Consumo acumulado</p>
-                <iframe [srcdoc]="data['consumo-acumulado']" frameBorder="0"></iframe>
+                <div id="chartConsumoAcumulado" [innerHTML]="data['consumo-acumulado']"></div>
             </div>
             <!-- Curva de carga -->
-            <div class="container graph">
+            <div class="container">
                 <p class="normal-text mb-20px">Curva de carga</p>
-                <iframe [srcdoc]="data['curva-de-carga']" frameBorder="0"></iframe>
+                <div id="chartCurvaDeCarga" [innerHTML]="data['curva-de-carga']"></div>
             </div>
         </div>
     </div>
