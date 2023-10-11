@@ -33,6 +33,21 @@ You can run the pre-commit checks on-demand running the following commands:
     * To execute the SCSS linter run `npm run lint:scss`, to execute and solve auto-fixable errors and warnings  run `npm run lint:scss-fix`.
     * To execute the HTML linter run `npm run lint:html`.
 
+## Build
+
+### Requirements
+- Docker (ideally v24.0.x+)
+To build the docker image corresponding to this component use make docker-build
+
+## Deployment
+
+### Requirements
+- Docker (ideally v24.0.x+)
+
+Initially, make sure that port 80 is not being used by any other application.
+Use the command *make docker-deploy* to deploy this component. Use the command *docker container logs frontend* to inspect the deployment status.
+
+
 ## Workflow
 
 ### Issue creation
