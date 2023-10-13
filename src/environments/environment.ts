@@ -1,4 +1,4 @@
 export const environment = {
   production: true,
-  apiUrl: 'http://plotter-api:8000'
+  apiUrl: 'http://143.107.102.8:8083'
 };
