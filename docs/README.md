@@ -58,11 +58,11 @@ Prior to initiating any development endeavors, it is imperative to create an iss
 
 When developing, your work branch should be named following the naming pattern:
 
-* **features**: YYYYMMDD/feat/name-of-feature
-* **fixes**: YYYYMMDD/fix/name-of-fix
-* **refactoring**: YYYYMMDD/refactor/name-of-refactor
+* **features**: N/feat/name-of-feature
+* **fixes**: N/fix/name-of-fix
+* **refactoring**: N/refactor/name-of-refactor
 
-Please ensure that you replace YYYYMMDD with the current date, formatted as Year-Month-Day.
+Please ensure that you replace N with the issue number.
 
 #### Adapted conventional commits pattern
 
