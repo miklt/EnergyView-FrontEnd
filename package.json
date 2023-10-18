@@ -5,6 +5,7 @@
     "ng": "ng",
     "prod": "ng serve --configuration production --open",
     "dev": "ng serve --configuration development --open",
+    "local": "ng serve --configuration local --open",
     "build": "ng build --configuration production",
     "watch": "ng build --watch --configuration development",
     "test": "ng test",

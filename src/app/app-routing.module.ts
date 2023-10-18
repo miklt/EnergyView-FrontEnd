@@ -3,6 +3,7 @@ import { RouterModule, Routes } from '@angular/router';
 import { RelatorioDeConsumoDiarioComponent } from './components/relatorio-de-consumo-diario/relatorio-de-consumo-diario.component';
 import { RelatorioDeConsumoMensalComponent } from './components/relatorio-de-consumo-mensal/relatorio-de-consumo-mensal.component';
 import { RelatorioFinanceiroMensalComponent } from './components/relatorio-financeiro-mensal/relatorio-financeiro-mensal.component';
+import { SobreComponent } from './components/sobre/sobre.component';
 
 const routes : Routes = [
   {path: '', redirectTo: '/relatorio-de-consumo/diario', pathMatch: 'full'},
@@ -11,7 +12,8 @@ const routes : Routes = [
     {path: 'diario', component: RelatorioDeConsumoDiarioComponent},
     {path: 'mensal', component: RelatorioDeConsumoMensalComponent}
   ]},
-  {path: 'relatorio-financeiro', component: RelatorioFinanceiroMensalComponent}
+  {path: 'relatorio-financeiro', component: RelatorioFinanceiroMensalComponent},
+  {path: 'sobre', component: SobreComponent}
 ];
 
 @NgModule({

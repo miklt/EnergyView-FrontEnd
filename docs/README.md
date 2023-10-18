@@ -15,7 +15,7 @@ This project relies on Angular, Node.js and Google Chrome (unit tests run in Chr
 1. Clone the repository on a local directory;
 2. Inside the repository's directory open a terminal;
 3. Run `npm install` to install dependencies;
-4. Run `npm run dev` to serve the app in the development environment or `npm run prod` for the production environment;
+4. Run `npm run dev` to serve the app in the development environment, `npm run local` to serve pointing to the local host, or `npm run prod` for the production environment (should not be used);
 5. After compiling the app should be served on [http://localhost:4200/](http://localhost:4200/),
 
 ## Testing, linting & commit hooks
