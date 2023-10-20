@@ -1,16 +1,42 @@
-@import "../../node_modules/@angular/material/theming";
+// Custom Angular Material theme
 
-@include mat-core;
+@use '@angular/material' as mat;
 
-$my-primary: mat-palette($mat-light-blue, 800);
-$my-accent: mat-palette($mat-light-blue, 600);
-$my-warn: mat-palette($mat-light-blue, 800);
-$my-theme: mat-light-theme((
+@import 'custom-colors';
+
+@include mat.core;
+
+$blue-palette: (
+  50: #e7f0fd,
+  100: #c0d9fb,
+  200: #96c3f8,
+  300: #6eadf6,
+  400: #4ea0f5,
+  500: $blue,
+  600: #2d81c7,
+  700: #236eae,
+  800: #1a5b96,
+  900: #10497d,
+  contrast: (
+    50: $black,
+    100: $black,
+    200: $black,
+    300: $white,
+    400: $white,
+    500: $white,
+    600: $white,
+    700: $white,
+    800: $white,
+    900: $white,
+  )
+);
+$my-primary: mat.define-palette($blue-palette, 500);
+$my-accent: mat.define-palette($blue-palette, 400);
+$my-theme: mat.define-light-theme((
   color: (
     primary: $my-primary,
-    accent: $my-accent,
-    warn: $my-warn
+    accent: $my-accent
   )
 ));
 
-@include angular-material-theme($my-theme);
+@include mat.all-component-themes($my-theme);
