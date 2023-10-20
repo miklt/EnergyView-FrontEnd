@@ -31,4 +31,15 @@ describe('SideBarComponent', () => {
     // Expect that the emit method of the EventEmitter was called with no arguments
     expect(component.closeSideNavEvent.emit).toHaveBeenCalledWith();
   });
+
+  it('should show an alert with the message "Em desenvolvimento."', () => {
+    // Mock the window.alert function using spyOn.
+    const alertSpy = spyOn(window, 'alert');
+
+    // Call the downloadData method to trigger the alert.
+    component.downloadData();
+
+    // Expect that window.alert was called with the expected message.
+    expect(alertSpy).toHaveBeenCalledWith('Em desenvolvimento.');
+  });
 });

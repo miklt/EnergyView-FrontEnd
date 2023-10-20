@@ -23,59 +23,90 @@
     padding-bottom: 18px;
     padding-left: 40px;
 
+    color: $white;
+
+    filter: invert(25%) sepia(14%) saturate(400%) hue-rotate(158deg) brightness(99%) contrast(90%);
     border-top-right-radius: 10px;
     border-bottom-right-radius: 10px;
 
     &.selected {
-        background-color: #116486;
-    }
-
-    .item-image {
-        float: left;
-        margin-right: 10px;
+        background-color: $blue;
+        filter: none;
+        transition: background-color 0.3s;
     }
 }
 
-.logo-container {
-    margin: 50px 40px;
+.item-image {
+    float: left;
+    width: 18px;
+    height: 18px;
+    margin-right: 10px;
+}
 
-    .logo-img-container {
-        display: flex;
-        justify-content: space-between;
-        width: 100%;
-        margin-bottom: 50px;
-    }
+.item-text-wrapper {
+    height: 16px;
+}
+
+.side-nav-container{
+    position: relative;
+    z-index: 1;
+    height: 100%;
+
+    .logo-container {
+        margin: 50px 40px;
     
-    .logo-img {
-        cursor: pointer;
-        height: 32px;
-    }
-
-    .close-button {
-        cursor: pointer;
-        position: relative;
-        width: 32px;
-        height: 32px;
-    }
+        .logo-img-container {
+            display: flex;
+            justify-content: space-between;
+            width: 100%;
+            margin-bottom: 50px;
+        }
+        
+        .logo-img {
+            cursor: pointer;
+            height: 32px;
+        }
     
-    .close-button::before, .close-button::after {
-        content: '';
-
-        position: absolute;
-        top: 50%;
-        left: 0;
-
-        width: 50%;
-        height: 3px;
-
-        background-color: #fff;
+        .close-button {
+            cursor: pointer;
+            position: relative;
+            width: 32px;
+            height: 32px;
+        }
+        
+        .close-button::before, .close-button::after {
+            content: '';
+    
+            position: absolute;
+            top: 50%;
+            left: 0;
+    
+            width: 50%;
+            height: 3px;
+    
+            background-color: #fff;
+        }
+    
+        .close-button::before {
+            transform: rotate(45deg);
+        }
+    
+        .close-button::after {
+            transform: rotate(-45deg);
+        }
     }
 
-    .close-button::before {
-        transform: rotate(45deg);
+    .export-container {
+        cursor: pointer;
+        margin: 50px 40px;
     }
+}        
 
-    .close-button::after {
-        transform: rotate(-45deg);
-    }
+.decoration-img {
+    position: fixed;
+    z-index: 0;
+    bottom: 0;
+    left: 0;
+
+    width: 320px;
 }

@@ -1,0 +1,26 @@
+<div class="view-container">
+    <!-- Title and date picker -->
+    <div class="title-container" id="financialReportTitleContainer">
+        <div class="title-wrapper" id="financialReportTitleWrapper">
+            <div class="flex-column-center">
+                <p class="bigger-text">Relatório Financeiro</p>
+            </div>
+        </div>
+        <!-- Date picker -->
+        <mat-form-field class="date-picker" id="financialReportDatePicker">
+            <input matInput [max]="maxDate" [matDatepicker]="picker" [formControl]="date">
+            <mat-datepicker-toggle matIconSuffix [for]="picker">
+                <mat-icon matDatepickerToggleIcon>keyboard_arrow_down</mat-icon>
+            </mat-datepicker-toggle>
+            <mat-datepicker [touchUi]="isMobile"
+                            #picker
+                            startView="year"
+                            (monthSelected)="setMonthAndYear($event, picker)"
+                            panelClass="example-month-picker">
+            </mat-datepicker>
+        </mat-form-field>
+    </div>
+
+    <!-- No response screen -->
+    <app-no-data [noData]="true"></app-no-data>
+</div>

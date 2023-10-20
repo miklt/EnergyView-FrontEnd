@@ -14,6 +14,7 @@ export class RelatorioDeConsumoDiarioComponent implements OnInit {
   loading: boolean = true;
   date: FormControl<Date|null> = new FormControl<Date>(new Date()); // Initializes date with today's date
   maxDate: Date = new Date();
+  isMobile: boolean = false;
 
   constructor(private dataService: DataService, private sanitizer: DomSanitizer) { }
 
@@ -30,6 +31,15 @@ export class RelatorioDeConsumoDiarioComponent implements OnInit {
 
   // Updates the size of elements for responsiveness
   updateSizes(): void {
+    // Gets the current window width
+    const screenWidth = window.innerWidth;
+    // Checks if the width is smaller than 800px and updates the sidenav accordingly
+    if (screenWidth < 800) {
+      this.isMobile = true;
+    }
+    else {
+      this.isMobile = false;
+    }
     // Updates title and date picker
     const titleContainer = document.getElementById('dailyConsumptionTitleContainer');
     const titleWrapper = document.getElementById('dailyConsumptionTitleWrapper');

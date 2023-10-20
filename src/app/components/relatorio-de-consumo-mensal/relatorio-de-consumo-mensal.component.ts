@@ -37,6 +37,7 @@ export const MY_FORMATS = {
 export class RelatorioDeConsumoMensalComponent implements OnInit {
   date: FormControl<Moment|null> = new FormControl(moment());
   maxDate: Moment = moment();
+  isMobile: boolean = false;
 
   constructor(private elementRef: ElementRef) { }
 
@@ -52,6 +53,15 @@ export class RelatorioDeConsumoMensalComponent implements OnInit {
 
   // Updates the size of elements for responsiveness
   updateSizes(): void {
+    // Gets the current window width
+    const screenWidth = window.innerWidth;
+    // Checks if the width is smaller than 800px and updates the sidenav accordingly
+    if (screenWidth < 800) {
+      this.isMobile = true;
+    }
+    else {
+      this.isMobile = false;
+    }
     // Updates title and date picker
     const titleContainer = document.getElementById('monthlyConsumptionTitleContainer');
     const titleWrapper = document.getElementById('monthlyConsumptionTitleWrapper');

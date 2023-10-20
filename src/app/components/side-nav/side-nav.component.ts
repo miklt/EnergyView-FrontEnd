@@ -11,9 +11,13 @@ export class SideNavComponent {
   demandaAtual = 702;
 
   // Emits the event to notify the parent component if on mobile
-  closeSideNav() {
+  closeSideNav(): void {
     if (this.isMobile) {
       this.closeSideNavEvent.emit();
     }
+  }
+
+  downloadData(): void {
+    alert('Em desenvolvimento.');
   }
 }

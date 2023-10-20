@@ -11,6 +11,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import moment, { Moment } from 'moment';
 import { Viewport } from 'karma-viewport/dist/adapter/viewport';
+import { NoDataComponent } from '../no-data/no-data.component';
 
 declare const viewport: Viewport;
 
@@ -33,7 +34,8 @@ describe('RelatorioDeConsumoMensalComponent', () => {
         MatProgressSpinnerModule
       ],
       declarations: [
-        RelatorioDeConsumoMensalComponent
+        RelatorioDeConsumoMensalComponent,
+        NoDataComponent
       ]
     }).compileComponents();
 
@@ -67,6 +69,7 @@ describe('RelatorioDeConsumoMensalComponent', () => {
     if (datePicker && titleWrapper) {
       expect(datePicker.classList.contains('wide')).toBeFalsy();
       expect(titleWrapper.classList.contains('wide')).toBeFalsy();
+      expect(component.isMobile).toBeFalsy();
     }
     else {
       fail('datePicker and titleWrapper are not defined');
@@ -85,6 +88,7 @@ describe('RelatorioDeConsumoMensalComponent', () => {
     if (datePicker && titleWrapper) {
       expect(datePicker.classList.contains('wide')).toBeTruthy();
       expect(titleWrapper.classList.contains('wide')).toBeTruthy();
+      expect(component.isMobile).toBeTruthy();
     }
     else {
       fail('datePicker and titleWrapper are not defined');
