@@ -54,85 +54,122 @@ describe('RelatorioDeConsumoDiarioComponent', () => {
     expect(component).toBeTruthy();
   });
 
+  // 
+  // onResize
+  // 
+
   it('should call updateSizes when window is resized', () => {
-    // Spy to check if it's called
     spyOn(component, 'updateSizes');
-    // Dispatch resize event
+    
     window.dispatchEvent(new Event('resize'));
-    // Check if updateSizes was called
+    
     expect(component.updateSizes).toHaveBeenCalled();
   });
 
-  it('should update sizes for responsiveness when titleContainer width > 600px', fakeAsync(() => {
-    // Create mock elements
+  // 
+  // updateSizes
+  // 
+
+  it('should handle missing elements in updateSizes', () => {
+    // Simulate the absence of elements by setting them to null
+    spyOn(document, 'getElementById').and.returnValue(null);
+  
+    try {
+      component.updateSizes();
+      fail('Expected an error to be thrown.');
+    }
+    catch (error) {
+      expect((error as Error).message).toBe('One of the following HTMLElements does not exist: dailyConsumptionTitleContainer, dailyConsumptionTitleWrapper, dailyConsumptionDatePicker.');
+    }
+  });
+  
+
+  it('should update sizes for responsiveness when titleContainer width > 600px', () => {
+    // Create mock elements and append them to the HTML document
     const chartConsumoAcumulado = document.createElement('div');
     chartConsumoAcumulado.id = 'chartConsumoAcumulado';
-    document.body.appendChild(chartConsumoAcumulado); // Adds it to the body of the HTML document
+    document.body.appendChild(chartConsumoAcumulado);
+
     const chartCurvaDeCarga = document.createElement('div');
     chartCurvaDeCarga.id = 'chartCurvaDeCarga';
-    document.body.appendChild(chartCurvaDeCarga); // Adds it to the body of the HTML document
+    document.body.appendChild(chartCurvaDeCarga);
+
     const titleWrapper = document.getElementById('dailyConsumptionTitleWrapper');
     const datePicker = document.getElementById('dailyConsumptionDatePicker');
-    // Set the viewport size
+
     viewport.set('desktop');
-    // Spy to check if it's called
-    spyOn(component, 'executeChartsScripts');
-    // Call the updateSizes method
+
     component.updateSizes();
-    // Advance the virtual clock to allow asynchronous operations to complete
-    tick(101);
-    // Expectations
+
     if (datePicker && titleWrapper) {
       expect(datePicker.classList.contains('wide')).toBeFalsy();
       expect(titleWrapper.classList.contains('wide')).toBeFalsy();
-      expect(component.executeChartsScripts).toHaveBeenCalled();
     }
     else {
       fail('datePicker and titleWrapper are not defined');
     }
-  }));
+  });
 
-  it('should update sizes for responsiveness when titleContainer width <= 600px', fakeAsync(() => {
-    // Create mock elements
+  it('should update sizes for responsiveness when titleContainer width <= 600px', () => {
+    // Create mock elements and append them to the HTML document
     const chartConsumoAcumulado = document.createElement('div');
     chartConsumoAcumulado.id = 'chartConsumoAcumulado';
-    document.body.appendChild(chartConsumoAcumulado); // Adds it to the body of the HTML document
+    document.body.appendChild(chartConsumoAcumulado);
+
     const chartCurvaDeCarga = document.createElement('div');
     chartCurvaDeCarga.id = 'chartCurvaDeCarga';
-    document.body.appendChild(chartCurvaDeCarga); // Adds it to the body of the HTML document
+    document.body.appendChild(chartCurvaDeCarga);
+
     const titleWrapper = document.getElementById('dailyConsumptionTitleWrapper');
     const datePicker = document.getElementById('dailyConsumptionDatePicker');
-    // Set the viewport size
+
     viewport.set('mobile');
-    // Spy to check if it's called
-    spyOn(component, 'executeChartsScripts');
-    // Call the updateSizes method
+
     component.updateSizes();
-    // Advance the virtual clock to allow asynchronous operations to complete
-    tick(101);
-    // Expectations
+    
     if (datePicker && titleWrapper) {
       expect(datePicker.classList.contains('wide')).toBeTruthy();
       expect(titleWrapper.classList.contains('wide')).toBeTruthy();
-      expect(component.executeChartsScripts).toHaveBeenCalled();
     }
     else {
       fail('datePicker and titleWrapper are not defined');
     }
-  }));
+  });
+
+  // 
+  // onDateSelect
+  // 
+
+  it('should handle missing dateRawValue in onDateSelect', () => {
+    // Simulate the absence of dateRawValue
+    spyOn(component.date, 'getRawValue').and.returnValue(null);
+  
+    try {
+      component.onDateSelect();
+      fail('Expected an error to be thrown.');
+    }
+    catch (error) {
+      expect((error as Error).message).toBe('dateRawValue does not exist.');
+    }
+  });
 
   it('should call getData with the formatted date when onDateSelect is called', () => {
-    // Mock the necessary dependencies or services (e.g., this.date.getRawValue(), this.getData())
-    spyOn(component.date, 'getRawValue').and.returnValue(new Date('2023-9-14')); // Mock the date value
+    // Mock getRawValue's return
+    spyOn(component.date, 'getRawValue').and.returnValue(new Date('2023-9-14'));
+
     spyOn(component, 'getData');
-    // Call the onDateSelect function
+    
     component.onDateSelect();
-    // Expect that the getData method was called with the formatted date string '2023-09-14'
+    
     expect(component.getData).toHaveBeenCalledWith('2023-09-14');
   });
 
+  // 
+  // getDailyConsumptionData
+  // 
+
   it('should load data', fakeAsync(() => {
-    // Mock the necessary dependencies
+    // Mock getDailyConsumptionData's return
     const responseData = {
       'consumo-acumulado': '<div>Consumo Acumulado Chart</div>',
       'curva-de-carga': '<div>Curva de Carga Chart</div>',
@@ -151,15 +188,14 @@ describe('RelatorioDeConsumoDiarioComponent', () => {
       'consumo-total-c': 0,
       'variacao-consumo-total-c': 0
     };
-    const dateString = '2023-09-14';
-    // Spy to check if it's called
     spyOn(service, 'getDailyConsumptionData').and.returnValue(of(responseData));
     spyOn(component, 'executeChartsScripts');
-    // Call getData
+    
+    const dateString = '2023-09-14';
     component.getData(dateString);
-    // Advance the fakeAsync scheduler
+
     tick(); 
-    // Expectations
+
     expect(service.getDailyConsumptionData).toHaveBeenCalledWith(dateString);
     expect(component.data).toEqual(responseData);
     expect(component.loading).toBe(false);
@@ -167,50 +203,72 @@ describe('RelatorioDeConsumoDiarioComponent', () => {
   }));
 
   it('should not load data', fakeAsync(() => {
-    // Mock the necessary dependencies
-    const dateString = '2023-09-14';
-    // Spy to check if it's called
+    // Mock getDailyConsumptionData's return
     spyOn(service, 'getDailyConsumptionData').and.returnValue(
       new Observable((observer) => {
         observer.error(new Error('Some error occurred'));
       })
     );
-    // Call getData
+
+    const dateString = '2023-09-14';
     component.getData(dateString);
-    // Advance the fakeAsync scheduler
-    tick(1); 
-    // Expectations
+
+    tick(); 
+
     expect(service.getDailyConsumptionData).toHaveBeenCalledWith(dateString);
-    expect(component.data).toEqual(null); // Data should not be set
-    expect(component.loading).toBe(false); // Loading should be false
+    expect(component.data).toEqual(null);
+    expect(component.loading).toBe(false);
+  }));
+
+  // 
+  // executeChartsScripts
+  // 
+
+  it('should handle missing chart elements in executeChartsScripts', fakeAsync(() => {
+    // Simulate the absence of elements by setting them to null
+    spyOn(document, 'getElementById').and.returnValue(null);
+  
+    try {
+      component.executeChartsScripts();
+
+      tick();
+
+      fail('Expected an error to be thrown.');
+    }
+    catch (error) {
+      expect((error as Error).message).toBe('One of the following HTMLElements does not exist: chartConsumoAcumulado, chartCurvaDeCarga.');
+    }
   }));
 
   it('should execute the scripts', fakeAsync(() => {
-    // Create test elements to be modified by the scripts
+    // Create test elements to be modified by the scripts and append them to the HTML document
     const testElementConsumoAcumulado = document.createElement('div');
     testElementConsumoAcumulado.id = 'test-element-consumo-acumulado';
     const testElementCurvaDeCarga = document.createElement('div');
     testElementCurvaDeCarga.id = 'test-element-curva-de-carga';
     document.body.appendChild(testElementConsumoAcumulado);
     document.body.appendChild(testElementCurvaDeCarga);
-    // Mock ConsumoAcumulado
+
+    // Mock ConsumoAcumulado's content
     const chartConsumoAcumulado = document.getElementById('chartConsumoAcumulado');
     if (chartConsumoAcumulado) {
       const scriptElementConsumoAcumulado = document.createElement('script');
       scriptElementConsumoAcumulado.textContent = 'document.getElementById("test-element-consumo-acumulado").textContent = "Script executed";';
       chartConsumoAcumulado.appendChild(scriptElementConsumoAcumulado);
     }
-    // Mock CurvaDeCarga
+
+    // Mock CurvaDeCarga's content
     const chartCurvaDeCarga = document.getElementById('chartCurvaDeCarga');
     if (chartCurvaDeCarga) {
       const scriptElementCurvaDeCarga = document.createElement('script');
       scriptElementCurvaDeCarga.textContent = 'document.getElementById("test-element-curva-de-carga").textContent = "Script executed";';
       chartCurvaDeCarga.appendChild(scriptElementCurvaDeCarga);
     }
-    // Call the function to be tested
+    
     component.executeChartsScripts();
+
     tick();
-    // Check if the script modified the DOM as expected
+    
     expect(testElementConsumoAcumulado.textContent).toBe('Script executed');
     expect(testElementConsumoAcumulado.textContent).toBe('Script executed');
   }));

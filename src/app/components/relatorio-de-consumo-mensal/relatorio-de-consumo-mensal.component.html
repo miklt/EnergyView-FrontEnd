@@ -7,10 +7,10 @@
             </div>
             <div class="flex-row-start column-gap-20px">
                 <div class="flex-column-center">
-                    <p class="normal-text dark-grey cursor-pointer hover-link" routerLinkActive="underline" routerLink="/relatorio-de-consumo/diario">Diário</p>
+                    <p class="medium-text dark-grey cursor-pointer hover-link" routerLinkActive="underline" routerLink="/relatorio-de-consumo/diario">Diário</p>
                 </div>
                 <div class="flex-column-center">
-                    <p class="normal-text dark-grey cursor-pointer hover-link" routerLinkActive="underline" routerLink="/relatorio-de-consumo/mensal">Mensal</p>
+                    <p class="medium-text dark-grey cursor-pointer hover-link" routerLinkActive="underline" routerLink="/relatorio-de-consumo/mensal">Mensal</p>
                 </div>
             </div>
         </div>
@@ -23,7 +23,7 @@
             <mat-datepicker [touchUi]="isMobile"
                             #picker
                             startView="year"
-                            (monthSelected)="setMonthAndYear($event, picker)"
+                            (monthSelected)="setDateFormControl($event, picker)"
                             panelClass="example-month-picker">
             </mat-datepicker>
         </mat-form-field>

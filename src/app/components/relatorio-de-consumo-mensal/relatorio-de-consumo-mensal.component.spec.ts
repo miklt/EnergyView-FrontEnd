@@ -49,23 +49,43 @@ describe('RelatorioDeConsumoMensalComponent', () => {
     expect(component).toBeTruthy();
   });
 
+  // 
+  // onResize
+  // 
+
   it('should call updateSizes when window is resized', () => {
-    // Spy to check if it's called
     spyOn(component, 'updateSizes');
-    // Dispatch resize event
+
     window.dispatchEvent(new Event('resize'));
-    // Check if updateSizes was called
+
     expect(component.updateSizes).toHaveBeenCalled();
+  });
+
+  // 
+  // updateSizes
+  // 
+
+  it('should handle missing elements in updateSizes', () => {
+    // Simulate the absence of elements by setting them to null
+    spyOn(document, 'getElementById').and.returnValue(null);
+  
+    try {
+      component.updateSizes();
+      fail('Expected an error to be thrown.');
+    }
+    catch (error) {
+      expect((error as Error).message).toBe('One of the following HTMLElements does not exist: monthlyConsumptionTitleContainer, monthlyConsumptionTitleWrapper, monthlyConsumptionDatePicker.');
+    }
   });
 
   it('should update sizes for responsiveness when titleContainer width > 600px', () => {
     const titleWrapper = document.getElementById('monthlyConsumptionTitleWrapper');
     const datePicker = document.getElementById('monthlyConsumptionDatePicker');
-    // Set the viewport size
+
     viewport.set('desktop');
-    // Call the updateSizes method
+
     component.updateSizes();
-    // Expectations
+
     if (datePicker && titleWrapper) {
       expect(datePicker.classList.contains('wide')).toBeFalsy();
       expect(titleWrapper.classList.contains('wide')).toBeFalsy();
@@ -79,12 +99,11 @@ describe('RelatorioDeConsumoMensalComponent', () => {
   it('should update sizes for responsiveness when titleContainer width <= 600px', () => {
     const titleWrapper = document.getElementById('monthlyConsumptionTitleWrapper');
     const datePicker = document.getElementById('monthlyConsumptionDatePicker');
-    // Set the viewport size
+
     viewport.set('mobile');
-    // Call the updateSizes method
+
     component.updateSizes();
-    // Advance the virtual clock to allow asynchronous operations to complete
-    // Expectations
+
     if (datePicker && titleWrapper) {
       expect(datePicker.classList.contains('wide')).toBeTruthy();
       expect(titleWrapper.classList.contains('wide')).toBeTruthy();
@@ -95,20 +114,21 @@ describe('RelatorioDeConsumoMensalComponent', () => {
     }
   });
 
+  // 
+  // setDateFormControl
+  // 
+
   it('should set the month and year correctly', () => {
-    // Create a moment object to represent the normalizedMonthAndYear
-    const normalizedMonthAndYear = moment({ month: 5, year: 2023 });
-    // Create a moment object to represent the initial date value
+    const inputMoment = moment({ month: 5, year: 2023 });
     const initialDateValue = moment({ month: 2, year: 2022 });
-    // Set the initial date value in your component
+
     component.date.setValue(initialDateValue);
-    // Call the setMonthAndYear function
-    component.setMonthAndYear(normalizedMonthAndYear, datepicker);
-    // Expectations
-    // Check if component.date.value is defined before accessing its properties
+
+    component.setDateFormControl(inputMoment, datepicker);
+
     if (component.date.value) {
-      expect(component.date.value.month()).toEqual(normalizedMonthAndYear.month());
-      expect(component.date.value.year()).toEqual(normalizedMonthAndYear.year());
+      expect(component.date.value.month()).toEqual(inputMoment.month());
+      expect(component.date.value.year()).toEqual(inputMoment.year());
     }
     else {
       fail('Date value is not defined');

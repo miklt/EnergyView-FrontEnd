@@ -15,7 +15,7 @@
             <mat-datepicker [touchUi]="isMobile"
                             #picker
                             startView="year"
-                            (monthSelected)="setMonthAndYear($event, picker)"
+                            (monthSelected)="setDateFormControl($event, picker)"
                             panelClass="example-month-picker">
             </mat-datepicker>
         </mat-form-field>

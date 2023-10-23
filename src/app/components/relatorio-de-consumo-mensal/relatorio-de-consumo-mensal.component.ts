@@ -1,22 +1,21 @@
-import { Component, ViewEncapsulation, OnInit, ElementRef, HostListener } from '@angular/core';
+import { Component, OnInit, ElementRef, HostListener } from '@angular/core';
 import { FormControl } from '@angular/forms';
 import { MomentDateAdapter, MAT_MOMENT_DATE_ADAPTER_OPTIONS } from '@angular/material-moment-adapter';
 import { DateAdapter, MAT_DATE_FORMATS, MAT_DATE_LOCALE } from '@angular/material/core';
 import { MatDatepicker } from '@angular/material/datepicker';
 import { default as _rollupMoment, Moment } from 'moment';
 
+// Alias the Moment.js library as 'moment' for easier usage throughout the component.
 const moment = _rollupMoment;
 
+// Define custom date formats for parsing and displaying dates.
 export const MY_FORMATS = {
   parse: {
-    dateInput: 'MM/YYYY',
+    dateInput: 'MM/YYYY'
   },
   display: {
-    dateInput: 'MM/YYYY',
-    monthYearLabel: 'MMM YYYY',
-    dateA11yLabel: 'LL',
-    monthYearA11yLabel: 'MMMM YYYY',
-  },
+    dateInput: 'MM/YYYY'
+  }
 };
 
 @Component({
@@ -24,19 +23,21 @@ export const MY_FORMATS = {
   templateUrl: './relatorio-de-consumo-mensal.component.html',
   styleUrls: ['./relatorio-de-consumo-mensal.component.scss'],
   providers: [
+    // Configure providers for date handling in the component.
     {
       provide: DateAdapter,
       useClass: MomentDateAdapter,
-      deps: [MAT_DATE_LOCALE, MAT_MOMENT_DATE_ADAPTER_OPTIONS],
+      deps: [MAT_DATE_LOCALE, MAT_MOMENT_DATE_ADAPTER_OPTIONS]
     },
-
-    {provide: MAT_DATE_FORMATS, useValue: MY_FORMATS},
-  ],
-  encapsulation: ViewEncapsulation.None,
+    {
+      provide: MAT_DATE_FORMATS,
+      useValue: MY_FORMATS
+    }
+  ]
 })
 export class RelatorioDeConsumoMensalComponent implements OnInit {
-  date: FormControl<Moment|null> = new FormControl(moment());
-  maxDate: Moment = moment();
+  date: FormControl<Moment|null> = new FormControl(moment()); // Initialize date with today's date
+  maxDate: Moment = moment(); // Initialize maxDate with today's date
   isMobile: boolean = false;
 
   constructor(private elementRef: ElementRef) { }
@@ -45,52 +46,43 @@ export class RelatorioDeConsumoMensalComponent implements OnInit {
     this.updateSizes();
   }
 
-  // Listens to the resizing of the window
   @HostListener('window:resize')
   onResize(): void {
     this.updateSizes();
   }
 
-  // Updates the size of elements for responsiveness
   updateSizes(): void {
-    // Gets the current window width
     const screenWidth = window.innerWidth;
-    // Checks if the width is smaller than 800px and updates the sidenav accordingly
+
     if (screenWidth < 800) {
       this.isMobile = true;
     }
     else {
       this.isMobile = false;
     }
-    // Updates title and date picker
+
     const titleContainer = document.getElementById('monthlyConsumptionTitleContainer');
     const titleWrapper = document.getElementById('monthlyConsumptionTitleWrapper');
     const datePicker = document.getElementById('monthlyConsumptionDatePicker');
-    if (titleContainer && datePicker && titleWrapper) {
-      // Checks if the title container's width is less than or equal to 600px
-      if (titleContainer.clientWidth <= 600) {
-        datePicker.classList.add('wide');
-        titleWrapper.classList.add('wide');
-      } 
-      else {
-        datePicker.classList.remove('wide');
-        titleWrapper.classList.remove('wide');
-      }
+
+    if (!titleContainer || !datePicker || !titleWrapper) {
+      throw new Error('One of the following HTMLElements does not exist: monthlyConsumptionTitleContainer, monthlyConsumptionTitleWrapper, monthlyConsumptionDatePicker.');
+    }
+
+    // Update the title and date picker according to the title's container size, not screen
+    if (titleContainer.clientWidth <= 600) {
+      datePicker.classList.add('wide');
+      titleWrapper.classList.add('wide');
+    } 
+    else {
+      datePicker.classList.remove('wide');
+      titleWrapper.classList.remove('wide');
     }
   }
 
-  // Sets the month and year of the MatDatepicker control to the provided values.
-  setMonthAndYear(normalizedMonthAndYear: Moment, datepicker: MatDatepicker<Moment>): void {
-    // Gets the current value of the MatDatepicker control
-    const ctrlValue = this.date.value;
-    if (ctrlValue) {
-      // Sets the month and year to the ones of the normalizedMonthAndYear
-      ctrlValue.month(normalizedMonthAndYear.month());
-      ctrlValue.year(normalizedMonthAndYear.year());
-      // Updates the value of the MatDatepicker control with the new month and year
-      this.date.setValue(ctrlValue);
-      // Closes the MatDatepicker after setting the new values
-      datepicker.close();
-    }
+  setDateFormControl(inputMoment: Moment, datepicker: MatDatepicker<Moment>): void {
+    this.date.setValue(inputMoment);
+
+    datepicker.close();
   }
 }
