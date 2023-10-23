@@ -11,7 +11,6 @@ import '@angular/common/locales/global/pt';
 // Angular Material
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatSidenavModule } from '@angular/material/sidenav';
-import { MatBadgeModule } from '@angular/material/badge';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatIconModule } from '@angular/material/icon';
@@ -46,7 +45,6 @@ import { SobreComponent } from './components/sobre/sobre.component';
     BrowserAnimationsModule,
     MatSidenavModule,
     MatDatepickerModule,
-    MatBadgeModule,
     MatFormFieldModule,
     MatIconModule,
     MatInputModule,
