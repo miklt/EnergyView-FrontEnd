@@ -8,10 +8,9 @@ import { Component, EventEmitter, Input, Output } from '@angular/core';
 export class SideNavComponent {
   @Input() isMobile: boolean = false;
   @Output() closeSideNavEvent: EventEmitter<void> = new EventEmitter<void>();
-  demandaAtual = 702;
+  demandaAtual = 1386;
 
-  // Emits the event to notify the parent component if on mobile
-  closeSideNav(): void {
+  closeSideNavIfOnMobile(): void {
     if (this.isMobile) {
       this.closeSideNavEvent.emit();
     }

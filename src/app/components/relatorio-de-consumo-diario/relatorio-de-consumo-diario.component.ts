@@ -121,7 +121,6 @@ export class RelatorioDeConsumoDiarioComponent implements OnInit {
         const scriptFunction = new Function(String(curvaDeCargaChartScripts[i].textContent));
         scriptFunction();
       }
-
     });
   }
 }

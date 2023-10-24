@@ -1,5 +1,4 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-
 import { SideNavComponent } from './side-nav.component';
 
 describe('SideBarComponent', () => {
@@ -20,26 +19,28 @@ describe('SideBarComponent', () => {
     expect(component).toBeTruthy();
   });
 
+  // 
+  // closeSideNavIfOnMobile
+  // 
+
   it('should emit the closeSideNavEvent', () => {
-    // Create a spy on the EventEmitter
     spyOn(component.closeSideNavEvent, 'emit');
 
-    // Call the closeSideNav function
     component.isMobile = true;
-    component.closeSideNav();
+    component.closeSideNavIfOnMobile();
 
-    // Expect that the emit method of the EventEmitter was called with no arguments
     expect(component.closeSideNavEvent.emit).toHaveBeenCalledWith();
   });
 
+  // 
+  // downloadData
+  // 
+
   it('should show an alert with the message "Em desenvolvimento."', () => {
-    // Mock the window.alert function using spyOn.
     const alertSpy = spyOn(window, 'alert');
 
-    // Call the downloadData method to trigger the alert.
     component.downloadData();
 
-    // Expect that window.alert was called with the expected message.
     expect(alertSpy).toHaveBeenCalledWith('Em desenvolvimento.');
   });
 });

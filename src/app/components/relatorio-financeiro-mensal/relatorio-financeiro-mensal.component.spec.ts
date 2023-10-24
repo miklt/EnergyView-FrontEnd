@@ -66,7 +66,7 @@ describe('RelatorioFinanceiroMensalComponent', () => {
   // 
 
   it('should handle missing elements in updateSizes', () => {
-    // Simulate the absence of elements by setting them to null
+    // Simulate the absence of elements
     spyOn(document, 'getElementById').and.returnValue(null);
   
     try {
