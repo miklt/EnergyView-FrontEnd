@@ -25,10 +25,10 @@
     </div>
 
     <!-- Loading -->
-    <app-loader [loading]="loading"></app-loader>
+    <app-loader [loading]="loading" />
     
     <!-- No response screen -->
-    <app-no-data [noData]="!data && !loading"></app-no-data>
+    <app-no-data [noData]="!data && !loading" />
 
     <div *ngIf="data && !loading">
         <!-- Containers -->
@@ -149,13 +149,11 @@
         <div class="containers-container">
             <!-- Consumo acumulado -->
             <div class="container">
-                <p class="medium-text mb-20px">Consumo acumulado</p>
-                <div id="chartConsumoAcumulado" [innerHTML]="data['consumo-acumulado']"></div>
+                <app-chart title="Consumo acumulado" [innerHTML]="data['consumo-acumulado']" />
             </div>
             <!-- Curva de carga -->
             <div class="container">
-                <p class="medium-text mb-20px">Curva de carga</p>
-                <div id="chartCurvaDeCarga" [innerHTML]="data['curva-de-carga']"></div>
+                <app-chart title="Curva de carga" [innerHTML]="data['curva-de-carga']" />
             </div>
         </div>
     </div>

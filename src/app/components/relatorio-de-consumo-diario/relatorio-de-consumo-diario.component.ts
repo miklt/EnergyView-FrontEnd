@@ -87,39 +87,10 @@ export class RelatorioDeConsumoDiarioComponent implements OnInit {
         this.data['curva-de-carga'] = this.sanitizer.bypassSecurityTrustHtml(String(this.data['curva-de-carga']));
 
         this.loading = false;
-
-        this.executeChartsScripts();
       },
       error: () => {
         this.data = null;
         this.loading = false;
-      }
-    });
-  }
-
-  executeChartsScripts(): void {
-    // Use setTimeout to wait for the view to finish loading
-    setTimeout(() => {
-      const consumoAcumuladoChart = document.getElementById('chartConsumoAcumulado');
-      const curvaDeCargaChart = document.getElementById('chartCurvaDeCarga');
-
-      if (!consumoAcumuladoChart || !curvaDeCargaChart) {
-        throw new Error('One of the following HTMLElements does not exist: chartConsumoAcumulado, chartCurvaDeCarga.');
-      }
-
-      // Get all script elements within the consumoAcumuladoChart and curvaDeCargaChart HTMLElements
-      const consumoAcumuladoChartScripts = consumoAcumuladoChart.getElementsByTagName('script');
-      const curvaDeCargaChartScripts = curvaDeCargaChart.getElementsByTagName('script');
-
-      // Loop through each script element executing them for both of the HTMLElements
-      for (let i = 0; i < consumoAcumuladoChartScripts.length; i++) {
-        const scriptFunction = new Function(String(consumoAcumuladoChartScripts[i].textContent));
-        scriptFunction();
-      }
-
-      for (let i = 0; i < curvaDeCargaChartScripts.length; i++) {
-        const scriptFunction = new Function(String(curvaDeCargaChartScripts[i].textContent));
-        scriptFunction();
       }
     });
   }

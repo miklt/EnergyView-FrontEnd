@@ -1,7 +1,7 @@
 <mat-sidenav-container>
   <!-- Left-positioned side bar -->
   <mat-sidenav class="side-nav" #sidenav [mode]="sideNavMode" [opened]="sideNavIsOpened">
-    <app-side-nav [isMobile]="isMobile" (closeSideNavEvent)="closeSidenav()"></app-side-nav>
+    <app-side-nav [isMobile]="isMobile" (closeSideNavEvent)="closeSidenav()" />
   </mat-sidenav>
   <!-- Router outlet (content) -->
   <mat-sidenav-content class="content">
@@ -11,6 +11,6 @@
       <img class="logo-img cursor-pointer" src="/assets/logo.png" alt="Logo do EnergyView" routerLink="">
     </div>
     <!-- Content -->
-    <router-outlet></router-outlet>
+    <router-outlet />
   </mat-sidenav-content>
 </mat-sidenav-container>

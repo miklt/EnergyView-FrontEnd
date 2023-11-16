@@ -14,6 +14,7 @@ import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { DataService } from 'src/app/services/data.service';
 import { Observable, of } from 'rxjs';
 import { Viewport } from 'karma-viewport/dist/adapter/viewport';
+import { ChartComponent } from '../chart/chart.component';
 declare const viewport: Viewport;
 
 describe('RelatorioDeConsumoDiarioComponent', () => {
@@ -37,7 +38,8 @@ describe('RelatorioDeConsumoDiarioComponent', () => {
       declarations: [
         RelatorioDeConsumoDiarioComponent,
         LoaderComponent,
-        NoDataComponent
+        NoDataComponent,
+        ChartComponent
       ],
       providers: [
         DataService
@@ -85,15 +87,6 @@ describe('RelatorioDeConsumoDiarioComponent', () => {
   
 
   it('should update sizes for responsiveness when titleContainer width > 600px', () => {
-    // Create mock elements and append them to the HTML document
-    const chartConsumoAcumulado = document.createElement('div');
-    chartConsumoAcumulado.id = 'chartConsumoAcumulado';
-    document.body.appendChild(chartConsumoAcumulado);
-
-    const chartCurvaDeCarga = document.createElement('div');
-    chartCurvaDeCarga.id = 'chartCurvaDeCarga';
-    document.body.appendChild(chartCurvaDeCarga);
-
     const titleWrapper = document.getElementById('dailyConsumptionTitleWrapper');
     const datePicker = document.getElementById('dailyConsumptionDatePicker');
 
@@ -111,15 +104,6 @@ describe('RelatorioDeConsumoDiarioComponent', () => {
   });
 
   it('should update sizes for responsiveness when titleContainer width <= 600px', () => {
-    // Create mock elements and append them to the HTML document
-    const chartConsumoAcumulado = document.createElement('div');
-    chartConsumoAcumulado.id = 'chartConsumoAcumulado';
-    document.body.appendChild(chartConsumoAcumulado);
-
-    const chartCurvaDeCarga = document.createElement('div');
-    chartCurvaDeCarga.id = 'chartCurvaDeCarga';
-    document.body.appendChild(chartCurvaDeCarga);
-
     const titleWrapper = document.getElementById('dailyConsumptionTitleWrapper');
     const datePicker = document.getElementById('dailyConsumptionDatePicker');
 
@@ -189,7 +173,6 @@ describe('RelatorioDeConsumoDiarioComponent', () => {
       'variacao-consumo-total-c': 0
     };
     spyOn(service, 'getDailyConsumptionData').and.returnValue(of(responseData));
-    spyOn(component, 'executeChartsScripts');
     
     const dateString = '2023-09-14';
     component.getData(dateString);
@@ -199,7 +182,6 @@ describe('RelatorioDeConsumoDiarioComponent', () => {
     expect(service.getDailyConsumptionData).toHaveBeenCalledWith(dateString);
     expect(component.data).toEqual(responseData);
     expect(component.loading).toBe(false);
-    expect(component.executeChartsScripts).toHaveBeenCalled();
   }));
 
   it('should not load data', fakeAsync(() => {
@@ -218,58 +200,5 @@ describe('RelatorioDeConsumoDiarioComponent', () => {
     expect(service.getDailyConsumptionData).toHaveBeenCalledWith(dateString);
     expect(component.data).toEqual(null);
     expect(component.loading).toBe(false);
-  }));
-
-  // 
-  // executeChartsScripts
-  // 
-
-  it('should handle missing chart elements in executeChartsScripts', fakeAsync(() => {
-    // Simulate the absence of elements
-    spyOn(document, 'getElementById').and.returnValue(null);
-  
-    try {
-      component.executeChartsScripts();
-
-      tick();
-
-      fail('Expected an error to be thrown.');
-    }
-    catch (error) {
-      expect((error as Error).message).toBe('One of the following HTMLElements does not exist: chartConsumoAcumulado, chartCurvaDeCarga.');
-    }
-  }));
-
-  it('should execute the scripts', fakeAsync(() => {
-    // Create test elements to be modified by the scripts and append them to the HTML document
-    const testElementConsumoAcumulado = document.createElement('div');
-    testElementConsumoAcumulado.id = 'test-element-consumo-acumulado';
-    const testElementCurvaDeCarga = document.createElement('div');
-    testElementCurvaDeCarga.id = 'test-element-curva-de-carga';
-    document.body.appendChild(testElementConsumoAcumulado);
-    document.body.appendChild(testElementCurvaDeCarga);
-
-    // Mock ConsumoAcumulado's content
-    const chartConsumoAcumulado = document.getElementById('chartConsumoAcumulado');
-    if (chartConsumoAcumulado) {
-      const scriptElementConsumoAcumulado = document.createElement('script');
-      scriptElementConsumoAcumulado.textContent = 'document.getElementById("test-element-consumo-acumulado").textContent = "Script executed";';
-      chartConsumoAcumulado.appendChild(scriptElementConsumoAcumulado);
-    }
-
-    // Mock CurvaDeCarga's content
-    const chartCurvaDeCarga = document.getElementById('chartCurvaDeCarga');
-    if (chartCurvaDeCarga) {
-      const scriptElementCurvaDeCarga = document.createElement('script');
-      scriptElementCurvaDeCarga.textContent = 'document.getElementById("test-element-curva-de-carga").textContent = "Script executed";';
-      chartCurvaDeCarga.appendChild(scriptElementCurvaDeCarga);
-    }
-    
-    component.executeChartsScripts();
-
-    tick();
-    
-    expect(testElementConsumoAcumulado.textContent).toBe('Script executed');
-    expect(testElementConsumoAcumulado.textContent).toBe('Script executed');
   }));
 });
