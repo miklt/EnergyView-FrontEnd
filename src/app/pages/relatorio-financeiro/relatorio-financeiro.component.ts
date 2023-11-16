@@ -19,9 +19,9 @@ export const MY_FORMATS = {
 };
 
 @Component({
-  selector: 'app-relatorio-financeiro-mensal',
-  templateUrl: './relatorio-financeiro-mensal.component.html',
-  styleUrls: ['./relatorio-financeiro-mensal.component.scss'],
+  selector: 'app-relatorio-financeiro',
+  templateUrl: './relatorio-financeiro.component.html',
+  styleUrls: ['./relatorio-financeiro.component.scss'],
   providers: [
     // Configure providers for date handling in the component.
     {
@@ -35,7 +35,7 @@ export const MY_FORMATS = {
     }
   ]
 })
-export class RelatorioFinanceiroMensalComponent implements OnInit {
+export class RelatorioFinanceiroComponent implements OnInit {
   date: FormControl<Moment|null> = new FormControl(moment()); // Initialize date with today's date
   maxDate: Moment = moment(); // Initialize maxDate with today's date
   isMobile: boolean = false;

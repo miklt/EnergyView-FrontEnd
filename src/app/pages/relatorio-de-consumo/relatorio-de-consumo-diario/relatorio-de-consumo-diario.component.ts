@@ -1,7 +1,7 @@
 import { Component, HostListener, OnInit } from '@angular/core';
 import { FormControl } from '@angular/forms';
-import { DataService } from '../../services/data.service';
-import { DailyConsumptionData } from '../../interfaces/daily-consumption-data';
+import { DataService } from '../../../services/data.service';
+import { DailyConsumptionData } from '../../../interfaces/daily-consumption-data';
 import { DomSanitizer } from '@angular/platform-browser';
 
 @Component({

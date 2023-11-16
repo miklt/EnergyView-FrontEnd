@@ -1,4 +1,5 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { RelatorioDeConsumoMensalComponent } from './relatorio-de-consumo-mensal.component';
 import { HttpClientModule } from '@angular/common/http';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatIconModule } from '@angular/material/icon';
@@ -10,14 +11,13 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import moment, { Moment } from 'moment';
 import { Viewport } from 'karma-viewport/dist/adapter/viewport';
-import { NoDataComponent } from '../../components/no-data/no-data.component';
-import { RelatorioFinanceiroMensalComponent } from './relatorio-financeiro-mensal.component';
+import { NoDataComponent } from '../../../components/no-data/no-data.component';
 
 declare const viewport: Viewport;
 
-describe('RelatorioFinanceiroMensalComponent', () => {
-  let component: RelatorioFinanceiroMensalComponent;
-  let fixture: ComponentFixture<RelatorioFinanceiroMensalComponent>;
+describe('RelatorioDeConsumoMensalComponent', () => {
+  let component: RelatorioDeConsumoMensalComponent;
+  let fixture: ComponentFixture<RelatorioDeConsumoMensalComponent>;
   let datepicker: jasmine.SpyObj<MatDatepicker<Moment>>;
 
   beforeEach(async () => {
@@ -34,12 +34,12 @@ describe('RelatorioFinanceiroMensalComponent', () => {
         MatProgressSpinnerModule
       ],
       declarations: [
-        RelatorioFinanceiroMensalComponent,
+        RelatorioDeConsumoMensalComponent,
         NoDataComponent
       ]
     }).compileComponents();
 
-    fixture = TestBed.createComponent(RelatorioFinanceiroMensalComponent);
+    fixture = TestBed.createComponent(RelatorioDeConsumoMensalComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
     datepicker = jasmine.createSpyObj<MatDatepicker<Moment>>(['close']);
@@ -74,13 +74,13 @@ describe('RelatorioFinanceiroMensalComponent', () => {
       fail('Expected an error to be thrown.');
     }
     catch (error) {
-      expect((error as Error).message).toBe('One of the following HTMLElements does not exist: financialReportTitleContainer, financialReportTitleWrapper, financialReportDatePicker.');
+      expect((error as Error).message).toBe('One of the following HTMLElements does not exist: monthlyConsumptionTitleContainer, monthlyConsumptionTitleWrapper, monthlyConsumptionDatePicker.');
     }
   });
 
   it('should update sizes for responsiveness when titleContainer width > 600px', () => {
-    const titleWrapper = document.getElementById('financialReportTitleWrapper');
-    const datePicker = document.getElementById('financialReportDatePicker');
+    const titleWrapper = document.getElementById('monthlyConsumptionTitleWrapper');
+    const datePicker = document.getElementById('monthlyConsumptionDatePicker');
 
     viewport.set('desktop');
 
@@ -97,13 +97,13 @@ describe('RelatorioFinanceiroMensalComponent', () => {
   });
 
   it('should update sizes for responsiveness when titleContainer width <= 600px', () => {
-    const titleWrapper = document.getElementById('financialReportTitleWrapper');
-    const datePicker = document.getElementById('financialReportDatePicker');
+    const titleWrapper = document.getElementById('monthlyConsumptionTitleWrapper');
+    const datePicker = document.getElementById('monthlyConsumptionDatePicker');
 
     viewport.set('mobile');
 
     component.updateSizes();
-  
+
     if (datePicker && titleWrapper) {
       expect(datePicker.classList.contains('wide')).toBeTruthy();
       expect(titleWrapper.classList.contains('wide')).toBeTruthy();

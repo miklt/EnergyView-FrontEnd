@@ -6,15 +6,15 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatNativeDateModule } from '@angular/material/core';
 import { MatInputModule } from '@angular/material/input';
-import { LoaderComponent } from '../../components/loader/loader.component';
-import { NoDataComponent } from '../../components/no-data/no-data.component';
+import { LoaderComponent } from '../../../components/loader/loader.component';
+import { NoDataComponent } from '../../../components/no-data/no-data.component';
 import { ReactiveFormsModule } from '@angular/forms';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { DataService } from 'src/app/services/data.service';
 import { Observable, of } from 'rxjs';
 import { Viewport } from 'karma-viewport/dist/adapter/viewport';
-import { ChartComponent } from '../../components/chart/chart.component';
+import { ChartComponent } from '../../../components/chart/chart.component';
 declare const viewport: Viewport;
 
 describe('RelatorioDeConsumoDiarioComponent', () => {
