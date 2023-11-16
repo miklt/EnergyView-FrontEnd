@@ -10,7 +10,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import moment, { Moment } from 'moment';
 import { Viewport } from 'karma-viewport/dist/adapter/viewport';
-import { NoDataComponent } from '../no-data/no-data.component';
+import { NoDataComponent } from '../../components/no-data/no-data.component';
 import { RelatorioFinanceiroMensalComponent } from './relatorio-financeiro-mensal.component';
 
 declare const viewport: Viewport;

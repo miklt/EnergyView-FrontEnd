@@ -20,12 +20,12 @@ import { MatNativeDateModule } from '@angular/material/core';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 // Components
 import { SideNavComponent } from './components/side-nav/side-nav.component';
-import { RelatorioDeConsumoDiarioComponent } from './components/relatorio-de-consumo-diario/relatorio-de-consumo-diario.component';
-import { RelatorioDeConsumoMensalComponent } from './components/relatorio-de-consumo-mensal/relatorio-de-consumo-mensal.component';
-import { RelatorioFinanceiroMensalComponent } from './components/relatorio-financeiro-mensal/relatorio-financeiro-mensal.component';
+import { RelatorioDeConsumoDiarioComponent } from './pages/relatorio-de-consumo-diario/relatorio-de-consumo-diario.component';
+import { RelatorioDeConsumoMensalComponent } from './pages/relatorio-de-consumo-mensal/relatorio-de-consumo-mensal.component';
+import { RelatorioFinanceiroMensalComponent } from './pages/relatorio-financeiro-mensal/relatorio-financeiro-mensal.component';
 import { NoDataComponent } from './components/no-data/no-data.component';
 import { LoaderComponent } from './components/loader/loader.component';
-import { SobreComponent } from './components/sobre/sobre.component';
+import { SobreComponent } from './pages/sobre/sobre.component';
 import { ChartComponent } from './components/chart/chart.component';
 
 @NgModule({
