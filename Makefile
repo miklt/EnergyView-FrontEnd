@@ -6,4 +6,4 @@ docker-build:
 
 docker-deploy:
 	docker container stop frontend && docker container rm frontend && \
-	docker container run -p 80:80 -d --network energyview-net --name frontend garsoft/energyview-frontend:latest
+	docker container run -p 8002:80 -d --network energyview-net --name frontend garsoft/energyview-frontend:latest
