@@ -221,6 +221,7 @@ body, p {
         @include mat.all-component-densities(-3);
 
         width: 150px;
+        box-shadow: 0 6px 6px 0 rgb(0 0 0 / 5%);
 
         &.wide {
             width: 100%;
@@ -228,6 +229,10 @@ body, p {
 
         .mat-mdc-form-field-subscript-wrapper {
             height: 0;
+        }
+
+        .mdc-text-field--filled:not(.mdc-text-field--disabled) { /* stylelint-disable-line */
+            background-color: $white;
         }
     }
 }
