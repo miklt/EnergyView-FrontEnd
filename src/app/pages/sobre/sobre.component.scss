@@ -1,1 +1,15 @@
-// Leaving comments here because StyleLint does not allow for empty scss files
+.no-data-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    margin-top: 60px;
+
+    div {
+        text-align: center; 
+    }
+
+    .no-data-img {
+        height: 150px;
+        margin-bottom: 30px;
+    }
+}
