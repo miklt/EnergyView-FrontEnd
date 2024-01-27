@@ -20,7 +20,7 @@
 2. Inside the repository's directory open a terminal;
 3. Run `npm install` to install dependencies;
 4. Run `npm run dev` to serve the app in the development environment, `npm run local` to serve pointing to the local host, or `npm run prod` for the production environment (ideally should never be used);
-5. After compiling Node will automatically open a browser window at [http://localhost:4200/](http://localhost:4200/) (where the app is served).
+5. After compiling, Node will automatically open a browser window at [http://localhost:4200/](http://localhost:4200/) (where the app is served).
 
 ## Building & deploying
 
