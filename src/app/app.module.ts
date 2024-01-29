@@ -11,7 +11,6 @@ import '@angular/common/locales/global/pt';
 // Angular Material
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatSidenavModule } from '@angular/material/sidenav';
-import { MatBadgeModule } from '@angular/material/badge';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatIconModule } from '@angular/material/icon';
@@ -21,11 +20,13 @@ import { MatNativeDateModule } from '@angular/material/core';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 // Components
 import { SideNavComponent } from './components/side-nav/side-nav.component';
-import { RelatorioDeConsumoDiarioComponent } from './components/relatorio-de-consumo-diario/relatorio-de-consumo-diario.component';
-import { RelatorioDeConsumoMensalComponent } from './components/relatorio-de-consumo-mensal/relatorio-de-consumo-mensal.component';
-import { RelatorioFinanceiroMensalComponent } from './components/relatorio-financeiro-mensal/relatorio-financeiro-mensal.component';
+import { RelatorioDeConsumoDiarioComponent } from './pages/relatorio-de-consumo/relatorio-de-consumo-diario/relatorio-de-consumo-diario.component';
+import { RelatorioDeConsumoMensalComponent } from './pages/relatorio-de-consumo/relatorio-de-consumo-mensal/relatorio-de-consumo-mensal.component';
+import { RelatorioFinanceiroComponent } from './pages/relatorio-financeiro/relatorio-financeiro.component';
 import { NoDataComponent } from './components/no-data/no-data.component';
 import { LoaderComponent } from './components/loader/loader.component';
+import { SobreComponent } from './pages/sobre/sobre.component';
+import { ChartComponent } from './components/chart/chart.component';
 
 @NgModule({
   declarations: [
@@ -33,9 +34,11 @@ import { LoaderComponent } from './components/loader/loader.component';
     SideNavComponent,
     RelatorioDeConsumoDiarioComponent,
     RelatorioDeConsumoMensalComponent,
-    RelatorioFinanceiroMensalComponent,
+    RelatorioFinanceiroComponent,
     NoDataComponent,
-    LoaderComponent
+    LoaderComponent,
+    SobreComponent,
+    ChartComponent
   ],
   imports: [
     BrowserModule,
@@ -44,7 +47,6 @@ import { LoaderComponent } from './components/loader/loader.component';
     BrowserAnimationsModule,
     MatSidenavModule,
     MatDatepickerModule,
-    MatBadgeModule,
     MatFormFieldModule,
     MatIconModule,
     MatInputModule,

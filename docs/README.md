@@ -6,47 +6,38 @@
 
 <p>This project is a product of GARSoft's ownership, do not copy or redistribute this code without granted permission.</p>
 
-## Dependencies & running
+## Running
 
-This project relies on Angular, Node.js and Google Chrome (unit tests run in ChromeHeadless), make sure you have all of them installed before starting. 
+### Requirements
+
+- Node.js
+- Angular
+- Google Chorme (unit tests run in ChromeHeadless)
 
 ### How to run
 
 1. Clone the repository on a local directory;
 2. Inside the repository's directory open a terminal;
 3. Run `npm install` to install dependencies;
-4. Run `npm run dev` to serve the app in the development environment or `npm run prod` for the production environment;
-5. After compiling the app should be served on [http://localhost:4200/](http://localhost:4200/),
+4. Run `npm run dev` to serve the app in the development environment, `npm run local` to serve pointing to the local host, or `npm run prod` for the production environment (ideally should never be used);
+5. After compiling, Node will automatically open a browser window at [http://localhost:4200/](http://localhost:4200/) (where the app is served).
 
-## Testing, linting & commit hooks
-
-When commiting, your code will be checked and should:
-1. Pass all unit tests (and those should have 100% code coverage - for further information see below).
-2. Pass all linters.
-
-You can run the pre-commit checks on-demand running the following commands:
-* To execute the pre-commit checks run `npm run pre-commit`.
-  * To execute unit tests run `npm run test`.
-    * Unit tests should aim for 100% code coverage, and the current coverage percentage will be reported every time you run the tests. You can precisely identify what your tests do not cover by opening the `index.html` file inside the `coverage` directory and navigating through the pages.
-  * To execute the linters run `npm run lint`, to execute and solve auto-fixable errors and warnings run `npm run lint-fix`.
-    * To execute the TypeScript linter run `npm run lint:ts`, to execute and solve auto-fixable errors and warnings  run `npm run lint:ts-fix`.
-    * To execute the SCSS linter run `npm run lint:scss`, to execute and solve auto-fixable errors and warnings  run `npm run lint:scss-fix`.
-    * To execute the HTML linter run `npm run lint:html`.
-
-## Build
+## Building & deploying
 
 ### Requirements
-- Docker (ideally v24.0.x+)
-To build the docker image corresponding to this component use make docker-build
 
-## Deployment
-
-### Requirements
 - Docker (ideally v24.0.x+)
 
-Initially, make sure that port 80 is not being used by any other application.
-Use the command *make docker-deploy* to deploy this component. Use the command *docker container logs frontend* to inspect the deployment status.
+### How to build
 
+To build this component's docker image use `make docker-build`.
+
+### How to deploy
+
+1. Make sure that port 80 is not being used by any other applications and you have your docker image built;
+2. Run `make docker-deploy`
+
+Use the command `docker container logs frontend` to inspect the deployment status.
 
 ## Workflow
 
@@ -58,11 +49,27 @@ Prior to initiating any development endeavors, it is imperative to create an iss
 
 When developing, your work branch should be named following the naming pattern:
 
-* **features**: YYYYMMDD/feat/name-of-feature
-* **fixes**: YYYYMMDD/fix/name-of-fix
-* **refactoring**: YYYYMMDD/refactor/name-of-refactor
+* **features**: N/feat/name-of-feature
+* **fixes**: N/fix/name-of-fix
+* **refactoring**: N/refactor/name-of-refactor
 
-Please ensure that you replace YYYYMMDD with the current date, formatted as Year-Month-Day.
+Please ensure that you replace N with the issue number.
+
+### Testing, linting & commit hooks
+
+When commiting, your code will be checked and should:
+1. Pass all unit tests (and those should have 100% code coverage - for further information see below).
+2. Pass all linters.
+3. Follow our adapted conventional commits pattern.
+
+You can run the pre-commit checks on-demand running the following commands:
+* To execute the pre-commit checks run `npm run pre-commit`.
+  * To execute unit tests run `npm run test`.
+    * Unit tests should aim for 100% code coverage, and the current coverage percentage will be reported every time you run the tests. You can precisely identify what your tests do not cover by opening the `index.html` file inside the `coverage` directory and navigating through the pages.
+  * To execute the linters run `npm run lint`, to execute and solve auto-fixable errors and warnings run `npm run lint-fix`.
+    * To execute the TypeScript linter run `npm run lint:ts`, to execute and solve auto-fixable errors and warnings  run `npm run lint:ts-fix`.
+    * To execute the SCSS linter run `npm run lint:scss`, to execute and solve auto-fixable errors and warnings  run `npm run lint:scss-fix`.
+    * To execute the HTML linter run `npm run lint:html`.
 
 #### Adapted conventional commits pattern
 
@@ -88,7 +95,6 @@ For example:
 </p>
 
 The types are as follows:
-
 
 * **test**: Indicates any type of creation or modification of test code. Example: Creation of unit tests.
 * **feat**: Indicates the development of a new feature in the project. Example: Adding a service, functionality, endpoint, etc.

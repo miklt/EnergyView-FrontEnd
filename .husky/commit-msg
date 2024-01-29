@@ -1,0 +1,20 @@
+#!/usr/bin/env sh
+
+# Source the Husky hook script
+. "$(dirname -- "$0")/_/husky.sh"
+
+# Get the commit message file path from the command line argument
+commit_message=$1
+
+# Read the first line of the commit message file
+start_line=`head -n1 $commit_message`
+
+# Check if the first line of the commit message matches the pattern
+if echo $start_line | grep -Pq '^#\d+ (test|feat|refactor|style|fix|chore|docs|build|perf|ci|revert): .+$';
+then
+    echo "Commit message matches the pattern."
+else
+    # Print an error message and exit with a non-zero status code if the commit message doesn't match
+    echo "Error: Invalid commit message format. Commit message should be in the format '#N type: message'."
+    exit 1
+fi

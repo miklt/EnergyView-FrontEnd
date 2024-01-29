@@ -1,18 +1,15 @@
 @import '../../../styles/custom-colors';
 
-.mat-badge-content {
-    top: unset !important;
-    right: unset !important;
+.green-dot {
+    position: relative;
+    left: 3px;
 
-    width: 5px !important;
-    height: 5px !important;
-    margin-left: 5px !important;
+    width: 5px;
+    height: 5px;
 
-    line-height: 5px !important;
-    color: $light-green !important;
-
-    background: $light-green !important;
- }
+    background-color: $light-green;
+    border-radius: 50%;
+}
 
 .side-nav-item {
     cursor: pointer;
@@ -23,36 +20,96 @@
     padding-bottom: 18px;
     padding-left: 40px;
 
+    color: $white;
+
+    filter: invert(25%) sepia(14%) saturate(400%) hue-rotate(158deg) brightness(99%) contrast(90%);
     border-top-right-radius: 10px;
     border-bottom-right-radius: 10px;
 
+    transition: filter 0.3s;
+
     &.selected {
-        background-color: #116486;
+        background-color: $blue;
+        filter: none;
+        transition: background-color 0.3s;
     }
 
-    .item-image {
-        float: left;
-        margin-right: 10px;
+    &:hover {
+        filter: none;
     }
 }
 
-.logo-container {
-    margin: 50px 40px;
+.item-image {
+    float: left;
+    width: 18px;
+    height: 18px;
+    margin-right: 10px;
+}
 
-    .logo-img-container {
-        display: flex;
-        justify-content: space-between;
-        width: 100%;
-        margin-bottom: 50px;
-    }
+.item-text-wrapper {
+    height: 16px;
+}
+
+.side-nav-container{
+    position: relative;
+    z-index: 1;
+    height: 100%;
+
+    .logo-container {
+        margin: 50px 40px;
     
-    .logo-img {
-        cursor: pointer;
-        height: 32px;
+        .logo-img-container {
+            display: flex;
+            justify-content: space-between;
+            width: 100%;
+            margin-bottom: 50px;
+        }
+        
+        .logo-img {
+            cursor: pointer;
+            height: 32px;
+        }
+    
+        .close-button {
+            cursor: pointer;
+            position: relative;
+            width: 32px;
+            height: 32px;
+        }
+        
+        .close-button::before, .close-button::after {
+            content: '';
+    
+            position: absolute;
+            top: 50%;
+            left: 0;
+    
+            width: 50%;
+            height: 3px;
+    
+            background-color: #fff;
+        }
+    
+        .close-button::before {
+            transform: rotate(45deg);
+        }
+    
+        .close-button::after {
+            transform: rotate(-45deg);
+        }
     }
 
-    .close-sidenav-button {
+    .export-container {
         cursor: pointer;
-        line-height: 32px;
+        margin: 50px 40px;
     }
+}        
+
+.decoration-img {
+    position: fixed;
+    z-index: 0;
+    bottom: 0;
+    left: 0;
+
+    width: 320px;
 }

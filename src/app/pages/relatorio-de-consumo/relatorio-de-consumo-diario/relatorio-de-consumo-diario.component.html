@@ -7,37 +7,36 @@
             </div>
             <div class="flex-row-start column-gap-20px">
                 <div class="flex-column-center">
-                    <p class="normal-text dark-grey cursor-pointer underline" routerLink="/relatorio-de-consumo/diario">Diário</p>
+                    <p class="medium-text dark-grey cursor-pointer hover-link" routerLinkActive="underline" routerLink="/relatorio-de-consumo/diario">Diário</p>
                 </div>
                 <div class="flex-column-center">
-                    <p class="normal-text dark-grey cursor-pointer" routerLink="/relatorio-de-consumo/mensal">Mensal</p>
+                    <p class="medium-text dark-grey cursor-pointer hover-link" routerLinkActive="underline" routerLink="/relatorio-de-consumo/mensal">Mensal</p>
                 </div>
             </div>
         </div>
         <!-- Date picker -->
         <mat-form-field class="date-picker" id="dailyConsumptionDatePicker">
-            <mat-label>Escolha uma data</mat-label>
             <input matInput [max]="maxDate" [matDatepicker]="picker" [formControl]="date" (dateInput)="onDateSelect()">
             <mat-datepicker-toggle matIconSuffix [for]="picker">
                 <mat-icon matDatepickerToggleIcon>keyboard_arrow_down</mat-icon>
             </mat-datepicker-toggle>
-            <mat-datepicker #picker></mat-datepicker>
+            <mat-datepicker [touchUi]="isMobile" #picker></mat-datepicker>
         </mat-form-field>
     </div>
 
     <!-- Loading -->
-    <app-loader [loading]="loading"></app-loader>
+    <app-loader [loading]="loading" />
     
     <!-- No response screen -->
-    <app-no-data [noData]="!data && !loading"></app-no-data>
+    <app-no-data [noData]="!data && !loading" />
 
     <div *ngIf="data && !loading">
         <!-- Containers -->
         <div class="containers-container">
             <!-- Consumo total -->
             <div class="container">
-                <p class="normal-text">Consumo total</p>
-                <p class="big-text">{{ data['consumo-total'] / 1000 | number:'1.2-2' }} kWh</p>
+                <p class="medium-text">Consumo total</p>
+                <p class="bigger-text">{{ data['consumo-total'] / 1000 | number:'1.2-2' }} kWh</p>
                 <div>
                     <p class="small-text bold" [ngClass]="{'red': data['variacao-consumo-total'] > 0, 'green': data['variacao-consumo-total'] < 0}">
                         <span *ngIf="data['variacao-consumo-total'] >= 0">+</span>{{ data['variacao-consumo-total'] }}%
@@ -47,8 +46,8 @@
             </div>
             <!-- Horario de pico -->
             <div class="container">
-                <p class="normal-text">Horário de pico</p>
-                <p class="big-text">{{ data['horario-de-pico'] }}</p>
+                <p class="medium-text">Horário de pico</p>
+                <p class="bigger-text">{{ data['horario-de-pico'] }}</p>
                 <div>
                     <p class="small-text bold">{{ data['horario-de-pico-ontem'] }}</p>
                     <p class="small-text base-line">No dia anterior</p>
@@ -56,16 +55,16 @@
             </div>
             <!-- Consumo por fase -->
             <div class="container">
-                <p class="normal-text mb-20px">Consumo por fase</p>
+                <p class="medium-text mb-20px">Consumo por fase</p>
                 <div>
                     <!-- Fase A -->
                     <div class="flex-row-space-between">
                         <div class="flex-row-start column-gap-10px">
                             <div class="flex-column-center">
-                                <p class="big-text">A</p>
+                                <p class="bigger-text">A</p>
                             </div>
                             <div>
-                                <p class="normal-text bold">{{ data['consumo-total-a'] / 1000 | number:'1.2-2' }} kWh</p>
+                                <p class="medium-text bold">{{ data['consumo-total-a'] / 1000 | number:'1.2-2' }} kWh</p>
                                 <p class="small-text">{{ (data['consumo-total-a'] / data['consumo-total'] * 100) | number:'1.0-0' }}% do consumo total</p>
                             </div>
                         </div>
@@ -80,10 +79,10 @@
                     <div class="flex-row-space-between mt-5px">
                         <div class="flex-row-start column-gap-10px">
                             <div class="flex-column-center">
-                                <p class="big-text">B</p>
+                                <p class="bigger-text">B</p>
                             </div>
                             <div>
-                                <p class="normal-text bold">{{ data['consumo-total-b'] / 1000 | number:'1.2-2' }} kWh</p>
+                                <p class="medium-text bold">{{ data['consumo-total-b'] / 1000 | number:'1.2-2' }} kWh</p>
                                 <p class="small-text">{{ (data['consumo-total-b'] / data['consumo-total'] * 100) | number:'1.0-0' }}% do consumo total</p>
                             </div>
                         </div>
@@ -98,10 +97,10 @@
                     <div class="flex-row-space-between mt-5px">
                         <div class="flex-row-start column-gap-10px">
                             <div class="flex-column-center">
-                                <p class="big-text">C</p>
+                                <p class="bigger-text">C</p>
                             </div>
                             <div>
-                                <p class="normal-text bold">{{ data['consumo-total-c'] / 1000 | number:'1.2-2' }} kWh</p>
+                                <p class="medium-text bold">{{ data['consumo-total-c'] / 1000 | number:'1.2-2' }} kWh</p>
                                 <p class="small-text">{{ (data['consumo-total-c'] / data['consumo-total'] * 100) | number:'1.0-0' }}% do consumo total</p>
                             </div>
                         </div>
@@ -120,10 +119,10 @@
             <!-- Demanda media -->
             <div class="container">
                 <div>
-                    <p class="normal-text mb-20px">Demanda média</p>
+                    <p class="medium-text mb-20px">Demanda média</p>
                     <div class="blue-line dashed"></div>
                 </div>
-                <p class="big-text">{{ data['demanda-media'] }} W</p>
+                <p class="bigger-text">{{ data['demanda-media'] }} W</p>
                 <div>
                     <p class="small-text bold" [ngClass]="{'red': data['variacao-demanda-media'] > 0, 'green': data['variacao-demanda-media'] < 0}">
                         <span *ngIf="data['variacao-demanda-media'] >= 0">+</span>{{ data['variacao-demanda-media'] }}%
@@ -134,10 +133,10 @@
             <!-- Demanda maxima -->
             <div class="container">
                 <div>
-                    <p class="normal-text mb-20px">Demanda máxima</p>
+                    <p class="medium-text mb-20px">Demanda máxima</p>
                     <div class="blue-line"></div>
                 </div>                
-                <p class="big-text">{{ data['demanda-maxima'] }} W</p>
+                <p class="bigger-text">{{ data['demanda-maxima'] }} W</p>
                 <div>
                     <p class="small-text bold" [ngClass]="{'red': data['variacao-demanda-maxima'] > 0, 'green': data['variacao-demanda-maxima'] < 0}">
                         <span *ngIf="data['variacao-demanda-maxima'] >= 0">+</span>{{ data['variacao-demanda-maxima'] }}%
@@ -150,13 +149,11 @@
         <div class="containers-container">
             <!-- Consumo acumulado -->
             <div class="container">
-                <p class="normal-text mb-20px">Consumo acumulado</p>
-                <div id="chartConsumoAcumulado" [innerHTML]="data['consumo-acumulado']"></div>
+                <app-chart title="Consumo acumulado" [innerHTML]="data['consumo-acumulado']" />
             </div>
             <!-- Curva de carga -->
             <div class="container">
-                <p class="normal-text mb-20px">Curva de carga</p>
-                <div id="chartCurvaDeCarga" [innerHTML]="data['curva-de-carga']"></div>
+                <app-chart title="Curva de carga" [innerHTML]="data['curva-de-carga']" />
             </div>
         </div>
     </div>

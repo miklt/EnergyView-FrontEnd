@@ -1,16 +1,16 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { NoDataComponent } from './no-data.component';
+import { SobreComponent } from './sobre.component';
 
-describe('NoDataComponent', () => {
-  let component: NoDataComponent;
-  let fixture: ComponentFixture<NoDataComponent>;
+describe('SobreComponent', () => {
+  let component: SobreComponent;
+  let fixture: ComponentFixture<SobreComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ NoDataComponent ]
+      declarations: [ SobreComponent ]
     }).compileComponents();
 
-    fixture = TestBed.createComponent(NoDataComponent);
+    fixture = TestBed.createComponent(SobreComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });
