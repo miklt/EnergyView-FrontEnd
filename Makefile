@@ -2,6 +2,7 @@ docker-build:
 	git checkout main && git pull && \
 	docker image build -f src/build/docker/Dockerfile -t garsoft/energyview-frontend:latest .
 	docker image push garsoft/energyview-frontend:latest
+	docker push containerregistry.uspdigital.usp.br/michelet/imagens/garsoft/energyview-frontend:latest
 	docker image prune -f
 
 docker-deploy:
