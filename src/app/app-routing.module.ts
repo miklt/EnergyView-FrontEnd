@@ -6,7 +6,7 @@ import { RelatorioFinanceiroComponent } from './pages/relatorio-financeiro/relat
 import { SobreComponent } from './pages/sobre/sobre.component';
 
 const routes : Routes = [
-  {path: '', redirectTo: '/relatorio-de-consumo/diario', pathMatch: 'full'},
+  //{path: '', redirectTo: '/relatorio-de-consumo/diario', pathMatch: 'full'},
   {path: 'relatorio-de-consumo', children: [
     {path: '', redirectTo: 'diario', pathMatch: 'full'},
     {path: 'diario', component: RelatorioDeConsumoDiarioComponent},
