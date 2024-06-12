@@ -1,0 +1,49 @@
+# Ignore node_modules as they are installed inside the container
+node_modules
+node_modules/**
+
+# Ignore log files
+*.log
+
+# Ignore temporary files and directories
+tmp
+temp
+*.tmp
+*.swp
+*.swo
+
+# Ignore build and dist directories if you're not copying them directly
+dist
+dist/**
+build
+build/**
+
+# Ignore environment files if they are not meant to be included
+.env
+.env.*
+
+# Ignore local Angular configuration files
+.angular
+.angular/cache
+
+# Ignore IDE/editor specific files
+.vscode
+.idea
+*.sublime-project
+*.sublime-workspace
+
+# Ignore OS-specific files
+.DS_Store
+Thumbs.db
+
+# Ignore git files
+.git
+.gitignore
+
+# Ignore Dockerfile and docker-compose files if they should not be in the image
+Dockerfile
+docker-compose.yml
+
+# Ignore coverage files from testing
+coverage
+coverage/**

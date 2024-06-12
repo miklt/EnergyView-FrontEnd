@@ -8,6 +8,7 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { LOCALE_ID } from '@angular/core';
 import '@angular/common/locales/global/pt';
+import  {environment as env} from '../environments/environment';
 // Angular Material
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatSidenavModule } from '@angular/material/sidenav';
@@ -27,7 +28,17 @@ import { NoDataComponent } from './components/no-data/no-data.component';
 import { LoaderComponent } from './components/loader/loader.component';
 import { SobreComponent } from './pages/sobre/sobre.component';
 import { ChartComponent } from './components/chart/chart.component';
-
+import  {MqttModule, IMqttServiceOptions} from 'ngx-mqtt';
+export const MQTT_SERVICE_OPTIONS: IMqttServiceOptions = {
+  
+  hostname:env.mqtt.server,
+  port:env.mqtt.port,
+  protocol: (env.mqtt.protocol ==='wss') ? 'wss': 'ws',
+  path: env.mqtt.path,
+  username: env.mqtt.username,
+  password: env.mqtt.password,
+  clientId: env.mqtt.clientId
+};
 @NgModule({
   declarations: [
     AppComponent,
@@ -48,6 +59,7 @@ import { ChartComponent } from './components/chart/chart.component';
     MatSidenavModule,
     MatDatepickerModule,
     MatFormFieldModule,
+    MqttModule.forRoot(MQTT_SERVICE_OPTIONS),
     MatIconModule,
     MatInputModule,
     MatSelectModule,
