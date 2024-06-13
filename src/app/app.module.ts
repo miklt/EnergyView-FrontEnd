@@ -31,13 +31,11 @@ import { ChartComponent } from './components/chart/chart.component';
 import  {MqttModule, IMqttServiceOptions} from 'ngx-mqtt';
 export const MQTT_SERVICE_OPTIONS: IMqttServiceOptions = {
   
-  hostname:env.mqtt.server,
-  port:env.mqtt.port,
-  protocol: (env.mqtt.protocol ==='wss') ? 'wss': 'ws',
-  path: env.mqtt.path,
+  
   username: env.mqtt.username,
   password: env.mqtt.password,
-  clientId: env.mqtt.clientId
+  clientId: env.mqtt.clientId + Math.random().toString(16).substr(2, 8), 
+  url: env.mqtt.url
 };
 @NgModule({
   declarations: [

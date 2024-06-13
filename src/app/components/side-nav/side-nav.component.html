@@ -1,48 +1,88 @@
 <div class="side-nav-container flex-column-space-between">
-    <div>
-        <div class="logo-container">
-            <!-- Logo -->
-            <div class="logo-img-container">
-                <img class="logo-img" src="/assets/logo.png" alt="Logo do EnergyView" routerLink="" (click)="closeSideNavIfOnMobile()">
-                <!-- Close side nav -->
-                <div class="close-button" *ngIf="isMobile" (click)="closeSideNavIfOnMobile()"></div>
-            </div>
-            <!-- Demanda atual -->
-            <div class="flex-row-start">
-                <p class="bigger-text white mb-5px">{{ demandaAtual }} W</p>
-                <div class="green-dot"></div>
-            </div>
-            <p class="medium-text white">Demanda atual</p>
-        </div>
-        <!-- Relatorio de consumo -->
-        <div class="side-nav-item" routerLink="/relatorio-de-consumo" routerLinkActive="selected" (click)="closeSideNavIfOnMobile()">
-            <img class="item-image" src="/assets/consumption-dashboard.png" alt="Relatório de Consumo">
-            <div class="item-text-wrapper flex-column-center">
-                <p class="medium-text">Relatório de consumo</p>
-            </div>
-        </div>
-        <!-- Relatorio financeiro -->
-        <div class="side-nav-item" routerLink="/relatorio-financeiro" routerLinkActive="selected" (click)="closeSideNavIfOnMobile()">
-            <img class="item-image" src="/assets/financial-report.png" alt="Relatório Financeiro">
-            <div class="item-text-wrapper flex-column-center">
-                <p class="medium-text">Relatório financeiro</p>
-            </div>
-        </div>
-        <!-- Sobre -->
-        <div class="side-nav-item" routerLink="/sobre" routerLinkActive="selected" (click)="closeSideNavIfOnMobile()">
-            <img class="item-image" src="/assets/about.png" alt="Sobre">
-            <div class="item-text-wrapper flex-column-center">
-                <p class="medium-text">Sobre</p>
-            </div>
-        </div>
+  <div>
+    <div class="logo-container">
+      <!-- Logo -->
+      <div class="logo-img-container">
+        <img
+          class="logo-img"
+          src="/assets/logo.png"
+          alt="Logo do EnergyView"
+          routerLink=""
+          (click)="closeSideNavIfOnMobile()"
+        />
+        <!-- Close side nav -->
+        <div
+          class="close-button"
+          *ngIf="isMobile"
+          (click)="closeSideNavIfOnMobile()"
+        ></div>
+      </div>
+      <!-- Demanda atual -->
+      <div class="flex-row-start">
+        <p class="bigger-text white mb-5px">{{ demandaAtual }}</p>
+        <div class="green-dot"></div>
+      </div>
+      <p class="medium-text white">Demanda atual</p>
     </div>
-    <!-- Exportar dados -->
-    <div class="export-container medium-text white hover-link" (click)="downloadData()">
-        <img class="item-image" src="/assets/export.png" alt="Exportar dados">
-        <div class="item-text-wrapper flex-column-center">
-            <p class="medium-text white">Exportar dados</p>
-        </div>
+    <!-- Relatorio de consumo -->
+    <div
+      class="side-nav-item"
+      routerLink="/relatorio-de-consumo"
+      routerLinkActive="selected"
+      (click)="closeSideNavIfOnMobile()"
+    >
+      <img
+        class="item-image"
+        src="/assets/consumption-dashboard.png"
+        alt="Relatório de Consumo"
+      />
+      <div class="item-text-wrapper flex-column-center">
+        <p class="medium-text">Relatório de consumo</p>
+      </div>
     </div>
+    <!-- Relatorio financeiro -->
+    <div
+      class="side-nav-item"
+      routerLink="/relatorio-financeiro"
+      routerLinkActive="selected"
+      (click)="closeSideNavIfOnMobile()"
+    >
+      <img
+        class="item-image"
+        src="/assets/financial-report.png"
+        alt="Relatório Financeiro"
+      />
+      <div class="item-text-wrapper flex-column-center">
+        <p class="medium-text">Relatório financeiro</p>
+      </div>
+    </div>
+    <!-- Sobre -->
+    <div
+      class="side-nav-item"
+      routerLink="/sobre"
+      routerLinkActive="selected"
+      (click)="closeSideNavIfOnMobile()"
+    >
+      <img class="item-image" src="/assets/about.png" alt="Sobre" />
+      <div class="item-text-wrapper flex-column-center">
+        <p class="medium-text">Sobre</p>
+      </div>
+    </div>
+  </div>
+  <!-- Exportar dados -->
+  <div
+    class="export-container medium-text white hover-link"
+    (click)="downloadData()"
+  >
+    <img class="item-image" src="/assets/export.png" alt="Exportar dados" />
+    <div class="item-text-wrapper flex-column-center">
+      <p class="medium-text white">Exportar dados</p>
+    </div>
+  </div>
 </div>
 <!-- Decoration -->
-<img class="decoration-img" src="/assets/decoration.png" alt="Sidebar decoration">
+<img
+  class="decoration-img"
+  src="/assets/decoration.png"
+  alt="Sidebar decoration"
+/>

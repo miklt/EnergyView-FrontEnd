@@ -27,7 +27,7 @@ export class RealTimeDataService {
         .subscribe((message: IMqttMessage) => {
           const m = JSON.parse(message.payload.toString());
           const realTimeData: RealTimeData = m['DATA'];
-          console.log(m,realTimeData.PT);
+          
           observer.next(realTimeData);
         });
     });

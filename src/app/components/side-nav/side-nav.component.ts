@@ -24,7 +24,7 @@ export class SideNavComponent implements OnInit {
       .subscribe({
         next: (data) => {          
           const d = data;
-          this.demandaAtual = d.PT.toString();
+          this.demandaAtual = d.PT.toString() +' W';
         }
       });
       
